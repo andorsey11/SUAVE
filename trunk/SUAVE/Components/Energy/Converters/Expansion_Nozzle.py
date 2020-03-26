@@ -119,7 +119,7 @@ class Expansion_Nozzle(Energy_Component):
         Tto      = conditions.freestream.stagnation_temperature
         R        = conditions.freestream.gas_specific_constant
         Mo       = conditions.freestream.mach_number
-        
+        To       = conditions.freestream.temperature
         #unpack from inputs
         Tt_in    = self.inputs.stagnation_temperature
         Pt_in    = self.inputs.stagnation_pressure
@@ -127,7 +127,8 @@ class Expansion_Nozzle(Energy_Component):
         #unpack from self
         pid      = self.pressure_ratio
         etapold  = self.polytropic_efficiency
-        
+     #   print((Pt_in/Po)**((gamma-1)/gamma)/(Tt_in/To))
+
         
         #Method for computing the nozzle properties
         
@@ -139,7 +140,9 @@ class Expansion_Nozzle(Energy_Component):
         
         #compute the output Mach number, static quantities and the output velocity
         Mach          = np.sqrt((((Pt_out/Po)**((gamma-1)/gamma))-1)*2/(gamma-1))
-        
+        #Mach         = np.sqrt((Tt_out/To - 1)*2/(gamma-1))
+     #   print((Pt_out/Po)**((gamma-1)/gamma)/(Tt_out/To))
+
         #Checking from Mach numbers below, above 1.0
         i_low         = Mach < 1.0
         i_high        = Mach >=1.0
@@ -160,10 +163,11 @@ class Expansion_Nozzle(Energy_Component):
         h_out         = Cp*T_out
         u_out         = np.sqrt(2*(ht_out-h_out))
         rho_out       = P_out/(R*T_out)
-        
+      #  import pdb; pdb.set_trace()
+       
         #Computing the freestream to nozzle area ratio (mainly from thrust computation)
         area_ratio    = (fm_id(Mo,gamma)/fm_id(Mach,gamma)*(1/(Pt_out/Pto))*(np.sqrt(Tt_out/Tto)))
-        
+        #import pdb; pdb.set_trace()
         #pack computed quantities into outputs
         self.outputs.stagnation_temperature  = Tt_out
         self.outputs.stagnation_pressure     = Pt_out

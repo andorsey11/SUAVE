@@ -1,0 +1,40 @@
+MTOW                                       = 195950  lbm
+MLW                                        = 0  lbm 
+MZFW                                       = 126915  lbm 
+Payload                                    = 38250 lbm 
+OEW                                        = 88665 lbm 
+
+Engine Type                                = turbofan
+Engine Thrust (M0.25)                      = 19471  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 7
+Nacelle Diameter                           = 65.6 inches
+Fan Pressure Ratio                         = 1.7
+Thrust to Weight (SLS)                     = 0.269
+
+Wing Area                                  = 1452  sqft
+Wing AR                                    = 11.23
+Wing t/c                                   = 0.137
+Wing Span                                  = 127.7  ft
+Wing Loading                               = 134.9  lbs/sqft
+Fuel Volume                                = 10242  USG
+Wing Sweep                                 = 41.3 deg 
+Horizontail Tail Area / Volume Coefficient = 410 / 0.928  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 265 / 0.070  sqft / nd
+
+Cruise Altitude                            = 34824  ft
+Cruise Mach                                = 0.828
+Initial Cruise L/D                         = 19.1
+Initial Cruise SFC                         = 0.584  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.344 percent  
+Cruise Range Factor                        = 8030.9 
+
+Maximum Throttle Setting / Requirement     = 0.95 / 0.95
+Takeoff Field Length / Requirement         = 8950 / 8950  ft/ft
+Approach Speed / Requirement               = 129.4 / 135.4  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.050 / 0.05
+Second Segment Gradient / Requirement      = 0.024 / 0.024 deg / deg
+Takeoff Convergence                        = 0.0000
+
+Design Mission Fuel Burn                   = 65282  lbs 
+

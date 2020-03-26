@@ -130,15 +130,16 @@ def ducted_fan_sizing(ducted_fan,mach_number = None, altitude = None, delta_isa 
     thrust.inputs.core_nozzle.velocity                     = 0.
     thrust.inputs.core_nozzle.area_ratio                   = 0.
     thrust.inputs.core_nozzle.static_pressure              = 0.                                                                                                                
-    
+    import pdb; pdb.set_trace()  
+
     #compute the trust
     thrust.size(conditions)
     mass_flow  = thrust.mass_flow_rate_design
-    
+   
     #update the design thrust value
     ducted_fan.design_thrust = thrust.total_design
-      
     #compute the sls_thrust
+    import pdb; pdb.set_trace()  
     
     #call the atmospheric model to get the conditions at the specified altitude
     atmosphere_sls = SUAVE.Analyses.Atmospheric.US_Standard_1976()

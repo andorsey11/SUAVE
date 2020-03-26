@@ -132,9 +132,26 @@ def empty(vehicle,settings=None):
         # for now, using thrust_sls = design_thrust / 0.20, just for optimization evaluations
         thrust_sls                       = propulsors.sealevel_static_thrust
         wt_engine_jet                    = Propulsion.engine_jet(thrust_sls)
-        wt_propulsion                    = Propulsion.integrated_propulsion(wt_engine_jet,num_eng)
-        propulsors.mass_properties.mass  = wt_propulsion 
-        
+        wt_propulsion                    = Propulsion.integrated_propulsion(propulsors, 1.6)
+        fuel_weight        = vehicle.wings['main_wing'].fuel_volume * .804 * 1000 / Units.lbs
+        max_mach           = vehicle.cruise_mach*1.1
+        num_eng            = propulsors.thrust.inputs.number_of_engines
+        fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
+       # engine_start_weight = 11 * (num_eng) * (max_mach**.32) * (propulsors.nacelle_diameter / Units.inches**1.6) ## This isn't working
+        propulsors.mass_properties.mass  = wt_propulsion + fuel_system_weight
+    if propulsor_name == 'openrotor':
+        #wt_propulsion      = Propulsion.integrated_propulsion_open_rotor(propulsors,1.6)
+        thrust_sls                       = propulsors.sealevel_static_thrust
+
+        wt_engine_jet                    = Propulsion.engine_jet(thrust_sls)
+        wt_propulsion                    = Propulsion.integrated_propulsion(propulsors, 1.6)
+        fuel_weight        = vehicle.wings['main_wing'].fuel_volume * .804 * 1000 / Units.lbs
+        max_mach           = vehicle.cruise_mach*1.1
+        num_eng            = propulsors.thrust.inputs.number_of_engines
+        fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
+        propulsors.mass_properties.mass  = wt_propulsion + fuel_system_weight
+       # import pdb; pdb.set_trace()
+
     else: #propulsor used is not a turbo_fan; assume mass_properties defined outside model
         wt_propulsion                   = propulsors.mass_properties.mass
 
@@ -211,7 +228,7 @@ def empty(vehicle,settings=None):
                           wt_tail_horizontal + wt_vtail_tot) 
     vehicle.fuselages['fuselage'].mass_properties.mass = wt_fuselage
 
-
+   # import pdb; pdb.set_trace()
     
     # packup outputs
     output                   = payload.payload(TOW, wt_empty, num_pax,wt_cargo)

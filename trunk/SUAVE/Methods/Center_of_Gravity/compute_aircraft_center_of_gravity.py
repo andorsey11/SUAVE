@@ -41,7 +41,6 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
 
         #unpack components
         wing               = vehicle.wings['main_wing']
-
         #compute moments from each component about the nose of the aircraft
         # Wing
         wing_cg                   = wing.mass_properties.center_of_gravity
@@ -74,7 +73,6 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
         propulsor_cg = propulsor_cg/(j+1.)       
         propulsor_moment          = propulsor_cg*propulsor.mass_properties.mass
 
-
         # ---------------------------------------------------------------------------------
         # configurations with fuselages (BWB, Tube and Wing)  
         # ---------------------------------------------------------------------------------
@@ -93,7 +91,6 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
                 hydraulics         = vehicle.hydraulics
                 optionals          = vehicle.optionals     
                 control_systems    = vehicle.control_systems 
-
                 # Control Sytems               
                 control_systems_cg        = control_systems.mass_properties.center_of_gravity
                 control_systems_moment    = (control_systems.origin+control_systems_cg )*control_systems.mass_properties.mass                
@@ -107,7 +104,6 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
                 # Fuselage
                 fuselage_cg               = fuselage.mass_properties.center_of_gravity
                 fuselage_moment           = (fuselage.origin+fuselage_cg)*fuselage.mass_properties.mass  
-
                 # Furnishings
                 furnishings_cg            = furnishings.mass_properties.center_of_gravity
                 furnishings_moment        = (furnishings.origin+furnishings_cg )*furnishings.mass_properties.mass
@@ -143,7 +139,7 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
 
                 # Landing Gear
                 landing_gear.origin       = 1*(fuselage.origin) #front gear location
-                landing_gear.origin[0][0] = fuselage.origin[0][0]+fuselage.lengths.nose
+                landing_gear.origin[0][0] = fuselage.origin[0][0]#+fuselage.lengths.nose
 
 
                 #find moment of every object other than landing gear to find aft gear location, then cg
@@ -151,7 +147,7 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
                                             fuselage_moment+propulsor_moment+electrical_systems_moment+\
                                             avionics_moment+furnishings_moment+passengers_moment+ac_moment+\
                                             fuel_moment+apu_moment+ hydraulics_moment+optionals_moment  )
-
+               # import pdb; pdb.set_trace()
                 #took some algebra to get this
                 aft_gear_location                             = sum_moments \
                         /(vehicle.mass_properties.takeoff+landing_gear.mass_properties.mass/(1-nose_load_fraction))
@@ -170,6 +166,7 @@ def compute_aircraft_center_of_gravity(vehicle, nose_load_fraction=.06):
 
                 vehicle.mass_properties.zero_fuel_center_of_gravity = \
                         (sum_moments_less_fuel+landing_gear_moment)/vehicle.mass_properties.max_zero_fuel
+                #import pdb; pdb.set_trace()
 
         # ---------------------------------------------------------------------------------        
         # Electric UAV Configurations without Fuselages/Landing Gear/Fuel

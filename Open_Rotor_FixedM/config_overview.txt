@@ -1,0 +1,41 @@
+MTOW                                       = 198416  lbm
+MLW                                        = 0  lbm 
+MZFW                                       = 158146  lbm 
+Payload                                    = 65396 lbm 
+OEW                                        = 92750 lbm 
+
+Engine Type                                = openrotor
+Engine Thrust (M0.25)                      = 18999  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 40
+Nacelle Diameter                           = 67.0 inches
+Fan Diameter                               = 169.9 Inches
+Fan Pressure Ratio                         = 1.1
+Thrust to Weight (SLS)                     = 0.327
+
+Wing Area                                  = 1341  sqft
+Wing AR                                    = 12.00
+Wing t/c                                   = 0.104
+Wing Span                                  = 126.9  ft
+Wing Loading                               = 148.0  lbs/sqft
+Fuel Volume                                = 6681  USG
+Wing Sweep                                 = 26.0 deg 
+Horizontail Tail Area / Volume Coefficient = 265 / 0.765  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 302 / 0.087  sqft / nd
+
+Cruise Altitude                            = 35009  ft
+Cruise Mach                                = 0.790
+Initial Cruise L/D                         = 16.1
+Initial Cruise SFC                         = 0.474  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.403 percent  
+Cruise Range Factor                        = 7950.4 
+
+Maximum Throttle Setting / Requirement     = 1.77 / 0.95
+Takeoff Field Length / Requirement         = 8448 / 7902  ft/ft
+Approach Speed / Requirement               = 155.0 / 150.0  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.236 / 0.05
+Second Segment Gradient / Requirement      = 0.018 / 0.024 deg / deg
+Takeoff Convergence                        = 0.0116
+
+Design Mission Fuel Burn                   = 34259  lbs 
+

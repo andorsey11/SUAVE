@@ -73,7 +73,7 @@ def print_parasite_drag(ref_condition,vehicle,analyses,filename = 'parasite_drag
     taper                   = vehicle.wings['main_wing'].taper
     sref                    = vehicle.reference_area
     
-    settings                = analyses.configs.cruise.aerodynamics.settings
+    settings                = analyses.cruise.aerodynamics.settings
 
     # Defining conditions to solve for altitude that gives the input Rey and Mach
     alt_conditions = Data()
@@ -111,15 +111,15 @@ def print_parasite_drag(ref_condition,vehicle,analyses,filename = 'parasite_drag
     state.conditions.aerodynamics = Data()
     state.conditions.aerodynamics.drag_breakdown = Data()
     state.conditions.aerodynamics.drag_breakdown.parasite = Data()
-
+    state.conditions.freestream.dynamic_pressure  = .5 * state.conditions.freestream.density * (state.conditions.freestream.mach_number * a)**2
     # Compute parasite drag of components    
-    compute = analyses.configs.cruise.aerodynamics.process.compute.drag
+    compute = analyses.cruise.aerodynamics.process.compute.drag
     for wing in vehicle.wings:
         compute.parasite.wings.wing(state,settings,wing)
     
     for fuselage in vehicle.fuselages:
-        compute.parasite.fuselages.fuselage(state,settings,fuselage)    
-        
+        compute.parasite.fuselages.fuselage(state,settings,fuselage) 
+
     for propulsor in vehicle.propulsors:
         compute.parasite.propulsors.propulsor(state,settings,propulsor) 
       
@@ -167,7 +167,7 @@ def print_parasite_drag(ref_condition,vehicle,analyses,filename = 'parasite_drag
 
     for propulsor in vehicle.propulsors:
         drag_breakdown[propulsor.tag].tag = propulsor.tag[0:25] + '  (EACH)'
-        CD_p     += drag_breakdown[propulsor.tag].parasite_drag_coefficient
+        CD_p     += drag_breakdown[propulsor.tag].parasite_drag_coefficient 
         drag_breakdown[propulsor.tag].parasite_drag_coefficient /= propulsor.number_of_engines
         swet_tot += drag_breakdown[propulsor.tag].wetted_area * propulsor.number_of_engines
 

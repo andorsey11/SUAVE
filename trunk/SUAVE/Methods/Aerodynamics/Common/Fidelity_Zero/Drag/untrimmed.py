@@ -7,7 +7,7 @@
 # ----------------------------------------------------------------------
 #  Computes the miscellaneous drag
 # ----------------------------------------------------------------------
-
+import numpy as np
 ## @ingroup Methods-Aerodynamics-Common-Fidelity_Zero-Drag
 def untrimmed(state,settings,geometry):
     """Sums aircraft drag before trim correction
@@ -36,15 +36,19 @@ def untrimmed(state,settings,geometry):
     conditions     = state.conditions
     configuration  = settings
     drag_breakdown = conditions.aerodynamics.drag_breakdown
-
-    # various drag components
+    vehicle_reference_area = geometry.reference_area
+    propulsors             = geometry.propulsors
+    wings                  = geometry.wings
+ 
+# various drag components
     parasite_total        = conditions.aerodynamics.drag_breakdown.parasite.total            
     induced_total         = conditions.aerodynamics.drag_breakdown.induced.total            
     compressibility_total = conditions.aerodynamics.drag_breakdown.compressible.total         
-    miscellaneous_drag    = conditions.aerodynamics.drag_breakdown.miscellaneous.total 
+    miscellaneous_drag    = conditions.aerodynamics.drag_breakdown.miscellaneous.total
+
 
     # untrimmed drag
-    aircraft_untrimmed = parasite_total        \
+    aircraft_untrimmed = parasite_total       \
                        + induced_total         \
                        + compressibility_total \
                        + miscellaneous_drag

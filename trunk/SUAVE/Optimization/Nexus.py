@@ -382,7 +382,6 @@ class Nexus(Data):
         
         grad_obj = grad_obj.astype(float)
         jac_con  = jac_con.astype(float)
-        
         return grad_obj, jac_con
     
     

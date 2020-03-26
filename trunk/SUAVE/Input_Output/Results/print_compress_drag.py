@@ -50,10 +50,10 @@ def print_compress_drag(vehicle,analyses,filename = 'compress_drag.dat'):
     """    
 
     # Unpack
-    sweep           = vehicle.wings['main_wing'].sweeps.quarter_chord  / Units.deg
-    t_c             = vehicle.wings['main_wing'].thickness_to_chord
+    sweep           = vehicle.wings.main_wing.sweeps.quarter_chord  / Units.deg
+    t_c             = vehicle.wings.main_wing.thickness_to_chord
     sref            = vehicle.reference_area
-    settings        = analyses.configs.cruise.aerodynamics.settings
+    settings        = analyses.cruise.aerodynamics.settings
     
     # Define mach and CL vectors    
     mach_vec                = np.linspace(0.45,0.95,11)
@@ -86,7 +86,7 @@ def print_compress_drag(vehicle,analyses,filename = 'compress_drag.dat'):
         state.conditions.aerodynamics.lift_breakdown.compressible_wings = np.atleast_1d(cl)
         # call method
         for wing in vehicle.wings:
-            analyses.configs.cruise.aerodynamics.process.compute.drag.compressibility.wings.wing(state,settings,wing)
+            analyses.cruise.aerodynamics.process.compute.drag.compressibility.wings.wing(state,settings,wing)
         # process output for print
         drag_breakdown = state.conditions.aerodynamics.drag_breakdown.compressible
         for wing in vehicle.wings:

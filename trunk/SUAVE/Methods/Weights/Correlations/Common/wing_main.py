@@ -12,7 +12,7 @@
 
 from SUAVE.Core import Units
 import numpy as np
-
+import math
 # ----------------------------------------------------------------------
 #   Wing Main
 # ----------------------------------------------------------------------
@@ -54,6 +54,9 @@ def wing_main(S_gross_w,b,lambda_w,t_c_w,sweep_w,Nult,TOW,wt_zf):
     mtow  = TOW / Units.lb # Convert kg to lbs
     zfw   = wt_zf / Units.lb # Convert kg to lbs
 
+    #Raymer Eq .0052 * (MTOW * Load Factor)^.557*Area^.649*AR^.5*(t/c)^-.4*(1+lamba)^.1*(cos(lamba)^-1)*ControlSurfArea^.1
+  #  weight = .0052 * (mtow*Nult)**.557*(area**.649)*((span**2/area)**.5)*(t_c_w**-.4)*(1+sweep)**.1*(math.cos((sweep))**-1)*(area*.2)**.1
+  #  import pdb; pdb.set_trace()
     #Calculate weight of wing for traditional aircraft wing
     weight = 4.22*area + 1.642*10.**-6. * Nult*(span)**3. *(mtow*zfw)**0.5 \
              * (1.+2.*taper)/(t_c_w*(np.cos(sweep))**2. * area*(1.+taper) )

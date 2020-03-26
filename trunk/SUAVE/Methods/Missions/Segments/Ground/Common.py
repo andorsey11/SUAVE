@@ -35,7 +35,6 @@ def unpack_unknowns(segment):
             segment.state.conditions:
                 frames.inertial.velocity_vector [meters/second]
                 frames.inertial.time            [second]
-
         Properties Used:
         N/A
                                 
@@ -51,8 +50,8 @@ def unpack_unknowns(segment):
     t_nondim   = segment.state.numerics.dimensionless.control_points    
     
     # Velocity cannot be zero
-    velocity_x[velocity_x==0.0,0] = 0.01
-    velocity_x[0,0]               = v0
+    velocity_x[velocity_x==0.0] = 0.01
+    velocity_x[0]               = v0
     
     # time
     t_final    = t_initial + time  
@@ -70,26 +69,21 @@ def unpack_unknowns(segment):
 ## @ingroup Methods-Missions-Segments-Ground
 def initialize_conditions(segment):
     """Sets the specified conditions which are given for the segment type.
-
     Assumptions:
     Checks to make sure non of the velocities are exactly zero
-
     Source:
     N/A
-
     Inputs:
     segment.velocity_start             [meters]
     segment.velocity_end               [meters]
     segment.speed                      [meters/second]
     segment.friction_coefficient       [unitless]
     segment.ground_incline             [radians]
-
     Outputs:
     conditions.frames.inertial.velocity_vector  [meters/second]
     conditions.ground.incline                   [radians]
     conditions.ground.friction_coefficient      [unitless]
     state.unknowns.velocity_x                   [meters/second]
-
     Properties Used:
     N/A
     """   
@@ -125,19 +119,15 @@ def compute_ground_forces(segment):
     
     Assumptions:
     Does a force balance to calculate the load on the wheels using only lift. Uses only a single friction coefficient.
-
     Source:
     N/A
-
     Inputs:
     conditions:
         frames.inertial.gravity_force_vector       [meters/second^2]
         ground.friction_coefficient                [unitless]
         frames.wind.lift_force_vector              [newtons]
-
     Outputs:
     conditions.frames.inertial.ground_force_vector [newtons]
-
     Properties Used:
     N/A
     """   
@@ -172,18 +162,14 @@ def compute_forces(segment):
     
     Assumptions:
     
-
     Source:
     N/A
-
     Inputs:
     conditions:
         frames.inertial.total_force_vector  [newtons]
         frames.inertial.ground_force_vector [newtons]
-
     Outputs:
     frames.inertial.ground_force_vector     [newtons]
-
     Properties Used:
     N/A
     """       
@@ -224,7 +210,6 @@ def solve_residuals(segment):
             segment.state:
                 residuals.acceleration_x           [meters/second^2]
                 residuals.final_velocity_error     [meters/second]
-
         Properties Used:
         N/A
                                 
@@ -235,7 +220,7 @@ def solve_residuals(segment):
     FT = conditions.frames.inertial.total_force_vector
     v  = conditions.frames.inertial.velocity_vector
     m  = conditions.weights.total_mass
-    D  = state.numerics.time.differentiate
+    D  = segment.state.numerics.time.differentiate
     vf = segment.velocity_end
 
     # process and pack
@@ -243,4 +228,4 @@ def solve_residuals(segment):
     conditions.frames.inertial.acceleration_vector = acceleration
 
     segment.state.residuals.final_velocity_error = (v[-1,0] - vf)
-    segment.state.residuals.acceleration_x       = np.reshape(((FT[:,0]) / m[:,0] - acceleration[:,0]),np.shape(m))
+    segment.state.residuals.acceleration_x = np.reshape(((FT[:,0]) / m[:,0] - acceleration[:,0]),np.shape(m))

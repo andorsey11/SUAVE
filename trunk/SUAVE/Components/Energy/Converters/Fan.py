@@ -119,7 +119,7 @@ class Fan(Energy_Component):
         
         #computing the wok done by the fan (for matching with turbine)
         work_done = ht_out- ht_in
-        
+        #import pdb; pdb.set_trace()
         #pack the computed quantities into outputs
         self.outputs.stagnation_temperature  = Tt_out
         self.outputs.stagnation_pressure     = Pt_out

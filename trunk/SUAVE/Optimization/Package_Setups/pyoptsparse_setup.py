@@ -17,7 +17,7 @@ from SUAVE.Optimization import helper_functions as help_fun
 # ----------------------------------------------------------------------
 
 ## @ingroup Optimization-Package_Setups
-def Pyoptsparse_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  nonderivative_line_search=False):
+def Pyoptsparse_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-4,  nonderivative_line_search=False):
     """ This converts your SUAVE Nexus problem into a PyOptsparse optimization problem and solves it.
         Pyoptsparse has many algorithms, they can be switched out by using the solver input. 
 
@@ -102,14 +102,20 @@ def Pyoptsparse_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  no
     print(opt_prob)
    
     if solver == 'SNOPT':
-        opt = pyOpt.SNOPT()
-        CD_step = (sense_step**2.)**(1./3.)  #based on SNOPT Manual Recommendations
-        opt.setOption('Function precision', sense_step**2.)
-        opt.setOption('Difference interval', sense_step)
-        opt.setOption('Central difference interval', CD_step)
+       opt = pyOpt.SNOPT()
+       CD_step = (sense_step**2.)**(1./3.)  #based on SNOPT Manual Recommendations
+       opt.setOption('Function precision', sense_step**2)
+       opt.setOption('Difference interval', sense_step)
+       opt.setOption('Central difference interval', CD_step)
+       opt.setOption('Major feasibility tolerance', sense_step)
+       opt.setOption('Minor feasibility tolerance', sense_step)
+       opt.setOption('Major optimality tolerance', sense_step)
+       # opt.setOption('Penalty parameter', 0.01)
+       # opt.setOption('Major step limit', 0.01)
         
     elif solver == 'SLSQP':
         opt = pyOpt.SLSQP()
+        opt.setOption('ACC', sense_step)
          
     elif solver == 'FSQP':
         opt = pyOpt.FSQP()
@@ -142,7 +148,7 @@ def Pyoptsparse_Solve(problem,solver='SNOPT',FD='single', sense_step=1.0E-6,  no
         outputs = opt(opt_prob, sens='FD',sensMode='pgc')
         
     elif solver == 'SNOPT' or solver == 'SLSQP':
-        outputs = opt(opt_prob, sens='FD', sensStep = sense_step)
+        outputs = opt(opt_prob, sens='FD', sensStep = sense_step, storeHistory='snopt.hist')
   
     else:
         outputs = opt(opt_prob)        

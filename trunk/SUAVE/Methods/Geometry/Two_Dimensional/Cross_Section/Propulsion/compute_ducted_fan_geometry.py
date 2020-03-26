@@ -78,7 +78,7 @@ def compute_ducted_fan_geometry(ducted_fan, conditions):
     ducted_fan.engine_length    = 1.5*ducted_fan.nacelle_diameter
     ducted_fan.areas.wetted     = ducted_fan.nacelle_diameter*ducted_fan.engine_length*np.pi
 
-    
+    #import pdb; pdb.set_trace()
 # ----------------------------------------------------------------------
 #   Module Tests
 # ----------------------------------------------------------------------

@@ -1,0 +1,53 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-05
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.29782661E+01
+     ITER =    2     OBJ =  0.25847426E+01
+     ITER =    3     OBJ =  0.24209858E+01
+     ITER =    4     OBJ =  0.23942324E+01
+     ITER =    5     OBJ =  0.22844962E+01
+     ITER =    6     OBJ =  0.21968423E+01
+     ITER =    7     OBJ =  0.22037293E+01
+     ITER =    8     OBJ =  0.22624386E+01
+     ITER =    9     OBJ =  0.24009623E+01
+     ITER =   10     OBJ =  0.26509333E+01
+     ITER =   11     OBJ =  0.26570782E+01
+     ITER =   12     OBJ =  0.26469558E+01
+     ITER =   13     OBJ =  0.26411697E+01
+     ITER =   14     OBJ =  0.26217419E+01
+     ITER =   15     OBJ =  0.26276988E+01
+     ITER =   16     OBJ =  0.26276988E+01
+     ITER =   17     OBJ =  0.26276988E+01
+     ITER =   18     OBJ =  0.26276988E+01
+     ITER =   19     OBJ =  0.26267203E+01
+     ITER =   20     OBJ =  0.26259733E+01
+     ITER =   21     OBJ =  0.26289832E+01
+     ITER =   22     OBJ =  0.26289832E+01
+     ITER =   23     OBJ =  0.26289832E+01
+     ITER =   24     OBJ =  0.26289832E+01
+     ITER =   25     OBJ =  0.26289832E+01
+     ITER =   26     OBJ =  0.26289832E+01
+     ITER =   27     OBJ =  0.26289832E+01
+     ITER =   28     OBJ =  0.26289833E+01
+     ITER =   29     OBJ =  0.26289833E+01
+     ITER =   30     OBJ =  0.26289833E+01
+     ITER =   31     OBJ =  0.26372465E+01
+     ITER =   32     OBJ =  0.26386314E+01
+     ITER =   33     OBJ =  0.26386314E+01
+     ITER =   34     OBJ =  0.26386314E+01
+     ITER =   35     OBJ =  0.26386314E+01
+     ITER =   36     OBJ =  0.26408746E+01
+        NUMBER OF FUNC-CALLS:  NFUNC = 258
+        NUMBER OF GRAD-CALLS:  NGRAD =  37

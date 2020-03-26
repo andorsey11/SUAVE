@@ -92,7 +92,6 @@ def turbofan_sizing(turbofan,mach_number = None, altitude = None, delta_isa = 0,
     inlet_nozzle.inputs.stagnation_pressure                = ram.outputs.stagnation_pressure
     #Flow through the inlet nozzle
     inlet_nozzle(conditions)      
-                    
     #--link low pressure compressor to the inlet nozzle
     low_pressure_compressor.inputs.stagnation_temperature  = inlet_nozzle.outputs.stagnation_temperature
     low_pressure_compressor.inputs.stagnation_pressure     = inlet_nozzle.outputs.stagnation_pressure
@@ -258,4 +257,31 @@ def turbofan_sizing(turbofan,mach_number = None, altitude = None, delta_isa = 0,
     
     turbofan.sealevel_static_thrust = results_sls.thrust_force_vector[0,0] / number_of_engines
   
- 
+
+    conditions_bet = SUAVE.Analyses.Mission.Segments.Conditions.Aerodynamics()            
+
+     ## Added module for takeoff power calculation
+     # freestream conditions    
+    conditions_bet.freestream.altitude                    = np.atleast_1d(0.)
+    conditions_bet.freestream.mach_number                 = np.atleast_1d(0.25)
+    conditions_bet.freestream.pressure                    = np.atleast_1d(p)
+    conditions_bet.freestream.temperature                 = np.atleast_1d(T)
+    conditions_bet.freestream.density                     = np.atleast_1d(rho)
+    conditions_bet.freestream.dynamic_viscosity           = np.atleast_1d(mu)
+    conditions_bet.freestream.gravity                     = np.atleast_1d(planet.sea_level_gravity)
+    conditions_bet.freestream.isentropic_expansion_factor = np.atleast_1d(turbofan.working_fluid.compute_gamma(T,p))
+    conditions_bet.freestream.Cp                          = np.atleast_1d(turbofan.working_fluid.compute_cp(T,p))
+    conditions_bet.freestream.R                           = np.atleast_1d(turbofan.working_fluid.gas_specific_constant)
+    conditions_bet.freestream.speed_of_sound              = np.atleast_1d(a)
+    conditions_bet.freestream.velocity                    = np.atleast_1d(a*0.25)
+    
+    # propulsion conditions
+    conditions_bet.propulsion.throttle           =  np.atleast_1d(1.0)    
+    
+    #size the turbofan
+
+    state_bet            = Data()
+    state_bet.numerics   = Data()
+    state_bet.conditions = conditions_sls   
+    results_bet          = turbofan.evaluate_thrust(state_bet)
+    turbofan.takeoff_power = results_bet.thrust_force_vector[0,0] / number_of_engines * conditions_bet.freestream.velocity

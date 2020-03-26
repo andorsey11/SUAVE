@@ -1,0 +1,54 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-05
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.15274366E+01
+     ITER =    2     OBJ =  0.14495093E+01
+     ITER =    3     OBJ =  0.13830348E+01
+     ITER =    4     OBJ =  0.14013604E+01
+     ITER =    5     OBJ =  0.14069215E+01
+     ITER =    6     OBJ =  0.15547758E+01
+     ITER =    7     OBJ =  0.16248432E+01
+     ITER =    8     OBJ =  0.16243062E+01
+     ITER =    9     OBJ =  0.15768775E+01
+     ITER =   10     OBJ =  0.15838777E+01
+     ITER =   11     OBJ =  0.15613618E+01
+     ITER =   12     OBJ =  0.15636130E+01
+     ITER =   13     OBJ =  0.15671281E+01
+     ITER =   14     OBJ =  0.15745950E+01
+     ITER =   15     OBJ =  0.15672312E+01
+     ITER =   16     OBJ =  0.15750417E+01
+     ITER =   17     OBJ =  0.15862052E+01
+     ITER =   18     OBJ =  0.15856661E+01
+     ITER =   19     OBJ =  0.15844050E+01
+     ITER =   20     OBJ =  0.15846141E+01
+     ITER =   21     OBJ =  0.15851545E+01
+     ITER =   22     OBJ =  0.15849729E+01
+     ITER =   23     OBJ =  0.15847602E+01
+     ITER =   24     OBJ =  0.15848067E+01
+     ITER =   25     OBJ =  0.15850099E+01
+     ITER =   26     OBJ =  0.15849529E+01
+     ITER =   27     OBJ =  0.15848881E+01
+     ITER =   28     OBJ =  0.15848993E+01
+     ITER =   29     OBJ =  0.15849442E+01
+     ITER =   30     OBJ =  0.15849322E+01
+     ITER =   31     OBJ =  0.15849183E+01
+     ITER =   32     OBJ =  0.15849206E+01
+     ITER =   33     OBJ =  0.15849289E+01
+     ITER =   34     OBJ =  0.15849267E+01
+     ITER =   35     OBJ =  0.15849241E+01
+     ITER =   36     OBJ =  0.15849245E+01
+     ITER =   37     OBJ =  0.15849260E+01
+        NUMBER OF FUNC-CALLS:  NFUNC = 143
+        NUMBER OF GRAD-CALLS:  NGRAD =  38

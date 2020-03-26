@@ -1,0 +1,49 @@
+MTOW                                       = 208952  lbm
+MLW                                        = 0  lbm 
+MZFW                                       = 152937  lbm 
+Payload                                    = 51000 lbm 
+OEW                                        = 101937 lbm 
+
+Engine Type                                = turbofan
+Engine Thrust (M0.25)                      = 20450  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 7
+Nacelle Diameter                           = 67.2 inches
+Fan Pressure Ratio                         = 1.7
+Thrust to Weight (SLS)                     = 0.264
+
+Wing Area                                  = 1576  sqft
+Wing AR                                    = 11.54
+Wing t/c                                   = 0.120
+Wing Span                                  = 134.9  ft
+Wing Loading                               = 132.6  lbs/sqft
+Fuel Volume                                = 9979  USG
+Wing Sweep                                 = 31.0 deg 
+Horizontail Tail Area / Volume Coefficient = 445 / 1.067  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 259 / 0.070  sqft / nd
+
+Cruise Altitude                            = 32779  ft
+Cruise Mach                                = 0.795
+Initial Cruise L/D                         = 18.0
+Initial Cruise SFC                         = 0.573  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.339 percent  
+Cruise Range Factor                        = 7497.2 
+
+Maximum Throttle Setting / Requirement     = 0.95 / 0.95
+Takeoff Field Length / Requirement         = 8787 / 8785  ft/ft
+Approach Speed / Requirement               = 134.6 / 134.6  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.229 / 0.05
+Second Segment Gradient / Requirement      = 0.024 / 0.024 deg / deg
+Takeoff Convergence                        = -0.0000
+
+Design Mission Fuel Burn                   = 51628  lbs 
+
+config #4
+
+[0.8067932333832778, 1.2258589516764733, 0.9183904097020853, 0.9936409108351748, 1.2315444604434846, 1.3716747065963264, 1.094661519283949, 0.32800000000010543, 1.069835513282065]
+Obj
+0.9416265029453432
+Con
+[-2.5952288442692113e-05, 0.9999929005469214, 1.0000291454312424, 0.9999839968791245, 0.9999660608248778, 3.884244360025182]
+
+

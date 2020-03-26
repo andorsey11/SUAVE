@@ -70,7 +70,7 @@ class Fidelity_Zero(Markup):
         settings.fuselage_lift_correction           = 1.14
         settings.trim_drag_correction_factor        = 1.02
         settings.wing_parasite_drag_form_factor     = 1.1
-        settings.fuselage_parasite_drag_form_factor = 2.3
+        settings.fuselage_parasite_drag_form_factor = 1.4 #2.3
         settings.oswald_efficiency_factor           = None
         settings.viscous_lift_dependent_drag_factor = 0.38
         settings.drag_coefficient_increment         = 0.0000
@@ -121,7 +121,6 @@ class Fidelity_Zero(Markup):
         compute.drag.trim                          = Common.Drag.trim
         compute.drag.spoiler                       = Common.Drag.spoiler_drag
         compute.drag.total                         = Common.Drag.total_aircraft
-        
         
     def initialize(self):
         """Initializes the surrogate needed for lift calculation.

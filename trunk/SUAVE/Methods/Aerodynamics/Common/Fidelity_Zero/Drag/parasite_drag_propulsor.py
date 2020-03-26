@@ -56,7 +56,11 @@ def parasite_drag_propulsor(state,settings,geometry):
     propulsor = geometry
     Sref      = propulsor.nacelle_diameter**2. / 4. * np.pi
     Swet      = propulsor.areas.wetted
-    
+
+
+
+
+
     l_prop = propulsor.engine_length
     d_prop = propulsor.nacelle_diameter
     
@@ -65,7 +69,27 @@ def parasite_drag_propulsor(state,settings,geometry):
     Mc  = freestream.mach_number
     Tc  = freestream.temperature    
     re  = freestream.reynolds_number
+    q_free = freestream.dynamic_pressure
+    q_delta = [1]
 
+    drag_delta = 0
+    #propulsor.tag = "open_rotor"
+    if (propulsor.tag == "openrotor"):
+        Swet = Swet * .9  # One part is slipper on the wing
+       # Mc = propulsor.fan_nozzle.outputs.mach_number[0]
+       # Tc = propulsor.fan_nozzle.outputs.static_temperature[0]
+        # need to increase the effective drag due to change in q  -- Drag  = q * S * Cd so we ratio the Cd up by delta q
+        q_new = .5 * propulsor.fan_nozzle.outputs.density * propulsor.fan_nozzle.outputs.velocity**2
+        q_delta = q_new[0] / q_free[0]
+        #Need to add wing scrubbing
+        chord_affected = propulsor.scrubbed_chord
+        span_affected = propulsor.fan_diameter
+        area_affected = chord_affected * span_affected * propulsor.number_of_engines + chord_affected * (span_affected - propulsor.nacelle_diameter) * propulsor.number_of_engines
+        # Get baseline drag of this section of wing
+        Re_wing = re * chord_affected 
+        cf_wing, k_wing, k_reyn_wing = compressible_turbulent_flat_plate(Re_wing,Mc,Tc)
+        drag_delta = (q_delta-1) * area_affected * cf_wing  / Sref * 1.3 # Engineering judgment form factor and extra turbulence
+    #print(drag_delta)
     # reynolds number
     Re_prop = re*l_prop
     
@@ -74,11 +98,10 @@ def parasite_drag_propulsor(state,settings,geometry):
     
     ## form factor according to Raymer equation (pg 283 of Aircraft Design: A Conceptual Approach)
     k_prop = 1 + 0.35 / (float(l_prop)/float(d_prop))  
-    
    
     # find the final result    
-    propulsor_parasite_drag = k_prop * cf_prop * Swet / Sref
-    
+    propulsor_parasite_drag = k_prop * cf_prop * q_delta[0] * Swet / Sref + drag_delta
+   # print(propulsor_parasite_drag)
     # dump data to conditions
     propulsor_result = Data(
         wetted_area               = Swet    , 
@@ -90,5 +113,5 @@ def parasite_drag_propulsor(state,settings,geometry):
         form_factor               = k_prop  ,
     )
     conditions.aerodynamics.drag_breakdown.parasite[propulsor.tag] = propulsor_result    
-    
+  
     return propulsor_parasite_drag

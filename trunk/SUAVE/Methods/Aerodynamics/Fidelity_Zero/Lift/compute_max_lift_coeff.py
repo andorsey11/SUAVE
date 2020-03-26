@@ -103,6 +103,8 @@ def compute_max_lift_coeff(vehicle,conditions=None):
                              -0.279166666666676*taper**3 +  0.002300000000000*taper**2*sweep_deg + \
                               0.000049982142857*taper*sweep_deg**2  -0.000000280000000* sweep_deg**3)
 
+        w_Clmax = max( .5 , w_Clmax)
+
         #---FAR stall speed effect---------------
         #should be optional based on aircraft being modelled
         Cl_max_FAA = 1.1 * w_Clmax
@@ -120,7 +122,7 @@ def compute_max_lift_coeff(vehicle,conditions=None):
         Cl_max_ls += (Cl_max_w_eng + dcl_slat + dcl_flap) * Swing / Sref
         Cd_ind += ( 0.01 ) * Swing / Sref
 
-    Cl_max_ls = Cl_max_ls * max_lift_coefficient_factor
+    Cl_max_ls = max(.5, Cl_max_ls * max_lift_coefficient_factor)
     return Cl_max_ls, Cd_ind
 
 

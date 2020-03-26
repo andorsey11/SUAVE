@@ -129,19 +129,17 @@ def estimate_take_off_field_length(vehicle,analyses,airport,compute_2nd_seg_clim
     state.numerics   = Numerics()
     conditions = state.conditions    
 
-    conditions.freestream.dynamic_pressure = np.array(np.atleast_1d(0.5 * rho * speed_for_thrust**2))
-    conditions.freestream.gravity          = np.array([np.atleast_1d(sea_level_gravity)])
-    conditions.freestream.velocity         = np.array(np.atleast_1d(speed_for_thrust))
-    conditions.freestream.mach_number      = np.array(np.atleast_1d(speed_for_thrust/ a))
-    conditions.freestream.speed_of_sound   = np.array(a)
-    conditions.freestream.temperature      = np.array(np.atleast_1d(T))
-    conditions.freestream.pressure         = np.array(np.atleast_1d(p))
-    conditions.propulsion.throttle         = np.array(np.atleast_1d(1.))
-    
+    state.conditions.freestream.dynamic_pressure = np.array(np.atleast_1d(0.5 * rho * speed_for_thrust**2))
+    state.conditions.freestream.gravity          = np.array([np.atleast_1d(sea_level_gravity)])
+    state.conditions.freestream.velocity         = np.array(np.atleast_1d(speed_for_thrust))
+    state.conditions.freestream.mach_number      = np.array(np.atleast_1d(speed_for_thrust/ a))
+    state.conditions.freestream.speed_of_sound   = np.array(a)
+    state.conditions.freestream.temperature      = np.array(np.atleast_1d(T))
+    state.conditions.freestream.pressure         = np.array(np.atleast_1d(p))
+    state.conditions.propulsion.throttle         = np.array(np.atleast_1d(1.))
     results = vehicle.propulsors.evaluate_thrust(state) # total thrust
     
     thrust = results.thrust_force_vector
-
     # ==============================================
     # Calculate takeoff distance
     # ==============================================
@@ -176,6 +174,8 @@ def estimate_take_off_field_length(vehicle,analyses,airport,compute_2nd_seg_clim
 
     # Define takeoff index   (V2^2 / (T/W)
     takeoff_index = V2_speed**2. / (thrust[0][0] / weight)
+   # import pdb; pdb.set_trace()
+
     # Calculating takeoff field length
     takeoff_field_length = 0.
     for idx,constant in enumerate(takeoff_constants):
@@ -188,7 +188,13 @@ def estimate_take_off_field_length(vehicle,analyses,airport,compute_2nd_seg_clim
         state.conditions.freestream.dynamic_pressure = np.array(np.atleast_1d(0.5 * rho * V2_speed**2))
         state.conditions.freestream.velocity         = np.array(np.atleast_1d(V2_speed))
         state.conditions.freestream.mach_number      = np.array(np.atleast_1d(V2_speed/ a))
-        results = vehicle.propulsors['turbofan'].engine_out(state)
+        try:
+            if vehicle.propulsors['turbofan'].tag == "turbofan":
+                results = vehicle.propulsors['turbofan'].engine_out(state)
+        except:   
+            if vehicle.propulsors['openrotor'].tag == "openrotor":
+                results = vehicle.propulsors['openrotor'].engine_out(state)
+
         thrust = results.thrust_force_vector[0][0]
 
         # Compute windmilling drag
@@ -205,10 +211,9 @@ def estimate_take_off_field_length(vehicle,analyses,airport,compute_2nd_seg_clim
         cdv2_all_engine = clv2 / l_over_d
         cdv2 = cdv2_all_engine + asymmetry_drag_coefficient + windmilling_drag_coefficient
         l_over_d_v2 = clv2 / cdv2
-    
+
         # Compute 2nd segment climb gradient
         second_seg_climb_gradient = thrust / (weight*sea_level_gravity) - 1. / l_over_d_v2
-        
         return takeoff_field_length, second_seg_climb_gradient
     
     else:
