@@ -70,6 +70,8 @@ def compute_component_centers_of_gravity(vehicle, compute_propulsor_origin = Tru
         propulsor.origin = [[0,0,0]]
         if propulsor.tag == 'openrotor':
             propulsor.origin[0][0] = wing.origin[0] + mac_le_offset # Slipper into wing
+        elif propulsor.tag =='openrotoraft':
+            propulsor.origin[0][0] = vehicle.fuselages['fuselage'].lengths.total * 0.8    
         else:
             propulsor.origin[0][0] = wing.origin[0] + mac_le_offset/2.-(2./4.)*propulsor.engine_length
         propulsor.origin[0][1] = 0.

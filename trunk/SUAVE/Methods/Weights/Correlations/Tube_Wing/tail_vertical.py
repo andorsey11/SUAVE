@@ -54,8 +54,8 @@ def tail_vertical(S_v,Nult,b_v,TOW,t_c_v,sweep_v,S_gross_w,t_tail,rudder_fractio
     Sref  = S_gross_w / Units.ft**2 # Convert from meters squared to ft squared  
     
     # Determine weight of the vertical portion of the tail
-    if t_tail == "yes": 
-        T_tail_factor = 1.25 # Weight of vertical portion of the T-tail is 25% more than a conventional tail
+    if t_tail == "True": 
+        T_tail_factor = 1.17 # Weight of vertical portion of the T-tail is 17% more than a conventional tail per Raymer
     else: 
         T_tail_factor = 1.0 
     

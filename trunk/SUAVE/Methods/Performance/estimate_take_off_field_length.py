@@ -188,12 +188,14 @@ def estimate_take_off_field_length(vehicle,analyses,airport,compute_2nd_seg_clim
         state.conditions.freestream.dynamic_pressure = np.array(np.atleast_1d(0.5 * rho * V2_speed**2))
         state.conditions.freestream.velocity         = np.array(np.atleast_1d(V2_speed))
         state.conditions.freestream.mach_number      = np.array(np.atleast_1d(V2_speed/ a))
-        try:
-            if vehicle.propulsors['turbofan'].tag == "turbofan":
-                results = vehicle.propulsors['turbofan'].engine_out(state)
-        except:   
-            if vehicle.propulsors['openrotor'].tag == "openrotor":
-                results = vehicle.propulsors['openrotor'].engine_out(state)
+
+        prop_key   = list(vehicle.propulsors.keys())[0] 
+        if prop_key == "turbofan":
+            results = vehicle.propulsors['turbofan'].engine_out(state)  
+        elif prop_key == "openrotor":
+            results = vehicle.propulsors['openrotor'].engine_out(state)
+        elif prop_key == "openrotoraft":
+            results = vehicle.propulsors['openrotoraft'].engine_out(state)
 
         thrust = results.thrust_force_vector[0][0]
 

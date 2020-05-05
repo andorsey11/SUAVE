@@ -42,8 +42,9 @@ def base_setup():
     vehicle.mass_properties.takeoff                   = 87000 * Units.kilogram   
     vehicle.mass_properties.operating_empty           = 52746.4 * Units.kilogram 
     vehicle.mass_properties.max_zero_fuel             = 62732.0 * Units.kilogram 
-    vehicle.mass_properties.cargo                     = 10000.  * Units.kilogram   
-    
+    vehicle.mass_properties.cargo                     = 10000.  * Units.kilogram
+    vehicle.mass_properties.econ_takeoff              = 75000   * Units.kilogram  
+
     # envelope properties
     vehicle.envelope.ultimate_load = 2.5
     vehicle.envelope.limit_load    = 1.5
@@ -84,6 +85,8 @@ def base_setup():
     wing.areas.reference         = 124.862 * Units['meters**2']  
     wing.aspect_ratio            = 10.4
     wing.sweeps.quarter_chord    = 26 * Units.deg
+    wing.sweeps.leading_edge     = 26 * Units.deg
+    wing.sweeps.trailing_edge    = 26 * Units.deg
     wing.thickness_to_chord      = 0.095
     wing.taper                   = 0.1
     wing.span_efficiency         = 0.95
@@ -100,7 +103,7 @@ def base_setup():
     wing.high_lift               = True
     wing.dynamic_pressure_ratio  = 1.08
     wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
-    #import pdb; pdb.set_trace()
+    wing.origin_factor           = .5
     # ------------------------------------------------------------------
     #   Flaps
     # ------------------------------------------------------------------
@@ -313,8 +316,8 @@ def base_setup():
 
     fan.polytropic_efficiency = 0.93
     fan.pressure_ratio        = 1.7
-    fan.spinner_ratio         = 1.5
-    fan.nacelle_length_to_fan_di = 2.08
+    fan.spinner_ratio         = 1.2
+    fan.nacelle_length_to_fan_di = 1.6 # CFM56
 
 
     #add the fan to the network
@@ -375,6 +378,16 @@ def configs_setup(vehicle):
     base_config = SUAVE.Components.Configs.Config(vehicle)
     base_config.tag = 'base'
     configs.append(base_config)
+
+
+    config = SUAVE.Components.Configs.Config(base_config)
+    config.tag = 'econ'
+    config.mass_properties.takeoff = 70000 * Units.kg
+    config.cruise_altitude = 37000 * Units.ft
+    config.cruise_step = 2000/3.28 * Units.m
+    configs.append(config)
+    
+
 
     # ------------------------------------------------------------------
     #   Cruise Configuration

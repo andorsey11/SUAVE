@@ -1,0 +1,50 @@
+MTOW                                       = 215322  lbm
+MLW                                        = 0  lbm 
+Payload                                    = 65396 lbm 
+OEW                                        = 109869 lbm 
+
+Engine Type                                = openrotoraft
+Engine Thrust (M0.25)                      = 23655  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 21.492521995023154
+Nacelle Diameter                           = 88.3 inches
+Fan Diameter                               = 169.0 Inches
+Fan Pressure Ratio                         = 1.152431399908334
+Thrust to Weight (SLS)                     = 0.340
+
+Wing Area                                  = 1658  sqft
+Wing AR                                    = 14.00
+Wing t/c                                   = 0.107
+Wing Span                                  = 152.4  ft
+Wing Loading                               = 129.9  lbs/sqft
+Wing Origin                                = 41.32  ft
+Fuel Volume                                = 8756  USG
+Wing Sweep                                 = 36.5 deg 
+Horizontail Tail Area / Volume Coefficient = 362 / 0.665  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 465 / 0.067  sqft / nd
+
+Cruise Altitude                            = 30881  ft
+Cruise Mach                                = 0.790
+Initial Cruise Thrust                      = 10670.67 lbf
+Initial Cruise Cl                          = 0.47
+Initial Parasite Cd                        = 0.01544
+Initial Induced Cd                         = 0.00669
+Initial Viscous e                          = 0.76296
+Initial Compressible Cd                    = 0.00069
+Initial Misc Cd                            = 0.00104
+Initial Trim Cd                            = 0.00048
+Initial Total Cd                           = 0.02435
+Initial Cruise L/D                         = 19.5
+Initial Cruise SFC                         = 0.548  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.356 percent  
+Cruise Range Factor                        = 8474.3 
+
+Maximum Throttle Setting / Requirement     = 0.95 / 0.95
+Takeoff Field Length / Requirement         = 7130 / 7902  ft/ft
+Approach Speed / Requirement               = 150.0 / 150.0  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.391 / 0.05
+Second Segment Gradient / Requirement      = 0.049 / 0.024 deg / deg
+Takeoff Convergence                        = 0.0000
+
+Design Mission Fuel Burn                   = 35782  lbs 
+

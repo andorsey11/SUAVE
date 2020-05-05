@@ -20,7 +20,7 @@ from SUAVE.Methods.Weights.Correlations.Common import landing_gear as landing_ge
 from SUAVE.Methods.Weights.Correlations.Common import payload as payload
 from SUAVE.Methods.Weights.Correlations import Propulsion as Propulsion
 import warnings
-
+import numpy
 # ----------------------------------------------------------------------
 #  Empty
 # ----------------------------------------------------------------------
@@ -139,7 +139,7 @@ def empty(vehicle,settings=None):
         fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
        # engine_start_weight = 11 * (num_eng) * (max_mach**.32) * (propulsors.nacelle_diameter / Units.inches**1.6) ## This isn't working
         propulsors.mass_properties.mass  = wt_propulsion + fuel_system_weight
-    if propulsor_name == 'openrotor':
+    elif propulsor_name == 'openrotor' or propulsor_name == 'openrotoraft':
         #wt_propulsion      = Propulsion.integrated_propulsion_open_rotor(propulsors,1.6)
         thrust_sls                       = propulsors.sealevel_static_thrust
 
@@ -150,8 +150,6 @@ def empty(vehicle,settings=None):
         num_eng            = propulsors.thrust.inputs.number_of_engines
         fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
         propulsors.mass_properties.mass  = wt_propulsion + fuel_system_weight
-       # import pdb; pdb.set_trace()
-
     else: #propulsor used is not a turbo_fan; assume mass_properties defined outside model
         wt_propulsion                   = propulsors.mass_properties.mass
 
@@ -217,7 +215,18 @@ def empty(vehicle,settings=None):
         vehicle.wings['vertical_stabilizer'].mass_properties.mass = wt_vtail_tot
         
     # Calculating Empty Weight of Aircraft
-    wt_landing_gear    = landing_gear.landing_gear(TOW)
+
+    gear_penalty_rotor = 1
+    if propulsor_name == 'openrotor':
+        #calculate gear length via 12 degree scrape and open rotor height
+
+        gear_origin = vehicle.wings['main_wing'].origin[0] + vehicle.wings['main_wing'].aerodynamic_center[0] + 0.4 * vehicle.wings['main_wing'].chords.mean_aerodynamic
+        length_to_scrape = (vehicle.fuselages['fuselage'].lengths.cabin*.8 + vehicle.fuselages['fuselage'].lengths.nose) - gear_origin
+        required_fuselage_height_tailscrape = length_to_scrape * numpy.sin(numpy.deg2rad(10))
+        required_fuselage_height_rotor = (vehicle.propulsors['openrotor'].fan_diameter / 2) * .9 + 0.5 
+        gear_penalty_rotor = (required_fuselage_height_rotor / required_fuselage_height_tailscrape ) ** .4
+
+    wt_landing_gear    = landing_gear.landing_gear(TOW, .04 * gear_penalty_rotor)
     
     wt_fuselage        = tube(S_fus, diff_p_fus,w_fus,h_fus,l_fus,Nlim,wt_zf,wt_wing,wt_propulsion, wing_c_r) 
     wt_fuselage        = wt_fuselage*(1.-wt_factors.fuselage)

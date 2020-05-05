@@ -35,11 +35,10 @@ def setup():
     # size the base config
     procedure = Process()
     procedure.simple_sizing = simple_sizing
-    
-
     # find the weights
     procedure.weights = weight
     # finalizes the data dependencies
+
     procedure.finalize = finalize
     
     # performance studies
@@ -86,12 +85,17 @@ def find_target_range(nexus,mission):
 # ----------------------------------------------------------------------    
 def design_mission(nexus):
     mission = nexus.missions.base
-    mission.design_range = 2900.*Units.nautical_miles
+    mission.design_range = 5500.*Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.base = mission.evaluate()
-   # for config in nexus.vehicle_configurations:
-   #     config.mass_properties.max_landing = config.mass_properties.max_zero_fuel + (results.base.segments['descent_3'].conditions.weights.total_mass[-1] - results.base.segments['reserve_descent_1'].conditions.weights.total_mass[-1])
+  
+
+    mission = nexus.missions.econ
+    mission.design_range = 5500 / 3 * Units.nautical_miles
+    find_target_range(nexus,mission)
+    results = nexus.results
+    results.econ = mission.evaluate()   
     return nexus
 
 # ----------------------------------------------------------------------        
@@ -99,9 +103,8 @@ def design_mission(nexus):
 # ----------------------------------------------------------------------    
 
 def simple_sizing(nexus):
-    configs=nexus.vehicle_configurations
-    base=configs.base
-   
+    configs     = nexus.vehicle_configurations
+    base        = configs.base
     #find conditions
     air_speed   = nexus.missions.base.segments['cruise1'].air_speed 
     altitude    = nexus.missions.base.cruise_altitude
@@ -115,12 +118,12 @@ def simple_sizing(nexus):
     
     #now size engine
     mach_number        = air_speed/freestream.speed_of_sound
-    
     #now add to freestream data object
     freestream.velocity    = air_speed
     freestream.mach_number = mach_number
     freestream.gravity     = 9.81
 
+    base.wings['main_wing'].origin[0] = base.fuselages['fuselage'].lengths.total * base.wings['main_wing'].origin_factor
     conditions             = SUAVE.Analyses.Mission.Segments.Conditions.Aerodynamics()   #assign conditions in form for propulsor sizing
     conditions.freestream  = freestream
     for config in configs:
@@ -128,16 +131,7 @@ def simple_sizing(nexus):
         #import pdb; pdb.set_trace()
         turbofan_sizing(config.propulsors['turbofan'], .25, 0)
         compute_turbofan_geometry(config.propulsors['turbofan'], conditions)
-        engine_arm_center      = config.fuselages['fuselage'].width / 2 + 1.5 * config.propulsors['turbofan'].nacelle_diameter # 1 diameter from fuselage
-        compute_component_centers_of_gravity(config)
-        compute_aircraft_center_of_gravity(config,.10)         
-        config.wings.horizontal_stabilizer.areas.reference = (26.0/92.0)*config.wings.main_wing.areas.reference
-        # vertical tail sizing is a force balance
-        vertical_arm = (config.wings.vertical_stabilizer.origin[0] + .25 * config.wings.vertical_stabilizer.chords.mean_aerodynamic) - (config.wings.main_wing.origin[0] + config.wings.main_wing.chords.mean_aerodynamic * .25)
-        #import pdb; pdb.set_trace()
-        config.wings.vertical_stabilizer.areas.reference   = (config.propulsors['turbofan'].sealevel_static_thrust * engine_arm_center) / (config.wings.vertical_stabilizer.q_cl_vertical * vertical_arm)
-        config.wings.vertical_stabilizer.areas.reference   = soft_max(config.wings.vertical_stabilizer.areas.reference,(.07 * config.wings.main_wing.areas.reference * config.wings.main_wing.spans.projected) / vertical_arm)
-        
+        engine_arm_center      = config.fuselages['fuselage'].width / 2 + 1.5 * config.propulsors['turbofan'].nacelle_diameter # 1 diameter from fuselage      
         for wing in config.wings:
             
             wing = SUAVE.Methods.Geometry.Two_Dimensional.Planform.wing_planform(wing)
@@ -149,16 +143,21 @@ def simple_sizing(nexus):
             wing.chords.tip              = wing.chords.root * wing.taper
             wing.chords.mean_aerodynamic = wing.chords.root - (2*(wing.chords.root-wing.chords.tip)*(.5*wing.chords.root+wing.chords.tip)/(3*(wing.chords.root+wing.chords.tip)))   #A-(2(A-B)(0.5A+B) / (3(A+B))) http://www.nasascale.org/p2/wp-content/uploads/mac-calculator.htm
             wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
-
-        fuselage              = config.fuselages['fuselage']
-        fuselage.differential_pressure = diff_pressure
+        
+        vertical_arm                                       = (config.wings.vertical_stabilizer.origin[0] +  config.wings.vertical_stabilizer.aerodynamic_center[0]) - (config.wings.main_wing.origin[0] + config.wings.main_wing.aerodynamic_center[0])
+        config.wings.vertical_stabilizer.areas.reference   = (config.propulsors['turbofan'].sealevel_static_thrust * engine_arm_center) / (config.wings.vertical_stabilizer.q_cl_vertical * vertical_arm)
+        config.wings.vertical_stabilizer.areas.reference   = soft_max(config.wings.vertical_stabilizer.areas.reference,(.07 * config.wings.main_wing.areas.reference * config.wings.main_wing.spans.projected) / vertical_arm)
+        horizontal_arm                                     = (config.wings.horizontal_stabilizer.origin[0] +  config.wings.horizontal_stabilizer.aerodynamic_center[0]) - (config.wings.main_wing.origin[0] + config.wings.main_wing.aerodynamic_center[0])
+        config.wings.horizontal_stabilizer.areas.reference = (.7 * config.wings.main_wing.chords.mean_aerodynamic * config.wings.main_wing.areas.reference) / horizontal_arm
+        fuselage                                           = config.fuselages['fuselage']
+        fuselage.differential_pressure                     = diff_pressure
         #Add fan pressure ratio here 
         #config.propulsors['turbofan'].bypass_ratio = 6
 
 
         #ducted_fan_sizing(config.propulsors['turbofan'], .25, 0)
         #compute_ducted_fan_geometry(config.propulsors['turbofan'], conditions)
-    # ------------------------------------------------------------------
+     # ------------------------------------------------------------------
     #   Landing Configuration
     # ------------------------------------------------------------------
     landing = nexus.vehicle_configurations.landing
@@ -202,8 +201,11 @@ def simple_sizing(nexus):
 
     nexus.missions.base.cruise_altitude  = configs.base.cruise_altitude
     nexus.missions.base.cruise_mach      = configs.base.cruise_mach
-    #pdb.set_trace()
+    nexus.missions.econ.cruise_altitude  = configs.econ.cruise_altitude
+    nexus.missions.econ.cruise_mach      = configs.econ.cruise_mach
+
     nexus.missions = Missions.setup(nexus.analyses,nexus.vehicle_configurations) # Reset up missions with the new inputs
+
 
 
 
@@ -214,24 +216,19 @@ def simple_sizing(nexus):
 # ----------------------------------------------------------------------    
 
 def weight(nexus):
+  
     vehicle = nexus.vehicle_configurations.base
     results = nexus.results
-
-    # weight analysis
     weights = nexus.analyses.base.weights.evaluate()
     weights = nexus.analyses.cruise.weights.evaluate()
     nexus.vehicle_configurations.base.mass_properties.breakdown = weights
     weights = nexus.analyses.landing.weights.evaluate()
     weights = nexus.analyses.takeoff.weights.evaluate()
-  #  weights = nexus.analyses.short_field_takeoff.weights.evaluate()
-    
+    weights = nexus.analyses.econ.weights.evaluate()
     empty_weight     = vehicle.mass_properties.operating_empty
     passenger_weight = vehicle.passenger_weights.mass_properties.mass 
-    bags             = vehicle.mass_properties.breakdown.bag  
-    for config in nexus.vehicle_configurations:
-        config.mass_properties.zero_fuel_center_of_gravity  = vehicle.mass_properties.zero_fuel_center_of_gravity
-        config.fuel                                         = vehicle.fuel
-        config.mass_properties.max_zero_fuel                = empty_weight + passenger_weight + bags + vehicle.mass_properties.cargo
+    bags             = vehicle.mass_properties.breakdown.bag
+
     return nexus
 
 def weight_cruise(nexus):
@@ -274,12 +271,16 @@ def finalize(nexus):
 
 def post_process(nexus):
     
-    # Unpack data
+   # Unpack data
     vehicle                           = nexus.vehicle_configurations.base
     results                           = nexus.results
     summary                           = nexus.summary
     missions                          = nexus.missions  
     nexus.total_number_of_iterations +=1
+
+    compute_component_centers_of_gravity(vehicle)
+    compute_aircraft_center_of_gravity(vehicle,.10)
+
     # Static stability calculations
     CMA = -10.
     for segment in results.base.segments.values():
@@ -297,7 +298,15 @@ def post_process(nexus):
             max_throttle = max_segment_throttle
             
     summary.max_throttle = max_throttle
-    
+
+    max_throttle_econ = 0
+    for segment in results.econ.segments.values():
+        max_segment_throttle_econ = np.max(segment.conditions.propulsion.throttle[:,0])
+        if max_segment_throttle_econ > max_throttle_econ:
+            max_throttle_econ = max_segment_throttle_econ
+
+    summary.max_throttle_econ = max_throttle_econ
+   
     #Set Requirements here
     second_seg_grad_req     = .024
     tofl_req                = 7900 * Units.ft
@@ -316,14 +325,12 @@ def post_process(nexus):
     max_takeoff_weight       = nexus.vehicle_configurations.takeoff.mass_properties.max_takeoff
     zero_fuel_weight         = payload + operating_empty
     reserve_fuel             = (results.base.segments['descent_3'].conditions.weights.total_mass[-1] - results.base.segments['reserve_descent_1'].conditions.weights.total_mass[-1])
+    reserve_fuel_econ        = (results.econ.segments['descent_3'].conditions.weights.total_mass[-1] - results.econ.segments['reserve_descent_1'].conditions.weights.total_mass[-1])
     design_landing_weight    = zero_fuel_weight + reserve_fuel
-
-    #summary.max_zero_fuel_margin    = (design_landing_weight - zero_fuel_weight)/zero_fuel_weight   # This just shows reserve fuel fraction
+    econ_takeoff_weight      = nexus.vehicle_configurations.econ.mass_properties.takeoff
     summary.base_mission_fuelburn   = design_takeoff_weight - results.base.segments['descent_3'].conditions.weights.total_mass[-1]
-   
-   # print(summary.max_zero_fuel_margin)
-    #print(results.base.segments['descent_3'].conditions.weights.total_mass[-1] + reserve_fuel) # Guessed landing weight
-    #print(design_landing_weight)                                                               # Actual landing weight
+    summary.econ_mission_fuelburn   = econ_takeoff_weight - results.econ.segments['descent_3'].conditions.weights.total_mass[-1]
+
     if ((2*design_landing_weight*9.81)/(summary.approach_denom) > 0):
         summary.approach_Speed          = math.sqrt((2 * design_landing_weight * 9.81)/(summary.approach_denom))
     else:    
@@ -332,22 +339,21 @@ def post_process(nexus):
  
     actual_takeoff_weight          = operating_empty  +  payload   +   summary.base_mission_fuelburn + reserve_fuel
     summary.takeoff_diff           = (design_takeoff_weight - actual_takeoff_weight) / design_takeoff_weight
-   # print(design_takeoff_weight)
-   # print(actual_takeoff_weight)
+    actual_takeoff_weight_econ     = operating_empty  +  payload   +   summary.econ_mission_fuelburn + reserve_fuel_econ   
+    summary.takeoff_econ_diff      = (econ_takeoff_weight - actual_takeoff_weight_econ) / econ_takeoff_weight 
+    summary.takeoff_econ_diff_neg  = (econ_takeoff_weight - actual_takeoff_weight_econ) / econ_takeoff_weight 
+
     summary.landing_diff           = (results.base.segments['descent_3'].conditions.weights.total_mass[-1] - design_landing_weight) / design_landing_weight
    
     summary.mzfw_diff              = (results.base.segments['reserve_descent_1'].conditions.weights.total_mass[-1] - zero_fuel_weight) / zero_fuel_weight
 
     summary.takeoff_weight         = actual_takeoff_weight
+    summary.econ_takeoff_weight    = actual_takeoff_weight_econ
     summary.operating_empty        = operating_empty
     summary.thrust                 = vehicle.propulsors['turbofan'].sealevel_static_thrust * 2
     summary.fuel_margin            = (vehicle.wings.main_wing.fuel_volume*.804 * 1000 - summary.base_mission_fuelburn) / (vehicle.wings.main_wing.fuel_volume*.804 * 1000) 
     summary.nacelle_d              = vehicle.propulsors['turbofan'].nacelle_diameter / Units.inches  
     summary.engine_length          = vehicle.propulsors['turbofan'].engine_length / Units.inches
-    
-   # import pdb; pdb.set_trace()
-    #when you run want to output results to a file
-    #filename = 'results.txt'
-    #write_optimization_outputs(nexus, filename)
-    #print(summary.takeoff_field_length)
+    summary.cg_error     = (((vehicle.wings['main_wing'].aerodynamic_center[0] + vehicle.wings['main_wing'].origin[0]) - vehicle.mass_properties.center_of_gravity[0][0]))/vehicle.wings['main_wing'].chords.mean_aerodynamic
+    summary.cg_error_neg = (((vehicle.wings['main_wing'].aerodynamic_center[0] + vehicle.wings['main_wing'].origin[0]) - vehicle.mass_properties.center_of_gravity[0][0]))/vehicle.wings['main_wing'].chords.mean_aerodynamic
     return nexus    

@@ -72,7 +72,7 @@ def setup():
     problem.inputs = np.array([
         [ 'wing_area'                    ,  1341    , (   1000. ,   2000.   ) ,   1341. , Units['ft^2']],
         [ 'thrust'                       ,  2*29000/1.255   , (   2*25000/1.255   ,     2*43000/1.255   ) ,   2*29000/1.255 , Units.lbf],
-        [ 'cruise_altitude'              ,  35000/3.28    , (   32000/3.28   ,    43000/3.28   ) ,   35000/3.28  , Units.m],
+        [ 'cruise_altitude'              ,  35000/3.28    , (   25000/3.28   ,    43000/3.28   ) ,   35000/3.28  , Units.m],
         [ 'takeoff_weight_guess'         ,  90000    , (70000 ,      150000)   ,      90000    , Units.kg],
         [ 'wing_sweep'                   ,   26        , (0     ,        40)     ,       26        , Units.deg],
         [ 'wing_toverc'                  ,   .104      , (.07   ,        .16)    ,       .104        , Units.less],
@@ -89,8 +89,8 @@ def setup():
     # throw an error if the user isn't specific about wildcards
     # [ tag, scaling, units ]
     problem.objective = np.array([
-        #[ 'fuel_burn', 10000, Units.kg ] # Design range fuel burn
-        ['mtowobj'  , 100000, Units.kg] # MTOW
+        [ 'fuel_burn', 10000, Units.kg ] # Design range fuel burn
+        #['mtowobj'  , 100000, Units.kg] # MTOW
     ])
     # -------------------------------------------------------------------
     # Constraints

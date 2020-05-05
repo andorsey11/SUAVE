@@ -1,0 +1,40 @@
+MTOW                                       = 201304  lbm
+MLW                                        = 0  lbm 
+Payload                                    = 65396 lbm 
+OEW                                        = 93647 lbm 
+
+Engine Type                                = openrotor
+Engine Thrust (M0.25)                      = 22908  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 14.131159685793744
+Nacelle Diameter                           = 88.0 inches
+Fan Diameter                               = 149.0 Inches
+Fan Pressure Ratio                         = 1.2246751714104407
+Thrust to Weight (SLS)                     = 0.325
+
+Wing Area                                  = 1337  sqft
+Wing AR                                    = 12.36
+Wing t/c                                   = 0.137
+Wing Span                                  = 128.5  ft
+Wing Loading                               = 150.6  lbs/sqft
+Fuel Volume                                = 8612  USG
+Wing Sweep                                 = 38.8 deg 
+Horizontail Tail Area / Volume Coefficient = 236 / 0.849  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 275 / 0.100  sqft / nd
+
+Cruise Altitude                            = 32008  ft
+Cruise Mach                                = 0.790
+Initial Cruise L/D                         = 18.2
+Initial Cruise SFC                         = 0.573  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.338 percent  
+Cruise Range Factor                        = 7527.0 
+
+Maximum Throttle Setting / Requirement     = 0.95 / 0.95
+Takeoff Field Length / Requirement         = 7410 / 7902  ft/ft
+Approach Speed / Requirement               = 149.7 / 150.0  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.351 / 0.05
+Second Segment Gradient / Requirement      = 0.036 / 0.024 deg / deg
+Takeoff Convergence                        = -0.0001
+
+Design Mission Fuel Burn                   = 37529  lbs 
+

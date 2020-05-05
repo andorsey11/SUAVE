@@ -34,7 +34,7 @@ def integrated_propulsion(propulsors, engine_wt_factor = 1.6):
     Properties Used:
             N/A
     """   
-    if propulsors.tag == 'openrotor':
+    if propulsors.tag == 'openrotor' or propulsors.tag == 'openrotoraft':
         rpm_fan = 1100
         gear_ratio = 6
         power = propulsors.takeoff_power[0][0] / Units.hp

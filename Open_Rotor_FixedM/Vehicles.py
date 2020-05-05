@@ -42,7 +42,8 @@ def base_setup():
     vehicle.mass_properties.takeoff                   = 87000 * Units.kilogram   
     vehicle.mass_properties.operating_empty           = 52746.4 * Units.kilogram 
     vehicle.mass_properties.max_zero_fuel             = 62732.0 * Units.kilogram 
-    vehicle.mass_properties.cargo                     = 10000.  * Units.kilogram   
+    vehicle.mass_properties.cargo                     = 10000.  * Units.kilogram
+    vehicle.mass_properties.econ_takeoff              = 75000   * Units.kilogram  
     
     # envelope properties
     vehicle.envelope.ultimate_load = 2.5
@@ -72,7 +73,7 @@ def base_setup():
     landing_gear.main_units  = 2    #number of main landing gear units
     landing_gear.nose_units  = 1    #number of nose landing gear
     landing_gear.main_wheels = 2    #number of wheels on the main landing gear
-    landing_gear.nose_wheels = 2    #number of wheels on the nose landing gear      
+    landing_gear.nose_wheels = 2    #number of wheels on the nose landing gear     
     vehicle.landing_gear = landing_gear
 
     # ------------------------------------------------------------------        
@@ -102,6 +103,7 @@ def base_setup():
     wing.high_lift               = True
     wing.dynamic_pressure_ratio  = 1.08
     wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
+    wing.origin_factor           = .5
     #import pdb; pdb.set_trace()
     # ------------------------------------------------------------------
     #   Flaps
@@ -214,6 +216,7 @@ def base_setup():
     gt_engine.engine_length     = 2.71
     gt_engine.nacelle_diameter  = 2.05
     gt_engine.scrubbed_chord    = vehicle.wings['main_wing'].chords.mean_aerodynamic
+    gt_engine.bypass_factor     = 1
 
     #set the working fluid for the network
     gt_engine.working_fluid = SUAVE.Attributes.Gases.Air()
@@ -313,7 +316,7 @@ def base_setup():
     fan = SUAVE.Components.Energy.Converters.Fan()   
     fan.tag = 'fan'
 
-    fan.polytropic_efficiency = 1
+    fan.polytropic_efficiency = .79082
     fan.pressure_ratio        = 1.2
     fan.spinner_ratio         = 2.5 
     fan.nacelle_length_to_fan_di = 1.5
@@ -381,6 +384,16 @@ def configs_setup(vehicle):
     # ------------------------------------------------------------------
     #   Cruise Configuration
     # ------------------------------------------------------------------
+    config = SUAVE.Components.Configs.Config(base_config)
+    config.tag = 'econ'
+    config.mass_properties.takeoff = 70000 * Units.kg
+    config.cruise_altitude = 37000 * Units.ft
+    config.cruise_step = 2000/3.28 * Units.m
+    configs.append(config)
+    
+
+
+
 
     config = SUAVE.Components.Configs.Config(base_config)
     config.tag = 'cruise'

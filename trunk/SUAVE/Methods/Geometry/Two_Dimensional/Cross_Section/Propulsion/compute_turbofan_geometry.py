@@ -49,7 +49,7 @@ def compute_turbofan_geometry(turbofan, conditions):
     bypass_ratio      = turbofan.bypass_ratio
     gamma = 1.4
     R = 287.05
-    if turbofan.tag == 'openrotor':
+    if turbofan.tag == 'openrotor' or turbofan.tag == 'openrotoraft':
     # Size the nacelle from the LPC instead of the fan
         core_mdot = turbofan.thrust.outputs.core_mass_flow_rate[0][0]# Core mass flow to fan mass flow
         core_Tt   = turbofan.low_pressure_compressor.inputs.stagnation_temperature[0][0]
@@ -78,34 +78,24 @@ def compute_turbofan_geometry(turbofan, conditions):
        # fan_height = sqrt(fan_area) / (sqrt(2*pi*turbofan.fan.spinner_ratio+pi))
         fan_radius = np.sqrt(fan_area / pi + (nacelle_diameter/2)**2)
         fan_diameter = fan_radius * 2 * 1.2 # k factor
-        #fan_diameter = (fan_height + (turbofan.fan.spinner_ratio) * fan_height)*2
-        #nacelle_diameter = fan_diameter / turbofan.fan.spinner_ratio
-
-        #import pdb; pdb.set_trace()
     else:
-
         fan_mdot = turbofan.thrust.outputs.core_mass_flow_rate[0][0]*(1/(1-turbofan.thrust.inputs.flow_through_fan)) # Core mass flow to fan mass flow
         fan_Tt   = turbofan.fan.inputs.stagnation_temperature[0][0]
         fan_mach = turbofan.thrust.inputs.fan_nozzle.mach_number[0][0] 
         fan_Pt   = turbofan.fan.inputs.stagnation_pressure[0][0]
-    
         Area_exp = (-1*(gamma+1)/(2*(gamma-1)))
         Area_rs  = fan_Pt * np.sqrt(gamma/R)* fan_mach*(1+((gamma-1)/2)*fan_mach**2)**(Area_exp)
-
         fan_area = fan_mdot * np.sqrt(fan_Tt) / Area_rs
         fan_diameter = 2 * ((sqrt(fan_area) / (sqrt(pi))) / (1-(1-turbofan.fan.spinner_ratio)**2))
-        #fan_diameter = turbofan.fan.spinner_ratio * fan_diameter
-        #fan_diameter = (fan_height + (turbofan.fan.spinner_ratio) * fan_height)*2
         nacelle_diameter = 1.12 * fan_diameter
         L_eng_m = turbofan.fan.nacelle_length_to_fan_di  * nacelle_diameter
-       # import pdb; pdb.set_trace()
 
     #Pack
     turbofan.engine_length    = L_eng_m
     turbofan.nacelle_diameter = nacelle_diameter
     turbofan.fan_diameter     = fan_diameter
   
-    turbofan.areas.wetted     = 1.1*np.pi*turbofan.nacelle_diameter*turbofan.engine_length * turbofan.thrust.inputs.number_of_engines
+    turbofan.areas.wetted     = 1.1*np.pi*turbofan.nacelle_diameter*turbofan.engine_length
 
 
 # ----------------------------------------------------------------------

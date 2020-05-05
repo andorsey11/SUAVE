@@ -29,12 +29,12 @@ def main():
     problem = setup()
     
     ## Base Input Values
-    output = problem.objective()
+    #output = problem.objective()
     
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
     ## Uncomment for the first optimization
-   # output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-3)
+    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-3)
     #print(output)        
     #output = scipy_setup.SciPy_Solve(problem, solver='SLSQP')
     # print('fuel burn = ', "%.1f" % (problem.summary.base_mission_fuelburn[0] / Units.lbs))
@@ -70,10 +70,11 @@ def setup():
     #   [ tag                            , initial, (lb,ub)             , scaling , units ]
   
     problem.inputs = np.array([
-        [ 'wing_area'                    ,  1341    , (   1000. ,   2000.   ) ,   1341. , Units['ft^2']],
-        [ 'thrust'                       ,  2*19000   , (   2*25000/1.255   ,     2*43000/1.255   ) ,   2*29000/1.255 , Units.lbf],
-        [ 'cruise_altitude'              ,  35000/3.28    , (   32000/3.28   ,    43000/3.28   ) ,   35000/3.28  , Units.m],
-        [ 'takeoff_weight_guess'         ,  90000    , (70000 ,      150000)   ,      90000    , Units.kg],
+        [ 'wing_area'                    ,  1341    , (   1000. ,   2500.   ) ,   1341. , Units['ft^2']],
+        [ 'thrust'                       ,  2*33000/1.255   , (   2*25000/1.255   ,     2*47000/1.255   ) ,   2*33000/1.255 , Units.lbf],
+        [ 'cruise_altitude'              ,  35000/3.28    , (   25000/3.28   ,    43000/3.28   ) ,   35000/3.28  , Units.m],
+        [ 'takeoff_weight_guess'         ,  90000    , (70000 ,      170000)   ,      90000    , Units.kg],
+        [ 'econ_takeoff_weight_guess'     ,  80000    , (20000 ,      170000)   ,      90000    , Units.kg],
         [ 'wing_sweep'                   ,   26        , (0     ,        40)     ,       26        , Units.deg],
         [ 'wing_toverc'                  ,   .104      , (.07   ,        .16)    ,       .104        , Units.less],
         [ 'wing_aspect_ratio'            ,   12     , ( 9    ,         14)     ,       10.4      , Units.less],
@@ -81,7 +82,12 @@ def setup():
       #  [ 'cruise_mach'                  ,   .79       , (.65   ,    .85)     ,      .79        , Units.less],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
-        [ 'fan_pressure_ratio'           ,   1.1       ,   (1.05, 3)        ,     1.7         , Units.less]
+        [ 'fan_pressure_ratio'           ,   1.05       ,   (1.05, 1.4)        ,     1.2         , Units.less],
+        [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
+        [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
+        [ 'econ_cruise_altitude'         ,   39000/3.28    , (   25000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],
+        [ 'econ_cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]
+
     ])
     # -------------------------------------------------------------------
     # Objective
@@ -91,7 +97,8 @@ def setup():
     # [ tag, scaling, units ]
     problem.objective = np.array([
         #[ 'fuel_burn', 10000, Units.kg ] # Design range fuel burn
-        ['mtowobj'  , 100000, Units.kg] # MTOW
+        #['mtowobj'  , 100000, Units.kg] # MTOW
+        ['econ_fb'   , 10000, Units.kg]
     ])
     # -------------------------------------------------------------------
     # Constraints
@@ -103,10 +110,14 @@ def setup():
         [ 'max_throttle', '<', .95, .95, Units.less],
         [ 'takeoff_field_length', '<', 7900/3.28, 7900/3.28, Units.m], # DO EVERYTHING IN METRIC
         [ 'second_seg_grad', '>', .024, .024, Units.less],
-        [ 'fuel_margin'    , '>',   .05, .05, Units.less]
+        [ 'fuel_margin'    , '>',   .05, .05, Units.less],
+        [ 'cg_error'       ,  '>', -.01 , .01, Units.less],
+        [ 'cg_error_neg'   ,  '<',  .01 ,  .01, Units.less],
+        [ 'econ_takeoff_diff'   ,  '>', -.01 , .01, Units.less],
+        [ 'econ_takeoff_diff_neg'   ,  '<',  .01 ,  .01, Units.less],
+        [ 'max_throttle_econ', '<', .95, .95, Units.less]
         #[ 'wing_span'      , '<',   118/3.28, 118/3.28, Units.m]
     ])
-    
     # -------------------------------------------------------------------
     #  Aliases
     # -------------------------------------------------------------------
@@ -116,7 +127,7 @@ def setup():
     problem.aliases = [
         [ 'wing_area'                        ,   ['vehicle_configurations.*.wings.main_wing.areas.reference',
                                                   'vehicle_configurations.*.reference_area'                              ]],
-        [ 'cruise_altitude'                  ,    'vehicle_configurations.*.cruise_altitude'                              ],
+        [ 'cruise_altitude'                  ,    'vehicle_configurations.base.cruise_altitude'                              ],
         [ 'cruise_mach'                      ,    'vehicle_configurations.*.cruise_mach'                                  ],
         [ 'fuel_burn'                        ,    'summary.base_mission_fuelburn'                                         ],
         [ 'design_range_fuel_margin'         ,    'summary.max_zero_fuel_margin'                                          ],
@@ -144,13 +155,23 @@ def setup():
         [ 'wing_span'                        ,      'vehicle_configurations.base.wings.main_wing.spans.projected'         ],
         [ 'landing_diff'                     ,      'summary.landing_diff'                                                ],
         [ 'mzfw_diff'                        ,      'summary.mzfw_diff'                                                   ],
-        [ 'fan_pressure_ratio'               ,      'vehicle_configurations.*.propulsors.openrotor.fan.pressure_ratio'     ],
-        [ 'cruise_step'                      ,      'vehicle_configurations.*.cruise_step'                                ],
+        [ 'fan_pressure_ratio'               ,      'vehicle_configurations.*.propulsors.openrotor.fan.pressure_ratio' ],
+        [ 'cruise_step'                      ,      'vehicle_configurations.base.cruise_step'                             ],
+        [ 'econ_cruise_step'                      ,      'vehicle_configurations.econ.cruise_step'                        ],
         [ 'v2_vs'                            ,      'vehicle_configurations.takeoff.V2_VS_ratio'                          ],
-        [ 'bypass_ratio'                     ,      'vehicle_configurations.*.propulsors.openrotor.bypass_ratio'           ]                                                                                                                                                                  
-                                                                                                                                                                 
-    ]     
-    
+        [ 'bypass_ratio'                     ,      'vehicle_configurations.*.propulsors.openrotor.bypass_ratio'       ],                                                                                                                                                                  
+        [ 'bypass_factor'                    ,      'vehicle_configurations.*.propulsors.openrotor.bypass_factor'      ],                                                                                                                                                                  
+        [ 'cg_error'                         ,      'summary.cg_error'                                                    ],                                                                                                                                                                  
+        [ 'cg_error_neg'                     ,      'summary.cg_error_neg'                                                ],                                                                                                                                                                  
+        [ 'wing_origin'                      ,     'vehicle_configurations.*.wings.main_wing.origin_factor'               ],                                                                                                                                                                                                       
+        [ 'econ_fb'                          ,     'summary.econ_mission_fuelburn'                                        ],                                     
+        [ 'econ_takeoff_diff'                ,     'summary.takeoff_econ_diff'                                            ],
+        [ 'econ_takeoff_diff_neg'            ,     'summary.takeoff_econ_diff_neg'                                        ],
+        [ 'econ_takeoff_weight_guess'        ,       'vehicle_configurations.econ.mass_properties.takeoff'                ],   
+        [ 'econ_cruise_altitude'             ,       'vehicle_configurations.econ.cruise_altitude'                        ],
+        [ 'max_throttle_econ'                ,       'summary.max_throttle_econ'                                          ],
+
+        ]  
     # -------------------------------------------------------------------
     #  Vehicles
     # -------------------------------------------------------------------

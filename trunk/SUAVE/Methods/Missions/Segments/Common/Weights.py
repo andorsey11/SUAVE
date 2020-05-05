@@ -36,7 +36,7 @@ def initialize_weights(segment):
                                 
     """    
     
- 
+   # import pdb; pdb.set_trace()
     if segment.state.initials:
         m_initial = segment.state.initials.conditions.weights.total_mass[-1,0]
     else:
