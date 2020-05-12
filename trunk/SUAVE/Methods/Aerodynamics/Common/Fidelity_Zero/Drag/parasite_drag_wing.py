@@ -229,7 +229,8 @@ def compute_parasite_drag(re,mac_w,Mc,Tc,xtu,xtl,sweep_w,t_c_w,Sref,Swet,C):
     cf_w_l, k_comp_l, k_reyn_l = compressible_mixed_flat_plate(Re_w,Mc,Tc,xtl) 
     
     # correction for airfoils
-    cos_sweep = np.cos(sweep_w)
+    cos_sweep = np.cos(sweep_w) * 1.1 # Make the form factor get worse with sweep faster. Giving too much sweep
+    t_c_w = t_c_w * 1.1
     cos2      = cos_sweep*cos_sweep
     
     ind = Mc <= 1.
@@ -238,7 +239,6 @@ def compute_parasite_drag(re,mac_w,Mc,Tc,xtu,xtl,sweep_w,t_c_w,Sref,Swet,C):
     k_w[ind] = 1. + ( 2.* C * (t_c_w * cos2) ) / ( np.sqrt(1.- Mc[ind]*Mc[ind] * cos2) )  \
             + ( C*C * cos2 * t_c_w*t_c_w * (1. + 5.*(cos2)) ) \
             / (2.*(1.-(Mc[ind]*cos_sweep)**2.))             
-    
     spline = Cubic_Spline_Blender(.95,1.0)
     h00 = lambda M:spline.compute(M)
     

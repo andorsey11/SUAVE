@@ -384,7 +384,7 @@ def configs_setup(vehicle):
     config.tag = 'econ'
     config.mass_properties.takeoff = 70000 * Units.kg
     config.cruise_altitude = 37000 * Units.ft
-    config.cruise_step = 2000/3.28 * Units.m
+    config.cruise_step = 1 * Units.m
     configs.append(config)
     
 

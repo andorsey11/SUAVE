@@ -65,11 +65,11 @@ def compute_component_centers_of_gravity(vehicle, compute_propulsor_origin = Tru
     # computes the CG of propulsors. If origin not specified in vehicle set up, change compute_propulsor_origin boolean to True
     propulsor_name                                              = list(vehicle.propulsors.keys())[0]
     propulsor                                                   = vehicle.propulsors[propulsor_name]   
-    
+    #import pdb; pdb.set_trace()
     if compute_propulsor_origin == True:
         propulsor.origin = [[0,0,0]]
         if propulsor.tag == 'openrotor':
-            propulsor.origin[0][0] = wing.origin[0] + mac_le_offset # Slipper into wing
+            propulsor.origin[0][0] = wing.origin[0] + mac_le_offset/2 # Slipper into wing, halfway to mac cg is at the leading edge
         elif propulsor.tag =='openrotoraft':
             propulsor.origin[0][0] = vehicle.fuselages['fuselage'].lengths.total * 0.8    
         else:

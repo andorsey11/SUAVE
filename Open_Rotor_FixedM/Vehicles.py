@@ -57,7 +57,7 @@ def base_setup():
 
 
     vehicle.cruise_altitude    = 31200 * Units.ft
-    vehicle.cruise_mach        = .79
+    vehicle.cruise_mach        = 0.75375
     vehicle.cruise_step        = 2000 / 3.28 * Units.m
     # ------------------------------------------------------------------        
     #  Landing Gear
@@ -316,7 +316,7 @@ def base_setup():
     fan = SUAVE.Components.Energy.Converters.Fan()   
     fan.tag = 'fan'
 
-    fan.polytropic_efficiency = .79082
+    fan.polytropic_efficiency = 0.803
     fan.pressure_ratio        = 1.2
     fan.spinner_ratio         = 2.5 
     fan.nacelle_length_to_fan_di = 1.5
@@ -388,7 +388,7 @@ def configs_setup(vehicle):
     config.tag = 'econ'
     config.mass_properties.takeoff = 70000 * Units.kg
     config.cruise_altitude = 37000 * Units.ft
-    config.cruise_step = 2000/3.28 * Units.m
+    config.cruise_step = 1/3.28 * Units.m
     configs.append(config)
     
 

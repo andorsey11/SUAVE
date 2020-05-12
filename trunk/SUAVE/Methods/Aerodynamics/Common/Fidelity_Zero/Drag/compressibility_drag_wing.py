@@ -68,6 +68,10 @@ def compressibility_drag_wing(state,settings,geometry):
     # unpack wing
     t_c_w   = wing.thickness_to_chord
     sweep_w = wing.sweeps.quarter_chord
+
+    #Calibrate to fit real data, make t/c hurt more, sweep help less
+    t_c_w = t_c_w * 1.8
+    sweep_w = sweep_w * .7
     
     # Currently uses vortex lattice model on all wings
     if wing.tag=='main_wing':
@@ -103,7 +107,7 @@ def compressibility_drag_wing(state,settings,geometry):
     
     # compressibility drag
     cd_c = dcdc_cos3g * cos_sweep*cos_sweep*cos_sweep
-    
+    cd_c = cd_c * .1 # Correction factor to get real world optimizations
     # increment
     #total_compressibility_drag += cd_c
     

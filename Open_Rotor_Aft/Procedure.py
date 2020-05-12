@@ -85,14 +85,14 @@ def find_target_range(nexus,mission):
 # ----------------------------------------------------------------------    
 def design_mission(nexus):
     mission = nexus.missions.base
-    mission.design_range = 5500.*Units.nautical_miles
+    mission.design_range = 2900.*Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.base = mission.evaluate()
   
 
     mission = nexus.missions.econ
-    mission.design_range = 5500 / 3 * Units.nautical_miles
+    mission.design_range = 2900 / 3 * Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.econ = mission.evaluate()   

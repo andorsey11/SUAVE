@@ -29,7 +29,7 @@ def main():
     problem = setup()
     
     ## Base Input Values
-    #output = problem.objective()
+   # output = problem.objective()
     
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
@@ -78,11 +78,9 @@ def setup():
         [ 'wing_sweep'                   ,   26        , (0     ,        40)     ,       26        , Units.deg],
         [ 'wing_toverc'                  ,   .104      , (.07   ,        .16)    ,       .104        , Units.less],
         [ 'wing_aspect_ratio'            ,   12     , ( 9    ,         14)     ,       10.4      , Units.less],
-       # [ 'bypass_ratio   '              ,   7     , ( 1    ,         17)     ,       7      , Units.less],
-      #  [ 'cruise_mach'                  ,   .79       , (.65   ,    .85)     ,      .79        , Units.less],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
-        [ 'fan_pressure_ratio'           ,   1.05       ,   (1.05, 1.4)        ,     1.2         , Units.less],
+        [ 'fan_pressure_ratio'           ,   1.1       ,   (1.05, 1.4)        ,     1.2         , Units.less],
         [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
         [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
         [ 'econ_cruise_altitude'         ,   39000/3.28    , (   25000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],
@@ -141,7 +139,9 @@ def setup():
                                                               'vehicle_configurations.*.mass_properties.takeoff'         ]],  
         ['second_seg_grad'                   ,     'summary.second_seg_grad'                                              ],
         [ 'fuel_margin'                      ,      'summary.fuel_margin'                                                 ],
-        [ 'wing_sweep'                       ,      'vehicle_configurations.*.wings.main_wing.sweeps.quarter_chord'       ],
+        [ 'wing_sweep'                       ,      ['vehicle_configurations.*.wings.main_wing.sweeps.quarter_chord',
+                                                    'vehicle_configurations.*.wings.main_wing.sweeps.leading_edge',
+                                                    'vehicle_configurations.*.wings.main_wing.sweeps.trailing_edge'      ]],        
         [ 'wing_toverc'                      ,      'vehicle_configurations.*.wings.main_wing.thickness_to_chord'         ], 
         [ 'mtowobj'                          ,      'summary.takeoff_weight'                                              ],
         [ 'approach_speed_diff'              ,      'summary.approach_speed_diff'                                         ],

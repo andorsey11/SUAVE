@@ -85,14 +85,14 @@ def find_target_range(nexus,mission):
 # ----------------------------------------------------------------------    
 def design_mission(nexus):
     mission = nexus.missions.base
-    mission.design_range = 5500.*Units.nautical_miles
+    mission.design_range = 2900.*Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.base = mission.evaluate()
   
 
     mission = nexus.missions.econ
-    mission.design_range = 5500 / 3 * Units.nautical_miles
+    mission.design_range = 2900 / 3 * Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.econ = mission.evaluate()   
@@ -128,9 +128,9 @@ def simple_sizing(nexus):
     conditions.freestream  = freestream
     for config in configs:
         if config.propulsors['openrotor'].bypass_factor <= 1 and config.propulsors['openrotor'].bypass_factor > 0:
-             config.propulsors['openrotor'].bypass_ratio = 3.64*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.984) * config.propulsors['openrotor'].bypass_factor
+             #config.propulsors['openrotor'].bypass_ratio = 3.64*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.984) * config.propulsors['openrotor'].bypass_factor
         else:
-             config.propulsors['openrotor'].bypass_ratio = 3.64*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.984)
+             #config.propulsors['openrotor'].bypass_ratio = 3.64*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.984)
         turbofan_sizing(config.propulsors['openrotor'], .25, 0)
         compute_turbofan_geometry(config.propulsors['openrotor'], conditions)
         engine_arm_center      = config.fuselages['fuselage'].width / 2 + 1.3 * config.propulsors['openrotor'].nacelle_diameter # 1 diameter from fuselage   

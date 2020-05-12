@@ -85,14 +85,14 @@ def find_target_range(nexus,mission):
 # ----------------------------------------------------------------------    
 def design_mission(nexus):
     mission = nexus.missions.base
-    mission.design_range = 5500.*Units.nautical_miles
+    mission.design_range = 2000.*Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.base = mission.evaluate()
   
 
     mission = nexus.missions.econ
-    mission.design_range = 5500 / 3 * Units.nautical_miles
+    mission.design_range = 1000 / 2 * Units.nautical_miles
     find_target_range(nexus,mission)
     results = nexus.results
     results.econ = mission.evaluate()   
@@ -143,7 +143,6 @@ def simple_sizing(nexus):
             wing.chords.tip              = wing.chords.root * wing.taper
             wing.chords.mean_aerodynamic = wing.chords.root - (2*(wing.chords.root-wing.chords.tip)*(.5*wing.chords.root+wing.chords.tip)/(3*(wing.chords.root+wing.chords.tip)))   #A-(2(A-B)(0.5A+B) / (3(A+B))) http://www.nasascale.org/p2/wp-content/uploads/mac-calculator.htm
             wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
-        
         vertical_arm                                       = (config.wings.vertical_stabilizer.origin[0] +  config.wings.vertical_stabilizer.aerodynamic_center[0]) - (config.wings.main_wing.origin[0] + config.wings.main_wing.aerodynamic_center[0])
         config.wings.vertical_stabilizer.areas.reference   = (config.propulsors['turbofan'].sealevel_static_thrust * engine_arm_center) / (config.wings.vertical_stabilizer.q_cl_vertical * vertical_arm)
         config.wings.vertical_stabilizer.areas.reference   = soft_max(config.wings.vertical_stabilizer.areas.reference,(.07 * config.wings.main_wing.areas.reference * config.wings.main_wing.spans.projected) / vertical_arm)
@@ -151,6 +150,8 @@ def simple_sizing(nexus):
         config.wings.horizontal_stabilizer.areas.reference = (.7 * config.wings.main_wing.chords.mean_aerodynamic * config.wings.main_wing.areas.reference) / horizontal_arm
         fuselage                                           = config.fuselages['fuselage']
         fuselage.differential_pressure                     = diff_pressure
+       # import pdb; pdb.set_trace()
+
         #Add fan pressure ratio here 
         #config.propulsors['turbofan'].bypass_ratio = 6
 
