@@ -443,7 +443,7 @@ def econ(analyses, vehicle):
     # segment attributes
     segment.atmosphere   = atmosphere
     segment.planet       = planet
-    segment.altitude_end = cruise_altitude * .7
+    segment.altitude_end = cruise_altitude * .9
     climb_atmo = airport.atmosphere.compute_values(segment.altitude_end,0)
     #air_speed_ratio 
     segment.air_speed    = cruise_speed * np.sqrt(cruise_atmo.density/climb_atmo.density) # flies at or less than the cruise Cl
@@ -581,7 +581,7 @@ def econ(analyses, vehicle):
     climb_atmo = airport.atmosphere.compute_values(segment.altitude_end,0)
     #air_speed_ratio 
     segment.air_speed    = cruise_speed * np.sqrt(cruise_atmo.density/climb_atmo.density)
-    segment.descent_rate = 700. * Units['ft/min']
+    segment.descent_rate = 1000. * Units['ft/min']
     segment.state.numerics.number_control_points = tolerance
 
     # append to mission
@@ -605,7 +605,7 @@ def econ(analyses, vehicle):
     climb_atmo = airport.atmosphere.compute_values(segment.altitude_end,0)
     #air_speed_ratio 
     segment.air_speed    = cruise_speed * np.sqrt(cruise_atmo.density/climb_atmo.density)
-    segment.descent_rate = 500. * Units['ft/min']
+    segment.descent_rate = 900. * Units['ft/min']
     segment.state.numerics.number_control_points = tolerance
 
     # append to mission

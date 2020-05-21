@@ -80,7 +80,7 @@ def setup():
         [ 'wing_aspect_ratio'            ,   12     , ( 9    ,         14)     ,       10.4      , Units.less],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
-        [ 'fan_pressure_ratio'           ,   1.05       ,   (1.05, 1.4)        ,     1.2         , Units.less],
+        [ 'fan_pressure_ratio'           ,   1.06       ,   (1.05, 1.4)        ,     1.2         , Units.less],
         [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
         [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
         [ 'econ_cruise_altitude'         ,   39000/3.28    , (   25000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],

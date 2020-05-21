@@ -128,9 +128,9 @@ def simple_sizing(nexus):
     conditions.freestream  = freestream
     for config in configs:
         if config.propulsors['openrotoraft'].bypass_factor <= 1 and config.propulsors['openrotoraft'].bypass_factor > 0:
-             config.propulsors['openrotoraft'].bypass_ratio = 3.64*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.984) * config.propulsors['openrotoraft'].bypass_factor
+            config.propulsors['openrotoraft'].bypass_ratio = 3.64*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.984) * config.propulsors['openrotoraft'].bypass_factor
         else:
-             config.propulsors['openrotoraft'].bypass_ratio = 3.64*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.984)
+            config.propulsors['openrotoraft'].bypass_ratio = 3.64*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.984)
         turbofan_sizing(config.propulsors['openrotoraft'], .25, 0)
         compute_turbofan_geometry(config.propulsors['openrotoraft'], conditions)
         engine_arm_center      = config.fuselages['fuselage'].width / 2 + 1.3 * config.propulsors['openrotoraft'].nacelle_diameter # 1 diameter from fuselage   
