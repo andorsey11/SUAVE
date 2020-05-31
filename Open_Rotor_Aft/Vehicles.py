@@ -339,7 +339,7 @@ def base_setup():
     mach_number   = 0.25 
     isa_deviation = 0.
 
-    # add thrust to the network
+    # add thrust to the networkStandard_Tech_FixedM_BPRVar
     gt_engine.thrust = thrust
 
     #size the turbofan

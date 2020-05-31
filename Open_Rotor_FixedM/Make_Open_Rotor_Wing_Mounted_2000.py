@@ -147,12 +147,19 @@ def main():
                     optimize_data[86] = "        #[ 'econ_cruise_step'             ,   1 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]" # Enforces basically no step
             
 
-
-                approach_req = 3*10**(-5) * mtow_guess + 128.45 # Knots
-                if(mtow_guess > 100000):
-                    takeoff_req =  .0067 * mtow_guess + 7400
-                if(mtow_guess <= 100000):
-                    takeoff_req = .046 * mtow_guess + 3617 	
+                approach_req_list = [ [129.66611,   130.79912,  131.978,    133.15382,  134.38559,  135.93143,  137.01593,  138.54269],
+                                      [129.85178,   131.14865,  132.52592,  133.87415,  135.69314,  137.25941,  138.563,    139.91582],
+                                      [129.98237,   131.43833,  132.96065,  134.36966,  136.38368,  137.96576,  139.2077,   141.11771],
+                                      [130.22867,   131.7203,   133.42103,  135.0164,   137.35985,  138.96707,  140.66369,  142.62188]]
+                tofl_list  =          [[5481.702,       7218.984,   8187.92,    8450.5198,  8725.6151,  9070.8527,  9313.0577,  9654.0341],
+                                       [5766.396,       7754.93,    8310.2888,  8611.3935,  9017.6346,  9367.4349,  9658.57,    9960.6998],
+                                       [5966.634,       8199.106,   8407.3785,  8722.0574,  9171.8552,  9525.1864,  9802.553,   10229.1219],
+                                       [6344.294,       8130.367,   8510.1967,  8866.496,   9389.8665,  9748.8123,  10127.7241, 10565.0532]]
+               
+                payload_indice = int((payload / 50) - 1)
+                range_indice   = int((design_range/1000)-1)
+                approach_req = approach_req_list[range_indice][payload_indice]
+                takeoff_req  = tofl_list[range_indice][payload_indice]  
 
             #Requirements
                 optimize_data[106] = "        [ 'approach_speed', '<', " + str(approach_req * .51444) + " , " + str(approach_req * .51444) + " , Units['m/sec']],\n"
@@ -182,8 +189,8 @@ def main():
                 parsed_mtow = config_data[0].split(" ")
                 mtow_result = int(parsed_mtow[40])
                 print(abs(mtow_result-mtow_guess))
-                if (abs(mtow_result - mtow_guess) <= 1500 or parsed_mtow[40] == "nan" ):
-                    converged = True
+                #if (abs(mtow_result - mtow_guess) <= 1500 or parsed_mtow[40] == "nan" ):
+                converged = True
                   #  import pdb; pdb.set_trace()
                 counter = counter + 1
                 mtow_guess = mtow_result

@@ -34,7 +34,7 @@ def main():
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
     ## Uncomment for the first optimization
-    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-4)
+    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-3)
     #print(output)        
     #output = scipy_setup.SciPy_Solve(problem, solver='SLSQP')
     # print('fuel burn = ', "%.1f" % (problem.summary.base_mission_fuelburn[0] / Units.lbs))
@@ -70,14 +70,14 @@ def setup():
     #   [ tag                            , initial, (lb,ub)             , scaling , units ]
   
     problem.inputs = np.array([
-        [ 'wing_area'                    , 2700.845197917999 , (   1350.4225989589995 , 4591.436836460598 ) , 2700.845197917999 , Units['ft^2']],
-        [ 'thrust'                       , 52493.067729083676  , (  15747.920318725102 , 157479.20318725103 ) ,  52493.067729083676 , Units.lbf],
-        [ 'cruise_altitude'              , 10670.731707317074 , ( 6707.317073170732 ,  43000/3.28   ) ,  10670.731707317074  , Units.m],
-        [ 'takeoff_weight_guess'         , 149385.03401360544 ,  ( 74692.51700680272  ,   298770.0680272109)   ,   149385.03401360544 , Units.kg],
+        [ 'wing_area'                    , 1336.0323886639676 , (   668.0161943319838 , 2271.255060728745 ) , 1336.0323886639676 , Units['ft^2']],
+        [ 'thrust'                       , 23373.173970783533  , (  7011.95219123506 , 70119.5219123506 ) ,  23373.173970783533 , Units.lbf],
+        [ 'cruise_altitude'              , 10219.060523938573 , ( 6707.317073170732 ,  43000/3.28   ) ,  10219.060523938573  , Units.m],
+        [ 'takeoff_weight_guess'         , 66515.49508692365 ,  ( 33257.747543461825  ,   133030.9901738473)   ,   66515.49508692365 , Units.kg],
         [ 'wing_sweep'                   , 25        , (5     ,        45)     ,   25         , Units.deg],
         [ 'wing_toverc'                  , 0.095        , (.07   ,       .16)     ,     0.095    , Units.less],
         [ 'wing_aspect_ratio'            , 11        , ( 6    ,         14)    ,     11   , Units.less],
-        [ 'econ_takeoff_weight_guess'    , 119508.02721088436 ,  ( 44815.510204081635  ,   224077.55102040817)   ,   119508.02721088436 , Units.kg],
+        [ 'econ_takeoff_weight_guess'    , 53212.396069538925 ,  ( 19954.648526077093  ,   99773.24263038547)   ,   53212.396069538925 , Units.kg],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
         [ 'fan_pressure_ratio'           ,   1.1       ,   (1.05, 1.4)        ,     1.2         , Units.less],
@@ -104,9 +104,9 @@ def setup():
     # [ tag, sense, edge, scaling, units ]
     problem.constraints = np.array([
         [ 'takeoff_diff', '>', 0, 1, Units.less],
-        [ 'approach_speed', '<', 71.1634214808 , 71.1634214808 , Units['m/sec']],
+        [ 'approach_speed', '<', 67.76219113200001 , 67.76219113200001 , Units['m/sec']],
         [ 'max_throttle', '<', .95, .95, Units.less],
-        [ 'takeoff_field_length', '<', 2928.94506097561 , 2928.94506097561 , Units.m],
+        [ 'takeoff_field_length', '<', 2478.7704268292687 , 2478.7704268292687 , Units.m],
         [ 'second_seg_grad', '>', .024, .024, Units.less],
         [ 'fuel_margin'    , '>',   .05, .05, Units.less],
         [ 'cg_error'       ,  '>', -.01 , .01, Units.less],
