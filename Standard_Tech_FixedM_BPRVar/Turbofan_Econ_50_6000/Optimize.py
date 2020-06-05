@@ -104,9 +104,9 @@ def setup():
     # [ tag, sense, edge, scaling, units ]
     problem.constraints = np.array([
         [ 'takeoff_diff', '>', 0, 1, Units.less],
-        [ 'approach_speed', '<', 67.43793959999999 , 67.43793959999999 , Units['m/sec']],
+        [ 'approach_speed', '<', 67.4533728 , 67.4533728 , Units['m/sec']],
         [ 'max_throttle', '<', .95, .95, Units.less],
-        [ 'takeoff_field_length', '<', 2336.890243902439 , 2336.890243902439 , Units.m],
+        [ 'takeoff_field_length', '<', 2351.829268292683 , 2351.829268292683 , Units.m],
         [ 'second_seg_grad', '>', .024, .024, Units.less],
         [ 'fuel_margin'    , '>',   .05, .05, Units.less],
         [ 'cg_error'       ,  '>', -.01 , .01, Units.less],

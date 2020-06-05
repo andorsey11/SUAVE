@@ -84,3 +84,21 @@ IOUT =   6
      ITER =   69     OBJ =  0.47596811E+00
      ITER =   70     OBJ =  0.47598682E+00
      ITER =   71     OBJ =  0.47597100E+00
+     ITER =   72     OBJ =  0.47599054E+00
+     ITER =   73     OBJ =  0.47597647E+00
+     ITER =   74     OBJ =  0.47599431E+00
+     ITER =   75     OBJ =  0.47598096E+00
+     ITER =   76     OBJ =  0.47599805E+00
+     ITER =   77     OBJ =  0.47597980E+00
+     ITER =   78     OBJ =  0.47600264E+00
+     ITER =   79     OBJ =  0.47599224E+00
+     ITER =   80     OBJ =  0.47600627E+00
+     ITER =   81     OBJ =  0.47600219E+00
+     ITER =   82     OBJ =  0.47601018E+00
+     ITER =   83     OBJ =  0.47600275E+00
+     ITER =   84     OBJ =  0.47601389E+00
+     ITER =   85     OBJ =  0.47601576E+00
+     ITER =   86     OBJ =  0.47617356E+00
+     ITER =   87     OBJ =  0.47624569E+00
+        NUMBER OF FUNC-CALLS:  NFUNC = 523
+        NUMBER OF GRAD-CALLS:  NGRAD =  88

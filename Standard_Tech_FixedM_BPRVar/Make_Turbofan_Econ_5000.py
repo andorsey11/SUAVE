@@ -11,7 +11,7 @@ from threading import Timer
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = [50,100,150,200,250,300,350]
+    skip_payload = [50]
     skip_range   = [5000] # Use this to skip to the one that failed
 
     tech_string = "Turbofan_Econ"
@@ -136,11 +136,25 @@ def main():
                 elif(design_range == 2000): # Restrict the econ mission so it doesnt fly backwards in cruise
                     optimize_data[86] = "        #[ 'econ_cruise_step'             ,   1 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]" # Enforces basically no step
 
-                approach_req = 3*10**(-5) * mtow_guess + 128.45 # Knots
-                if(mtow_guess > 100000):
-                    takeoff_req =  .0067 * mtow_guess + 7400
-                if(mtow_guess <= 100000):
-                    takeoff_req = .046 * mtow_guess + 3617 	
+                approach_req_list = [ [129.66611,   130.79912,  131.978,    133.15382,  134.38559,  135.93143,  137.01593,  138.54269],
+                                      [129.85178,   131.14865,  132.52592,  133.87415,  135.69314,  137.25941,  138.563,    139.91582],
+                                      [129.98237,   131.43833,  132.96065,  134.36966,  136.38368,  137.96576,  139.2077,   141.11771],
+                                      [130.22867,   131.7203,   133.42103,  135.0164,   137.35985,  138.96707,  140.66369,  142.62188],
+                                      [130.57,    132.22,  134.03,  135.70,  138.26,  140.32,  141.93,  144.39],
+                                       [131.12,   132.77,  135.04,  136.97,  139.32,  141.59,  143.63,  146.18],
+                                       [131.65,   133.33,  136.10,  138.27,  140.28,  142.88,  145.10,  148.17]]
+                tofl_list  =          [[5481.702,       7218.984,   8187.92,    8450.5198,  8725.6151,  9070.8527,  9313.0577,  9654.0341],
+                                       [5766.396,       7754.93,    8310.2888,  8611.3935,  9017.6346,  9367.4349,  9658.57,    9960.6998],
+                                       [5966.634,       8199.106,   8407.3785,  8722.0574,  9171.8552,  9525.1864,  9802.553,   10229.1219],
+                                       [6344.294,       8130.367,   8510.1967,  8866.496,   9389.8665,  9748.8123,  10127.7241, 10565.0532],
+                                       [6872,	        8242,	    8646,	9020,	    9592,	10051,	    10410,	10960],
+                                       [7714,	        8365,	    8872,	9303,	    9828,	10334,	    10789,	11360],
+                                       [8115,	        8489,	    9109,	9594,	    10042,	10622,	    11119,	11803]]
+                payload_indice = int((payload / 50) - 1)
+                range_indice   = int((design_range/1000)-1)
+                approach_req = approach_req_list[range_indice][payload_indice]
+                takeoff_req  = tofl_list[range_indice][payload_indice]  
+
 
             #Requirements
                 optimize_data[106] = "        [ 'approach_speed', '<', " + str(approach_req * .51444) + " , " + str(approach_req * .51444) + " , Units['m/sec']],\n"
@@ -170,8 +184,8 @@ def main():
                 parsed_mtow = config_data[0].split(" ")
                 mtow_result = int(parsed_mtow[40])
                 print(abs(mtow_result-mtow_guess))
-                if (abs(mtow_result - mtow_guess) <= 1500 or parsed_mtow[40] == "nan" ):
-                    converged = True
+                #if (abs(mtow_result - mtow_guess) <= 1500 or parsed_mtow[40] == "nan" ):
+                converged = True
                 counter = counter + 1
                 mtow_guess = mtow_result
                 os.rename(config_path, config_path + "_" + str(counter))

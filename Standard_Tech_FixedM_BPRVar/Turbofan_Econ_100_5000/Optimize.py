@@ -34,7 +34,7 @@ def main():
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
     ## Uncomment for the first optimization
-    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SNOPT', sense_step=1.0E-4)
+    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-3)
     #print(output)        
     #output = scipy_setup.SciPy_Solve(problem, solver='SLSQP')
     # print('fuel burn = ', "%.1f" % (problem.summary.base_mission_fuelburn[0] / Units.lbs))
@@ -104,9 +104,9 @@ def setup():
     # [ tag, sense, edge, scaling, units ]
     problem.constraints = np.array([
         [ 'takeoff_diff', '>', 0, 1, Units.less],
-        [ 'approach_speed', '<', 68.54913 , 68.54913 , Units['m/sec']],
+        [ 'approach_speed', '<', 68.0192568 , 68.0192568 , Units['m/sec']],
         [ 'max_throttle', '<', .95, .95, Units.less],
-        [ 'takeoff_field_length', '<', 2582.9268292682927 , 2582.9268292682927 , Units.m],
+        [ 'takeoff_field_length', '<', 2512.8048780487807 , 2512.8048780487807 , Units.m],
         [ 'second_seg_grad', '>', .024, .024, Units.less],
         [ 'fuel_margin'    , '>',   .05, .05, Units.less],
         [ 'cg_error'       ,  '>', -.01 , .01, Units.less],

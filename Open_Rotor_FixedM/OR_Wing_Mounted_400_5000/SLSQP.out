@@ -1,0 +1,77 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-02
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.17861713E+01
+     ITER =    2     OBJ =  0.17631223E+01
+     ITER =    3     OBJ =  0.16274192E+01
+     ITER =    4     OBJ =  0.16518764E+01
+     ITER =    5     OBJ =  0.18943977E+01
+     ITER =    6     OBJ =  0.19720175E+01
+     ITER =    7     OBJ =  0.23388988E+01
+     ITER =    8     OBJ =  0.22147472E+01
+     ITER =    9     OBJ =  0.22133185E+01
+     ITER =   10     OBJ =  0.21996110E+01
+     ITER =   11     OBJ =  0.23459995E+01
+     ITER =   12     OBJ =  0.23698366E+01
+     ITER =   13     OBJ =  0.26620344E+01
+     ITER =   14     OBJ =  0.25852453E+01
+     ITER =   15     OBJ =  0.25861105E+01
+     ITER =   16     OBJ =  0.26132766E+01
+     ITER =   17     OBJ =  0.26124751E+01
+     ITER =   18     OBJ =  0.26859904E+01
+     ITER =   19     OBJ =  0.26872487E+01
+     ITER =   20     OBJ =  0.26857420E+01
+     ITER =   21     OBJ =  0.26863126E+01
+     ITER =   22     OBJ =  0.26853993E+01
+     ITER =   23     OBJ =  0.26845645E+01
+     ITER =   24     OBJ =  0.26840548E+01
+     ITER =   25     OBJ =  0.26845936E+01
+     ITER =   26     OBJ =  0.26788735E+01
+     ITER =   27     OBJ =  0.26832716E+01
+     ITER =   28     OBJ =  0.26928690E+01
+     ITER =   29     OBJ =  0.26926896E+01
+     ITER =   30     OBJ =  0.26926400E+01
+     ITER =   31     OBJ =  0.26926251E+01
+     ITER =   32     OBJ =  0.26926251E+01
+     ITER =   33     OBJ =  0.26926251E+01
+     ITER =   34     OBJ =  0.26926274E+01
+     ITER =   35     OBJ =  0.26926239E+01
+     ITER =   36     OBJ =  0.26927092E+01
+     ITER =   37     OBJ =  0.26920140E+01
+     ITER =   38     OBJ =  0.26931194E+01
+     ITER =   39     OBJ =  0.26922845E+01
+     ITER =   40     OBJ =  0.26939624E+01
+     ITER =   41     OBJ =  0.26932261E+01
+     ITER =   42     OBJ =  0.26932430E+01
+     ITER =   43     OBJ =  0.26932408E+01
+     ITER =   44     OBJ =  0.26932408E+01
+     ITER =   45     OBJ =  0.26934521E+01
+     ITER =   46     OBJ =  0.26934466E+01
+     ITER =   47     OBJ =  0.26934466E+01
+     ITER =   48     OBJ =  0.26936062E+01
+     ITER =   49     OBJ =  0.26935969E+01
+     ITER =   50     OBJ =  0.27086964E+01
+     ITER =   51     OBJ =  0.27086604E+01
+     ITER =   52     OBJ =  0.27086604E+01
+     ITER =   54     OBJ =  0.25658326E+01
+     ITER =   55     OBJ =  0.21848073E+01
+     ITER =   56     OBJ =  0.21733779E+01
+     ITER =   57     OBJ =  0.21801062E+01
+     ITER =   58     OBJ =  0.22219920E+01
+     ITER =   59     OBJ =  0.20968173E+01
+     ITER =   60     OBJ =  0.20953986E+01
+     ITER =   61     OBJ =  0.20955204E+01
+     ITER =   62     OBJ =  0.22330445E+01
+     ITER =   63     OBJ =  0.22718759E+01

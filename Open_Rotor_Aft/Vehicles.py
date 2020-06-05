@@ -318,7 +318,7 @@ def base_setup():
     fan = SUAVE.Components.Energy.Converters.Fan()   
     fan.tag = 'fan'
 
-    fan.polytropic_efficiency = 0.780
+    fan.polytropic_efficiency = 0.771
     fan.pressure_ratio        = 1.1
     fan.spinner_ratio         = 2.5 
     fan.nacelle_length_to_fan_di = 1.5

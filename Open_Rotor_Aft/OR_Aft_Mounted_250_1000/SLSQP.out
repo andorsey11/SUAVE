@@ -110,3 +110,17 @@ IOUT =   6
      ITER =   95     OBJ =  0.38304347E+00
      ITER =   96     OBJ =  0.38304347E+00
      ITER =   97     OBJ =  0.38304347E+00
+     ITER =   98     OBJ =  0.38304347E+00
+     ITER =   99     OBJ =  0.38304347E+00
+     ITER =  100     OBJ =  0.38304347E+00
+     ITER =  101     OBJ =  0.38304347E+00
+     ITER =  102     OBJ =  0.38304347E+00
+     ITER =  103     OBJ =  0.38304347E+00
+     ITER =  104     OBJ =  0.38275126E+00
+     ITER =  105     OBJ =  0.38275319E+00
+     ITER =  106     OBJ =  0.38382228E+00
+     ITER =  107     OBJ =  0.38379229E+00
+     ITER =  108     OBJ =  0.38376974E+00
+     ITER =  109     OBJ =  0.38379474E+00
+        NUMBER OF FUNC-CALLS:  NFUNC = 598
+        NUMBER OF GRAD-CALLS:  NGRAD = 110

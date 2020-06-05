@@ -1,0 +1,101 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-02
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.13702694E+01
+     ITER =    2     OBJ =  0.13325847E+01
+     ITER =    3     OBJ =  0.13652890E+01
+     ITER =    4     OBJ =  0.13765732E+01
+     ITER =    5     OBJ =  0.14916855E+01
+     ITER =    6     OBJ =  0.17147842E+01
+     ITER =    7     OBJ =  0.19434177E+01
+     ITER =    8     OBJ =  0.21817065E+01
+     ITER =    9     OBJ =  0.22212396E+01
+     ITER =   10     OBJ =  0.22401225E+01
+     ITER =   11     OBJ =  0.22801894E+01
+     ITER =   12     OBJ =  0.25209229E+01
+     ITER =   13     OBJ =  0.24784678E+01
+     ITER =   14     OBJ =  0.24537366E+01
+     ITER =   15     OBJ =  0.24417323E+01
+     ITER =   16     OBJ =  0.24434271E+01
+     ITER =   17     OBJ =  0.24280198E+01
+     ITER =   18     OBJ =  0.24181856E+01
+     ITER =   19     OBJ =  0.24145187E+01
+     ITER =   20     OBJ =  0.24139033E+01
+     ITER =   21     OBJ =  0.24189639E+01
+     ITER =   22     OBJ =  0.24191636E+01
+     ITER =   23     OBJ =  0.24215405E+01
+     ITER =   24     OBJ =  0.24222413E+01
+     ITER =   25     OBJ =  0.24317706E+01
+     ITER =   26     OBJ =  0.24326321E+01
+     ITER =   27     OBJ =  0.24338677E+01
+     ITER =   29     OBJ =  0.22583865E+01
+     ITER =   30     OBJ =  0.16526532E+01
+     ITER =   31     OBJ =  0.14192885E+01
+     ITER =   32     OBJ =  0.14319474E+01
+     ITER =   33     OBJ =  0.14650980E+01
+     ITER =   34     OBJ =  0.15703778E+01
+     ITER =   35     OBJ =  0.16463628E+01
+     ITER =   36     OBJ =  0.16571702E+01
+     ITER =   37     OBJ =  0.18739549E+01
+     ITER =   38     OBJ =  0.18734059E+01
+     ITER =   39     OBJ =  0.19609397E+01
+     ITER =   40     OBJ =  0.21765620E+01
+     ITER =   41     OBJ =  0.21937776E+01
+     ITER =   42     OBJ =  0.21968097E+01
+     ITER =   43     OBJ =  0.21890229E+01
+     ITER =   44     OBJ =  0.21903348E+01
+     ITER =   45     OBJ =  0.21863950E+01
+     ITER =   46     OBJ =  0.21793411E+01
+     ITER =   47     OBJ =  0.21707516E+01
+     ITER =   48     OBJ =  0.21792896E+01
+     ITER =   49     OBJ =  0.21741605E+01
+     ITER =   50     OBJ =  0.21772367E+01
+     ITER =   51     OBJ =  0.21767651E+01
+     ITER =   52     OBJ =  0.21767543E+01
+     ITER =   53     OBJ =  0.21767540E+01
+     ITER =   54     OBJ =  0.21767537E+01
+     ITER =   55     OBJ =  0.21767535E+01
+     ITER =   56     OBJ =  0.21767532E+01
+     ITER =   57     OBJ =  0.21767529E+01
+     ITER =   58     OBJ =  0.21767526E+01
+     ITER =   59     OBJ =  0.21767522E+01
+     ITER =   60     OBJ =  0.21767518E+01
+     ITER =   61     OBJ =  0.21767515E+01
+     ITER =   62     OBJ =  0.21767511E+01
+     ITER =   63     OBJ =  0.21767507E+01
+     ITER =   64     OBJ =  0.21765659E+01
+     ITER =   65     OBJ =  0.21765447E+01
+     ITER =   66     OBJ =  0.21764478E+01
+     ITER =   67     OBJ =  0.21768958E+01
+     ITER =   68     OBJ =  0.21763981E+01
+     ITER =   69     OBJ =  0.21763429E+01
+     ITER =   70     OBJ =  0.21763995E+01
+     ITER =   71     OBJ =  0.21763995E+01
+     ITER =   72     OBJ =  0.21781835E+01
+     ITER =   73     OBJ =  0.21780100E+01
+     ITER =   74     OBJ =  0.21780010E+01
+     ITER =   75     OBJ =  0.21780010E+01
+     ITER =   76     OBJ =  0.21779814E+01
+     ITER =   77     OBJ =  0.21778643E+01
+     ITER =   78     OBJ =  0.21778921E+01
+     ITER =   79     OBJ =  0.21778296E+01
+     ITER =   80     OBJ =  0.21778899E+01
+     ITER =   81     OBJ =  0.21778975E+01
+     ITER =   82     OBJ =  0.21779255E+01
+     ITER =   83     OBJ =  0.21779710E+01
+     ITER =   84     OBJ =  0.21779901E+01
+     ITER =   85     OBJ =  0.21780057E+01
+        NUMBER OF FUNC-CALLS:  NFUNC = 421
+        NUMBER OF GRAD-CALLS:  NGRAD =  85

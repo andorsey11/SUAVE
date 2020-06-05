@@ -372,7 +372,7 @@ def econ(analyses, vehicle):
     # ------------------------------------------------------------------
     #   Initialize the Mission
     # ------------------------------------------------------------------
-    tolerance = 4
+    tolerance = 12
     mission = SUAVE.Analyses.Mission.Sequential_Segments()
     mission.tag = 'econ_mission'
     mission.cruise_altitude = vehicle.econ.cruise_altitude

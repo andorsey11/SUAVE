@@ -63,8 +63,8 @@ Econ Mission Takeoff Weight                = 31717  lbs
 
 --------------------------REQUIREMENTS-----------------------------------
 Maximum Throttle Setting / Requirement     = 0.95 / 0.95
-Takeoff Field Length / Requirement         = 4512 / 9171  ft/ft
-Approach Speed / Requirement               = 111.0 / 136.4  KCAS / KCAS 
+Takeoff Field Length / Requirement         = 4512 / 8874  ft/ft
+Approach Speed / Requirement               = 111.0 / 135.0  KCAS / KCAS 
 Fuel Margin   / Requirement                = 0.252 / 0.05
 Second Segment Gradient / Requirement      = 0.027 / 0.024 deg / deg
 Takeoff Convergence                        = 0.0002

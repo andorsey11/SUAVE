@@ -70,14 +70,14 @@ def setup():
     #   [ tag                            , initial, (lb,ub)             , scaling , units ]
   
     problem.inputs = np.array([
-        [ 'wing_area'                    , 451.3570974099536 , (   225.6785487049768 , 767.3070655969211 ) , 451.3570974099536 , Units['ft^2']],
-        [ 'thrust'                       , 7416.095617529882  , (  2224.8286852589645 , 22248.286852589645 ) ,  7416.095617529882 , Units.lbf],
-        [ 'cruise_altitude'              , 8862.276422764227 , ( 6707.317073170732 ,  43000/3.28   ) ,  8862.276422764227  , Units.m],
-        [ 'takeoff_weight_guess'         , 21104.761904761905 ,  ( 10552.380952380952  ,   42209.52380952381)   ,   21104.761904761905 , Units.kg],
+        [ 'wing_area'                    , 603.2906764168189 , (   301.64533820840944 , 1025.594149908592 ) , 603.2906764168189 , Units['ft^2']],
+        [ 'thrust'                       , 10017.074558907228  , (  3005.1223676721684 , 30051.223676721685 ) ,  10017.074558907228 , Units.lbf],
+        [ 'cruise_altitude'              , 9083.430120015486 , ( 6707.317073170732 ,  43000/3.28   ) ,  9083.430120015486  , Units.m],
+        [ 'takeoff_weight_guess'         , 28506.640751538707 ,  ( 14253.320375769354  ,   57013.281503077415)   ,   28506.640751538707 , Units.kg],
         [ 'wing_sweep'                   , 25        , (5     ,        45)     ,   25         , Units.deg],
         [ 'wing_toverc'                  , 0.095        , (.07   ,       .16)     ,     0.095    , Units.less],
         [ 'wing_aspect_ratio'            , 11        , ( 6    ,         14)    ,     11   , Units.less],
-        [ 'econ_takeoff_weight_guess'    , 16883.809523809523 ,  ( 6331.428571428572  ,   31657.142857142855)   ,   16883.809523809523 , Units.kg],
+        [ 'econ_takeoff_weight_guess'    , 22805.312601230966 ,  ( 8551.992225461612  ,   42759.96112730806)   ,   22805.312601230966 , Units.kg],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
         [ 'fan_pressure_ratio'           ,   1.7       ,   (1.4, 2.5)        ,     1.2         , Units.less],
@@ -103,9 +103,9 @@ def setup():
     # [ tag, sense, edge, scaling, units ]
     problem.constraints = np.array([
         [ 'takeoff_diff', '>', 0, 1, Units.less],
-        [ 'approach_speed', '<', 66.7980173952 , 66.7980173952 , Units['m/sec']],
+        [ 'approach_speed', '<', 66.80094970319999 , 66.80094970319999 , Units['m/sec']],
         [ 'max_throttle', '<', .95, .95, Units.less],
-        [ 'takeoff_field_length', '<', 1755.3829268292684 , 1755.3829268292684 , Units.m],
+        [ 'takeoff_field_length', '<', 1758.0475609756097 , 1758.0475609756097 , Units.m],
         [ 'second_seg_grad', '>', .024, .024, Units.less],
         [ 'fuel_margin'    , '>',   .05, .05, Units.less],
         [ 'cg_error'       ,  '>', -.01 , .01, Units.less],
