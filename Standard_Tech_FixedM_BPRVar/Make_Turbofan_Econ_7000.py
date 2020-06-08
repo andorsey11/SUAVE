@@ -11,7 +11,7 @@ from threading import Timer
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = [50,100,150]
+    skip_payload = [50,100,150,200,250,300]
     skip_range   = [7000] # Use this to skip to the one that failed
 
     tech_string = "Turbofan_Econ"
