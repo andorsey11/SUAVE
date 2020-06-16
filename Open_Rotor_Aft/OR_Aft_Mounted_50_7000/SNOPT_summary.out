@@ -1,0 +1,73 @@
+
+ ==============================
+ S N O P T  7.6.0    (Jan 2017)
+ ==============================
+ 
+ SNMEMB EXIT 100 -- finished successfully
+ SNMEMB INFO 104 -- memory requirements estimated
+
+ ==============================
+ S N O P T  7.6.0    (Jan 2017)
+ ==============================
+ 
+ 
+
+ Nonlinear constraints      11     Linear constraints       0
+ Nonlinear variables        15     Linear variables         0
+ Jacobian  variables        15     Objective variables     15
+ Total constraints          11     Total variables         15
+ 
+
+ 
+ The user has defined     165   out of     165   constraint gradients.
+ The user has defined      15   out of      15   objective  gradients.
+ 
+
+ Major Minors     Step   nCon Feasible  Optimal  MeritFunction     nS Penalty
+     0     21               1  3.4E+01  3.0E-01  6.2170799E-01      8           r
+     1     20  1.0E+00      2  4.9E+01  2.0E-01  3.2341922E-01      8 1.2E-04   r
+     2     20  1.0E+00      4  4.8E+01  5.2E-02  2.5906114E-01      6 1.5E-04 sm
+     3     30  9.7E-03     14  4.2E+01  2.9E-01  2.8574819E-01      6 1.7E-04
+     4      3  5.5E-09     25  4.2E+01  3.3E-01  4.8129988E-01      5 2.3E-04  M
+     5      3  4.0E-05     35  4.2E+01  3.2E-01  5.1074746E-01      4 2.4E-04
+     5     12              53  4.2E+01  1.9E+00  6.3729662E-03      9           R
+     6      9  1.0E+00     60  1.8E+01  3.1E-01  1.5081656E+03      8 8.9E-01 s
+     7      5  1.0E+00     61  1.2E+01  1.4E+00  1.1686718E+03      8 1.0E+00
+     7      4              67  1.2E+01  3.5E+00  9.4987065E+02     10           R
+     8     17  1.0E+00     69  6.5E+00  8.7E-02  1.2561750E+03      4 8.0E+00 sm
+     9     22  1.2E-02     80  6.1E+00  1.6E-01  4.6445684E+03      7 1.1E+02  m
+     9      2              86  6.1E+00  1.7E-01  9.1749220E+02      8          mR
+     9      2              92  6.1E+00  1.5E-01  9.1749220E+02      7          mr
+
+ Major Minors     Step   nCon Feasible  Optimal  MeritFunction     nS Penalty
+    10     15  1.0E+00     93  1.3E+01  1.3E+00  5.4574399E+00      8         s
+    11     12  5.7E-02     99  1.2E+01  1.4E+00  1.3304030E+01      8 2.2E-02
+    11      9             105  1.2E+01  3.3E+01  5.2308595E+00     12           R
+    11      1             111  1.2E+01  1.7E+00  5.2308595E+00     12           r
+    12     14  1.0E+00    112  1.0E+01  3.1E-01  8.1977175E-01      9         s
+    12      1             118  1.0E+01  2.5E-01  8.1977175E-01      9         s R
+    12      1             124  1.0E+01  2.4E-01  8.1977175E-01      9         s r
+ 
+ SNOPTC EXIT  40 -- terminated after numerical difficulties
+ SNOPTC INFO  41 -- current point cannot be improved
+
+ Problem name                 S
+ No. of iterations                 223   Objective            5.4359303559E-01
+ No. of major iterations            12   Linear    obj. term  0.0000000000E+00
+ Penalty parameter           1.368E-02   Nonlinear obj. term  5.4359303559E-01
+ User function calls (total)       131
+ No. of superbasics                  9   No. of basic nonlinears             6
+ No. of degenerate steps             1   Percentage                       0.45
+ Max x                       5 1.8E+00   Max pi                      1 1.4E+01
+ Max Primal infeas           0 0.0E+00   Max Dual infeas            16 1.4E+01
+ Nonlinear constraint violn    1.8E+01
+ 
+ 
+
+ Solution printed on file  18
+ 
+ Time for MPS input                             0.00 seconds
+ Time for solving problem                   32036.94 seconds
+ Time for solution output                       0.00 seconds
+ Time for constraint functions              32054.42 seconds
+ Time for objective function                    0.00 seconds

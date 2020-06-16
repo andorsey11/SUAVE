@@ -1,0 +1,186 @@
+
+         ==============================
+         S N O P T  7.6.0    (Jan 2017)
+         ==============================
+      Function precision  1.00000000E-04
+      Difference interval  1.00000000E-02
+      Central difference interval  4.64158883E-02
+      Major feasibility tolerance  1.00000000E-02
+      Minor feasibility tolerance  1.00000000E-02
+      Major optimality tolerance  1.00000000E-02
+      Derivative level               3
+1
+ 
+ SNMEMB EXIT 100 -- finished successfully
+ SNMEMB INFO 104 -- memory requirements estimated
+
+         ==============================
+         S N O P T  7.6.0    (Jan 2017)
+         ==============================
+      Function precision  1.00000000E-04
+      Difference interval  1.00000000E-02
+      Central difference interval  4.64158883E-02
+      Major feasibility tolerance  1.00000000E-02
+      Minor feasibility tolerance  1.00000000E-02
+      Major optimality tolerance  1.00000000E-02
+      Derivative level               3
+1
+ 
+ Parameters
+ ==========
+
+ Files
+ -----
+ Solution file..........         0       Old basis file ........         0       Standard input.........         5
+ Insert file............         0       New basis file ........         0       (Printer)..............        18
+ Punch file.............         0       Backup basis file......         0       (Specs file)...........         0
+ Load file..............         0       Dump file..............         0       Standard output........         6
+
+ Frequencies
+ -----------
+ Print frequency........       100       Check frequency........        60       Save new basis map.....       100
+ Summary frequency......       100       Factorization frequency        50       Expand frequency.......     10000
+
+ QP subproblems
+ --------------
+ QPsolver Cholesky......
+ Scale tolerance........     0.900       Minor feasibility tol..  1.00E-02       Iteration limit........     10000
+ Scale option...........         0       Minor optimality  tol..  1.00E-06       Minor print level......         1
+ Crash tolerance........     0.100       Pivot tolerance........  3.25E-11       New superbasics........        99
+ Crash option...........         3       Elastic weight.........  1.00E+05
+
+ Partial pricing
+ ---------------
+ LP Partial price.......         1       Prtl price section ( A)        15       Prtl price section (-I)        11
+ QP Partial price.......         1       Prtl price section ( A)        15       Prtl price section (-I)        11
+
+ The SQP Method
+ --------------
+ Minimize...............                 Cold start.............                 Proximal Point method..         1
+ Nonlinear objectiv vars        15       Major optimality tol...  1.00E-02       Function precision.....  1.00E-04
+ Unbounded step size....  1.00E+20       Superbasics limit......        15       Difference interval....  1.00E-02
+ Unbounded objective....  1.00E+10       Reduced Hessian dim....        15       Central difference int.  4.64E-02
+ Major step limit.......  2.00E+00       Derivative linesearch..                 Derivative level.......         3
+ Major iterations limit.      1000       Linesearch tolerance...   0.90000       Verify level...........         0
+ Minor iterations limit.       500       Penalty parameter......  0.00E+00       Major Print Level......         1
+ Time limit (secs)...... 9999999.0
+
+ Hessian Approximation
+ ---------------------
+ Hessian full-memory....                 Hessian updates........  99999999       Hessian frequency......  99999999
+                                                                                 Hessian flush..........  99999999
+
+ Nonlinear constraints
+ ---------------------
+ Nonlinear constraints..        11       Major feasibility tol..  1.00E-02       Violation limit........  1.00E+01
+ Nonlinear Jacobian vars        15
+
+ Miscellaneous
+ -------------
+ LU factor tolerance....      3.99       LU singularity tol.....  3.25E-11       Timing level...........         3
+ LU update tolerance....      3.99       LU swap tolerance......  1.22E-04       Debug level............         0
+ LU partial  pivoting...                 eps (machine precision)  2.22E-16       System information.....        No
+                                                                                 Sticky parameters......        No
+1
+ 
+
+ 
+
+ Matrix statistics
+ -----------------
+               Total      Normal        Free       Fixed     Bounded
+ Rows             11          11           0           0           0
+ Columns          15           0           0           0          15
+
+ No. of matrix elements                  165     Density     100.000
+ Biggest  constant element        0.0000E+00  (excluding fixed columns,
+ Smallest constant element        0.0000E+00   free rows, and RHS)
+
+ No. of objective coefficients             0
+
+ Nonlinear constraints      11     Linear constraints       0
+ Nonlinear variables        15     Linear variables         0
+ Jacobian  variables        15     Objective variables     15
+ Total constraints          11     Total variables         15
+1
+ 
+
+ 
+ The user has defined     165   out of     165   constraint gradients.
+ The user has defined      15   out of      15   objective  gradients.
+
+ Cheap test of user-supplied problem derivatives...
+
+ XXX  The constraint gradients seem to be incorrect.
+
+ -->  The largest discrepancy was    4.82E-01  in constraint    22
+ 
+
+ The objective  gradients seem to be OK.
+
+ Gradient projected in one direction  -9.38931958360E-02
+ Difference approximation             -1.49771174189E-02
+1
+ 
+ 
+
+   Itns Major Minors    Step   nCon Feasible  Optimal  MeritFunction     L+U BSwap     nS condZHZ Penalty
+     21     0     21              1  1.7E+01  2.1E-01  6.0612833E-01      98            8 6.7E+01         _  r
+     36     1     15 1.0E+00      2  2.2E+01  9.7E-02  6.0985551E-01     101     2      7 4.9E+01 1.3E-03 _  r
+     58     2     22 1.0E+00      3  1.6E+01  1.4E+00  5.4710838E-01      90     5      9 2.0E+02 1.3E-03 _s
+     72     3     14 2.1E-01      6  1.3E+01  2.2E-01  1.1217983E+00      73     3      6 1.3E+02 3.0E-03 _
+     73     4      1 1.0E-01      9  1.2E+01  5.6E-01  2.1157343E+00      71            6 8.1E+01 8.6E-03 _
+     78     5      5 4.1E-01     11  7.9E+00  9.6E-01  2.0015453E+00      63            6 3.7E+00 8.6E-03 _
+     82     6      4 2.4E-01     13  5.5E+00  4.8E-01  2.0070598E+00      71            5 1.4E+01 1.3E-02 _
+     93     7     11 5.0E-01     15  4.0E+00  1.2E+00  1.4791976E+00      72            4 3.9E+00 1.3E-02 _
+    101     7      8             21  4.0E+00  2.6E-01  1.0717729E+00      71            9 2.1E+02         _  R
+    105     7      4             26  4.0E+00  7.6E-02  1.0717729E+00      73            8 2.2E+01         _  r
+    124     8     19 1.0E+00     28  1.7E+01  7.7E-01  2.9104852E-01      81     3      5 5.9E+00         _sm
+    138     9     14 1.7E-01     31  1.2E+01  7.0E-01  6.6844134E-01      73            5 6.1E+03 5.8E-04 _
+    140    10      2 3.9E-03     35  1.2E+01  7.6E-01  6.6804625E-01      71            4 8.2E+02 5.9E-04 _ m
+    153    11     13 3.5E-04     39  1.2E+01  6.0E-01  6.8134057E-01      70            4 5.0E+04 6.4E-04 _ m
+    155    12      2 1.7E-04     44  1.2E+01  7.0E-01  6.7981278E-01      61            4 7.7E+02 6.4E-04 _ m
+    161    13      6 3.0E-06     54  1.2E+01  3.9E-01  7.4342220E-01      61            6 9.3E+03 8.7E-04 _
+    180    14     19 7.5E-02     57  1.2E+01  5.8E-01  7.3437727E-01      85            2 1.9E+06 8.7E-04 _
+    198    15     18 2.3E-01     59  8.1E+00  2.6E+00  1.6617110E+00      70            3 1.0E+04 5.9E-03 _
+    208    16     10 1.1E-01     61  6.3E+00  2.4E+00  1.5371079E+00      95            1 1.4E+03 5.9E-03 _
+    226    17     18 2.2E-03     70  4.7E+00  8.8E+00  1.1554168E+01     102     1      5 2.3E+04 2.2E-01 _
+    240    18     14 5.4E-03     72  5.5E+00  1.8E+00  8.1212505E+00     117     3                2.2E-01 _
+    249    19      9 6.5E-03     82  6.8E+00  2.5E-01  1.4913208E+03      82            1 2.2E+05 3.1E+01 _
+
+   Itns Major Minors    Step   nCon Feasible  Optimal  MeritFunction     L+U BSwap     nS condZHZ Penalty
+    255    20      6 2.4E-01     89  5.2E+00  1.1E+00  4.3305336E+03      71            1 6.1E+03 5.7E+01 _
+
+   Itns Major Minors    Step   nCon Feasible  Optimal  MeritFunction     L+U BSwap     nS condZHZ Penalty
+    268    20     13             95  5.2E+00  8.8E-01  1.9323992E+03      71           11 3.1E+02         _  R
+    282    21     14 1.0E+00     96  4.2E+00  1.0E+00  1.4370395E+03      72     3      6 1.7E+01         _s   i
+    284    21      2            101  4.2E+00  1.0E+00  1.4370395E+03      71            7 1.6E+01         _s R i
+    288    21      4            106  4.2E+00  6.6E+02  1.4370395E+03      61     3      4 2.9E+01         _s r
+    303    22     15 1.0E+00    108  7.4E+00  2.1E+04  1.1005740E+02      75            5 3.5E+04         _sm
+    319    23     16 1.0E+00    109  1.8E+01  6.4E+03  9.5059868E-01      77            3 3.8E+02         _
+    325    24      6 8.3E-03    114  1.6E+01  1.6E+03  2.4193376E+00      72     1      1 4.4E+04 4.0E-03 _
+    331    24      6            120  1.6E+01  1.3E+01  1.1129237E+00      71            6 1.4E+01         _  R
+    334    25      3 1.0E+00    121  9.3E+00  5.1E+00  3.2561408E+03      71            4 2.5E+00 1.2E+01 _s
+    338    25      4            127  9.3E+00  2.3E+01  1.5964886E+03      71            6 1.7E+02         _s R
+    339    25      1            132  9.3E+00  1.6E+04  1.5964886E+03      71            6 1.8E+02         _s r
+    349    26     10 1.0E+00    134  9.1E+00  7.9E+02  2.0995026E+00      71     2      6 1.2E+01         _sM
+    356    27      7 2.4E-02    137  8.8E+00  8.1E+02  1.8891831E+01      71            8 9.0E+03 1.7E-01 _
+    364    28      8 4.8E-03    142  8.5E+00  4.0E+01  2.8732176E+01      81            2 1.3E+00 2.4E-01 _
+    370    29      6 6.9E-02    149  8.4E+00  1.0E+00  5.8859936E+02      76            1 1.7E+07 5.3E+00 _    i
+    371    30      1 3.0E-04    153  8.2E+00  2.3E+00  3.4731634E+04      71            1 4.3E+05 3.6E+02 _    i
+    380    30      9            158  8.2E+00  2.1E+01  8.3586515E+01      71            7 1.7E+02         _  R i
+    388    31      8 1.0E+00    159  3.8E+00  1.3E+00  4.2006831E+05      71           12 1.0E+06 9.8E+03 _s   i
+    391    32      3 1.0E+00    160  3.7E+00  1.5E+00  5.8069343E+04      71           11 9.4E+05 1.1E+02 _    i
+    393    33      2 7.3E-02    163  3.6E+00  9.9E-01  7.1264978E+04      71           10 3.9E+03 6.2E+02 _    i
+    397    34      4 1.0E+00    165  6.2E-01  1.0E+00  5.9402673E+04      71           12 2.4E+03 6.6E+02 _ m  i
+    410    35     13 1.0E+00    166  2.8E+00  1.0E+00  4.8233118E+04      78           11 2.9E+03 6.0E+01 _    i
+    417    36      7 1.0E+00    168  2.4E+00  1.0E+00  3.4502540E+04      81           12 4.0E+04 3.9E+01 _ m  i
+    424    37      7 1.0E+00    169  1.4E+00  5.0E+00  9.0803574E+03      81           12 3.9E+05 3.9E+01 _
+    431    38      7 1.0E+00    170  3.6E+00  1.0E+00  4.5114009E+03      81           12 6.1E+02 3.9E+01 _    i
+    432    39      1 8.0E-02    176  3.1E+00  1.0E+00  2.9902661E+04      81           12 5.9E+02 9.4E+02 _    i
+    441    39      9            182  3.1E+00  1.0E+00  2.0370302E+04      81            8 6.3E+00         _  R i
+    446    39      5            187  3.1E+00  8.7E+06  1.4430922E+06      71     3      5 3.0E+00         _  r
+
+   Itns Major Minors    Step   nCon Feasible  Optimal  MeritFunction     L+U BSwap     nS condZHZ Penalty
+    462    40     16 1.0E+00    189  6.2E+00  5.7E+06  3.2514832E+00      82            9 1.7E+03         _sM
+    473    41     11 3.9E-01    192  5.9E+00  1.4E+04  3.8597453E+00      87                      1.1E-02 _

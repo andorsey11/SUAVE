@@ -11,8 +11,8 @@ from threading import Timer
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = []
-    skip_range   = [1000,2000,3000,4000,5000] # Use this to skip to the one that failed
+    skip_payload = [50,150,200,250,300,350,400]
+    skip_range   = [1000,2000,3000,4000,5000,6000] # Use this to skip to the one that failed
 
     tech_string = "OR_Wing_Mounted"
     payload_array = [50, 100, 150, 200 ,250 ,300, 350, 400]
@@ -110,6 +110,9 @@ def main():
                 elif(design_range == 2000):
                     procedure_data[130] = "            config.propulsors['openrotor'].bypass_ratio = .989*4.0878*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.9451147) * config.propulsors['openrotor'].bypass_factor\n"
                     procedure_data[132] = "            config.propulsors['openrotor'].bypass_ratio = .989*4.0878*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.9451147)\n"
+                elif(design_range == 6000):
+                    procedure_data[130] = "            config.propulsors['openrotor'].bypass_ratio = 3.86*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.9495) * config.propulsors['openrotor'].bypass_factor\n"
+                    procedure_data[132] = "            config.propulsors['openrotor'].bypass_ratio = 3.86*(config.propulsors['openrotor'].fan.pressure_ratio-1)**(-.9495)\n"
 
                 # Curve for this Mach 
                 #Dr 1000 =(4.051*F16^(-0.9541))*0.98

@@ -1,0 +1,61 @@
+
+ ==============================
+ S N O P T  7.6.0    (Jan 2017)
+ ==============================
+ 
+ SNMEMB EXIT 100 -- finished successfully
+ SNMEMB INFO 104 -- memory requirements estimated
+
+ ==============================
+ S N O P T  7.6.0    (Jan 2017)
+ ==============================
+ 
+ 
+
+ Nonlinear constraints      11     Linear constraints       0
+ Nonlinear variables        15     Linear variables         0
+ Jacobian  variables        15     Objective variables     15
+ Total constraints          11     Total variables         15
+ 
+
+ 
+ The user has defined     165   out of     165   constraint gradients.
+ The user has defined      15   out of      15   objective  gradients.
+ 
+
+ Major Minors     Step   nCon Feasible  Optimal  MeritFunction     nS Penalty
+     0     15               1  1.6E+01  7.1E-02  5.2050468E+00      9           r
+     1      8  1.0E+00      2  1.9E+00  3.2E-02  5.7027778E+00     10 1.4E-02   r
+     2      7  1.0E+00      3  2.8E+00  4.1E-01  4.7962777E+00      6 1.4E-02 s
+     3      3  1.0E+00      4  5.8E+00  6.9E-02  3.7203414E+00      6 1.4E-02
+     3      7              10  5.8E+00  1.3E-01  3.6976557E+00     10           R
+     4      4  1.0E+00     12  7.2E+00  2.4E+00  3.7526781E+00     10 8.5E-03 sm
+     5      5  9.3E-01     15  1.1E-01  6.5E-01  4.0292606E+00      9 1.3E-02
+     6      5  1.0E+00     16  5.4E-01  1.9E+00  3.6377263E+00      9 1.6E-01
+     7      8  2.4E-02     18  3.0E-01  4.2E-01  3.5054541E+00     10 1.6E-01
+     7      3              22  3.0E-01  7.8E+00  3.5000075E+00     12           R
+     7      3              27  3.0E-01  4.8E-02  3.5000075E+00     12           r
+ 
+ SNOPTC EXIT  40 -- terminated after numerical difficulties
+ SNOPTC INFO  41 -- current point cannot be improved
+
+ Problem name                 S
+ No. of iterations                  68   Objective            3.7168557017E+00
+ No. of major iterations             7   Linear    obj. term  0.0000000000E+00
+ Penalty parameter           4.808E-01   Nonlinear obj. term  3.7168557017E+00
+ User function calls (total)        32
+ No. of superbasics                 12   No. of basic nonlinears             8
+ No. of degenerate steps             1   Percentage                       1.47
+ Max x                      11 1.3E+00   Max pi                      6 2.4E-02
+ Max Primal infeas           0 0.0E+00   Max Dual infeas            14 1.9E+00
+ Nonlinear constraint violn    3.9E-01
+ 
+ 
+
+ Solution printed on file  18
+ 
+ Time for MPS input                             0.00 seconds
+ Time for solving problem                   11233.64 seconds
+ Time for solution output                       0.00 seconds
+ Time for constraint functions              11254.99 seconds
+ Time for objective function                    0.00 seconds

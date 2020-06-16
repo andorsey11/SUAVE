@@ -34,7 +34,7 @@ def main():
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
     ## Uncomment for the first optimization
-    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-3)
+    output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-5)
     #print(output)        
     #output = scipy_setup.SciPy_Solve(problem, solver='SLSQP')
     # print('fuel burn = ', "%.1f" % (problem.summary.base_mission_fuelburn[0] / Units.lbs))
@@ -84,7 +84,7 @@ def setup():
         [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
         [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
         [ 'econ_cruise_altitude'         ,   39000/3.28    , (   25000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],
-        [ 'econ_cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]
+        [ 'econ_cruise_step'             ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]
 
     ])
     # -------------------------------------------------------------------
