@@ -1,0 +1,35 @@
+Output file with weight breakdown
+
+ DESIGN WEIGHTS 
+ Maximum Takeoff Weight ......... :   123904 kg
+ Maximum Zero Fuel Weight ....... :   121744 kg
+
+ ASSUMPTIONS FOR WEIGHT ESTIMATION 
+ Airplane type .................. : SHORT RANGE
+ Flight Controls type ........... : FULLY POWERED
+
+ EMPTY WEIGHT BREAKDOWN 
+ Wing ........................... :   16084 kg
+ Fuselage ....................... :   15652 kg
+ Propulsion ..................... :   14250 kg
+ Landing gear ................... :    4956 kg
+ Horizontal tail ................ :    1661 kg
+ Vertical tail .................. :     861 kg
+ Rudder ......................... :     344 kg
+ Systems ........................ :   22364 kg
+ ........ EMPTY WEIGHT .......... :   76172 kg
+
+ SYSTEMS WEIGHT BREAKDOWN  
+ Control systems ................ :    1654 kg
+ Apu ............................ :     953 kg
+ Hydraulics ..................... :     671 kg
+ Instruments .................... :     363 kg
+ Avionics ....................... :     408 kg
+ Optionals ...................... :    3810 kg
+ Electrical ..................... :    1769 kg
+ Air conditioner ................ :    2041 kg
+ Furnish ........................ :   10696 kg
+
+
+-------------------------------------------
+ Wednesday, 17. June 2020 02:43:10 PM
