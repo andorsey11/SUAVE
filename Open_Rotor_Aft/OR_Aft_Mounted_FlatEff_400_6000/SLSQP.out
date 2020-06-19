@@ -18,3 +18,14 @@ IOUT =   6
      ITER =    3     OBJ =  0.23272699E+01
      ITER =    4     OBJ =  0.22449524E+01
      ITER =    5     OBJ =  0.22272100E+01
+     ITER =    6     OBJ =  0.24090181E+01
+     ITER =    7     OBJ =  0.25289187E+01
+     ITER =    8     OBJ =  0.29449139E+01
+     ITER =    9     OBJ =  0.28424896E+01
+     ITER =   10     OBJ =  0.28283372E+01
+     ITER =   11     OBJ =  0.29258681E+01
+     ITER =   12     OBJ =  0.29169186E+01
+     ITER =   13     OBJ =  0.29223717E+01
+     ITER =   14     OBJ =  0.29226600E+01
+        NUMBER OF FUNC-CALLS:  NFUNC =  24
+        NUMBER OF GRAD-CALLS:  NGRAD =  15
