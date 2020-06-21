@@ -16,7 +16,7 @@ def main():
     skip_range   = [1000] # Use this to skip to the one that failed
 
     tech_string = "OR_Wing_Mounted_Weight20"
-    payload_array = [100, 200 ,300, 400]
+    payload_array = [ 400]
     range_array   = [1000,3000,5000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
 

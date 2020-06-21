@@ -149,7 +149,7 @@ def empty(vehicle,settings=None):
         max_mach           = vehicle.cruise_mach*1.1
         num_eng            = propulsors.thrust.inputs.number_of_engines
         fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
-        prop_k_factor      = 1.2
+        prop_k_factor      = 0.8
         propulsors.mass_properties.mass  = (wt_propulsion + fuel_system_weight) * prop_k_factor
     else: #propulsor used is not a turbo_fan; assume mass_properties defined outside model
         wt_propulsion                   = propulsors.mass_properties.mass
