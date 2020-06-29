@@ -7,17 +7,48 @@
    ---------------------------------------------------------------------------
 
      PARAMETERS:
-        ACC =   0.1000D-01
+        ACC =   0.1000D+00
         MAXITER =500
         IPRINT =   1
 IOUT =   6
 
 
-     ITER =    1     OBJ =  0.26399450E+00
-     ITER =    2     OBJ =  0.27998321E+00
-     ITER =    3     OBJ =  0.28163752E+00
-     ITER =    4     OBJ =  0.27834703E+00
-     ITER =    5     OBJ =  0.28366106E+00
-     ITER =    6     OBJ =  0.29230834E+00
-     ITER =    7     OBJ =  0.30194103E+00
-     ITER =    8     OBJ =  0.30097515E+00
+     ITER =    1     OBJ =  0.30493605E+00
+     ITER =    2     OBJ =  0.30012483E+00
+     ITER =    3     OBJ =  0.27292884E+00
+     ITER =    4     OBJ =  0.27814499E+00
+     ITER =    5     OBJ =  0.27861895E+00
+     ITER =    6     OBJ =  0.27869059E+00
+     ITER =    7     OBJ =  0.27874704E+00
+     ITER =    8     OBJ =  0.27874701E+00
+     ITER =    9     OBJ =  0.27875156E+00
+     ITER =   10     OBJ =  0.27875366E+00
+     ITER =   11     OBJ =  0.27875526E+00
+     ITER =   12     OBJ =  0.27875679E+00
+     ITER =   13     OBJ =  0.27875834E+00
+     ITER =   14     OBJ =  0.27876028E+00
+     ITER =   16     OBJ =  0.27876739E+00
+     ITER =   17     OBJ =  0.27877258E+00
+     ITER =   18     OBJ =  0.27877237E+00
+     ITER =   19     OBJ =  0.27877296E+00
+     ITER =   20     OBJ =  0.27877338E+00
+     ITER =   21     OBJ =  0.27877368E+00
+     ITER =   22     OBJ =  0.27877365E+00
+     ITER =   23     OBJ =  0.27877367E+00
+     ITER =   24     OBJ =  0.27877370E+00
+     ITER =   25     OBJ =  0.27877372E+00
+     ITER =   27     OBJ =  0.27877373E+00
+     ITER =   28     OBJ =  0.27877373E+00
+     ITER =   29     OBJ =  0.27877374E+00
+     ITER =   30     OBJ =  0.27877374E+00
+     ITER =   31     OBJ =  0.27877374E+00
+     ITER =   32     OBJ =  0.27877374E+00
+     ITER =   33     OBJ =  0.27877374E+00
+     ITER =   34     OBJ =  0.27877374E+00
+     ITER =   35     OBJ =  0.27877374E+00
+     ITER =   36     OBJ =  0.27877374E+00
+     ITER =   37     OBJ =  0.27877374E+00
+     ITER =   38     OBJ =  0.27877374E+00
+     ITER =   39     OBJ =  0.27877374E+00
+     ITER =   40     OBJ =  0.27877374E+00
+     ITER =   41     OBJ =  0.27877374E+00

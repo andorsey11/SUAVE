@@ -12,11 +12,11 @@ def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
     skip_payload = [50,100]
-    skip_range   = [1000,2000,3000,4000,5000,6000] # Use this to skip to the one that failed
+    skip_range   = [1000,2000,3000,4000,5000,7000] # Use this to skip to the one that failed
 
     tech_string = "OR_Aft_Mounted"
     payload_array = [50, 100, 150, 200 ,250 ,300, 350, 400]
-    range_array   = [6000]#, 2000, 3000, 4000, 5000, 6000, 7000]
+    range_array   = [7000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
 
     for payload in payload_array:
@@ -110,6 +110,9 @@ def main():
                 elif(design_range == 2000):
                     procedure_data[130] = "            config.propulsors['openrotoraft'].bypass_ratio = .989*4.0878*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9451147) * config.propulsors['openrotoraft'].bypass_factor\n"
                     procedure_data[132] = "            config.propulsors['openrotoraft'].bypass_ratio = .989*4.0878*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9451147)\n"
+                elif(design_range == 7000):
+                    procedure_data[130] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.77*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.951) * config.propulsors['openrotoraft'].bypass_factor\n"
+                    procedure_data[132] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.77*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.951)\n"
                 elif(design_range == 6000):
                     procedure_data[130] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.86*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9495) * config.propulsors['openrotoraft'].bypass_factor\n"
                     procedure_data[132] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.86*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9495)\n"
@@ -165,7 +168,6 @@ def main():
                                        [6872,	        8242,	    8646,	9020,	    9592,	10051,	    10410,	10960],
                                        [7714,	        8365,	    8872,	9303,	    9828,	10334,	    10789,	11360],
                                        [8115,	        8489,	    9109,	9594,	    10042,	10622,	    11119,	11803]]
-
                
                 payload_indice = int((payload / 50) - 1)
                 range_indice   = int((design_range/1000)-1)

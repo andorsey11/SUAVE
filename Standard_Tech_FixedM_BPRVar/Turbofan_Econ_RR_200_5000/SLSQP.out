@@ -1,0 +1,59 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-02
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.72643096E+00
+     ITER =    2     OBJ =  0.70892477E+00
+     ITER =    3     OBJ =  0.81926263E+00
+     ITER =    4     OBJ =  0.85714045E+00
+     ITER =    5     OBJ =  0.84954278E+00
+     ITER =    6     OBJ =  0.85175148E+00
+     ITER =    7     OBJ =  0.10053846E+01
+     ITER =    8     OBJ =  0.10096715E+01
+     ITER =    9     OBJ =  0.10050635E+01
+     ITER =   10     OBJ =  0.99934027E+00
+     ITER =   11     OBJ =  0.99978350E+00
+     ITER =   12     OBJ =  0.10029931E+01
+     ITER =   13     OBJ =  0.10036828E+01
+     ITER =   14     OBJ =  0.10063484E+01
+     ITER =   15     OBJ =  0.10065702E+01
+     ITER =   16     OBJ =  0.10065729E+01
+     ITER =   17     OBJ =  0.10096593E+01
+     ITER =   18     OBJ =  0.10096406E+01
+     ITER =   19     OBJ =  0.10096406E+01
+     ITER =   20     OBJ =  0.10111590E+01
+     ITER =   21     OBJ =  0.10111446E+01
+     ITER =   22     OBJ =  0.10121575E+01
+     ITER =   23     OBJ =  0.10130240E+01
+     ITER =   24     OBJ =  0.10129331E+01
+     ITER =   25     OBJ =  0.10129855E+01
+     ITER =   26     OBJ =  0.10136490E+01
+     ITER =   27     OBJ =  0.10135290E+01
+     ITER =   28     OBJ =  0.10135750E+01
+     ITER =   29     OBJ =  0.10140517E+01
+     ITER =   30     OBJ =  0.10140904E+01
+     ITER =   31     OBJ =  0.10140697E+01
+     ITER =   32     OBJ =  0.10140697E+01
+     ITER =   33     OBJ =  0.10140810E+01
+     ITER =   34     OBJ =  0.10141278E+01
+     ITER =   35     OBJ =  0.10146356E+01
+     ITER =   36     OBJ =  0.10133221E+01
+     ITER =   37     OBJ =  0.10139995E+01
+     ITER =   38     OBJ =  0.10139995E+01
+     ITER =   39     OBJ =  0.10139995E+01
+     ITER =   40     OBJ =  0.10139995E+01
+     ITER =   41     OBJ =  0.10139995E+01
+     ITER =   42     OBJ =  0.10139995E+01
+        NUMBER OF FUNC-CALLS:  NFUNC = 250
+        NUMBER OF GRAD-CALLS:  NGRAD =  43

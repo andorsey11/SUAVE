@@ -7,48 +7,19 @@
    ---------------------------------------------------------------------------
 
      PARAMETERS:
-        ACC =   0.1000D-02
+        ACC =   0.1000D-01
         MAXITER =500
         IPRINT =   1
 IOUT =   6
 
 
-     ITER =    1     OBJ =  0.98785455E+00
-     ITER =    2     OBJ =  0.94024314E+00
-     ITER =    3     OBJ =  0.10886326E+01
-     ITER =    4     OBJ =  0.13109031E+01
-     ITER =    5     OBJ =  0.13148374E+01
-     ITER =    6     OBJ =  0.14247192E+01
-     ITER =    7     OBJ =  0.15844485E+01
-     ITER =    8     OBJ =  0.16387699E+01
-     ITER =    9     OBJ =  0.16381063E+01
-     ITER =   10     OBJ =  0.16794234E+01
-     ITER =   11     OBJ =  0.16474368E+01
-     ITER =   12     OBJ =  0.16581561E+01
-     ITER =   13     OBJ =  0.16538269E+01
-     ITER =   14     OBJ =  0.16489426E+01
-     ITER =   15     OBJ =  0.16462578E+01
-     ITER =   16     OBJ =  0.16398952E+01
-     ITER =   17     OBJ =  0.16330811E+01
-     ITER =   18     OBJ =  0.16138802E+01
-     ITER =   19     OBJ =  0.15879140E+01
-     ITER =   20     OBJ =  0.15744766E+01
-     ITER =   21     OBJ =  0.15232408E+01
-     ITER =   22     OBJ =  0.15022423E+01
-     ITER =   23     OBJ =  0.14726553E+01
-     ITER =   24     OBJ =  0.14788967E+01
-     ITER =   25     OBJ =  0.14429781E+01
-     ITER =   26     OBJ =  0.14307916E+01
-     ITER =   27     OBJ =  0.14037454E+01
-     ITER =   28     OBJ =  0.14091913E+01
-     ITER =   29     OBJ =  0.14058246E+01
-     ITER =   30     OBJ =  0.13963841E+01
-     ITER =   31     OBJ =  0.13887394E+01
-     ITER =   32     OBJ =  0.13922278E+01
-     ITER =   33     OBJ =  0.13933128E+01
-     ITER =   34     OBJ =  0.13933899E+01
-     ITER =   35     OBJ =  0.13927132E+01
-     ITER =   36     OBJ =  0.13907122E+01
-     ITER =   37     OBJ =  0.13906513E+01
-        NUMBER OF FUNC-CALLS:  NFUNC = 106
-        NUMBER OF GRAD-CALLS:  NGRAD =  38
+     ITER =    1     OBJ =  0.69251440E+00
+     ITER =    2     OBJ =  0.70005065E+00
+     ITER =    3     OBJ =  0.75852589E+00
+     ITER =    4     OBJ =  0.10405516E+01
+     ITER =    5     OBJ =  0.10584060E+01
+     ITER =    6     OBJ =  0.11013001E+01
+     ITER =    7     OBJ =  0.12002643E+01
+     ITER =    8     OBJ =  0.12028581E+01
+        NUMBER OF FUNC-CALLS:  NFUNC =  23
+        NUMBER OF GRAD-CALLS:  NGRAD =   9

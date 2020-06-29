@@ -113,6 +113,9 @@ def main():
                 elif(design_range == 7000):
                     procedure_data[130] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.77*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.951) * config.propulsors['openrotoraft'].bypass_factor\n"
                     procedure_data[132] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.77*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.951)\n"
+                elif(design_range == 6000):
+                    procedure_data[130] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.86*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9495) * config.propulsors['openrotoraft'].bypass_factor\n"
+                    procedure_data[132] = "            config.propulsors['openrotoraft'].bypass_ratio = 3.86*(config.propulsors['openrotoraft'].fan.pressure_ratio-1)**(-.9495)\n"
 
                 # Curve for this Mach 
                 #Dr 1000 =(4.051*F16^(-0.9541))*0.98

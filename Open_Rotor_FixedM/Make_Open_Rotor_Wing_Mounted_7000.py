@@ -11,10 +11,10 @@ from threading import Timer
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = [50,100,150,200,250,300,350]
+    skip_payload = []
     skip_range   = [1000,2000,3000,4000,5000,7000] # Use this to skip to the one that failed
 
-    tech_string = "OR_Wing_Mounted"
+    tech_string = "OR_Wing_Mounted_RR"
     payload_array = [50, 100, 150, 200 ,250 ,300, 350, 400]
     range_array   = [7000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     

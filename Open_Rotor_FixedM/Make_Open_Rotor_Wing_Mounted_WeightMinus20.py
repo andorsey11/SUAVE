@@ -12,8 +12,8 @@ import numpy as np
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = []
-    skip_range   = [1000] # Use this to skip to the one that failed
+    skip_payload = [100]
+    skip_range   = [1000,3000,5000] # Use this to skip to the one that failed
 
     tech_string = "OR_Wing_Mounted_WeightMinus20"
     payload_array = [100,200,300]

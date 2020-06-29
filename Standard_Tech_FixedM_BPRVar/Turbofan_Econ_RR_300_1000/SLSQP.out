@@ -1,0 +1,34 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-02
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.57981351E+00
+     ITER =    2     OBJ =  0.52601025E+00
+     ITER =    3     OBJ =  0.46982708E+00
+     ITER =    4     OBJ =  0.46551817E+00
+     ITER =    5     OBJ =  0.46791078E+00
+     ITER =    6     OBJ =  0.45078061E+00
+     ITER =    7     OBJ =  0.44694853E+00
+     ITER =    8     OBJ =  0.43491676E+00
+     ITER =    9     OBJ =  0.41260686E+00
+     ITER =   10     OBJ =  0.40678018E+00
+     ITER =   11     OBJ =  0.42269050E+00
+     ITER =   12     OBJ =  0.42549519E+00
+     ITER =   13     OBJ =  0.42332406E+00
+     ITER =   14     OBJ =  0.42157169E+00
+     ITER =   15     OBJ =  0.42050445E+00
+     ITER =   16     OBJ =  0.42050752E+00
+     ITER =   17     OBJ =  0.42195078E+00
+        NUMBER OF FUNC-CALLS:  NFUNC =  39
+        NUMBER OF GRAD-CALLS:  NGRAD =  18
