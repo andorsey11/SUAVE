@@ -5,13 +5,14 @@ import subprocess
 # This file creates seed geometry for configurations, sets requirements and creates the variables for the optimizer to run. 
 import time
 from threading import Timer
+import random
 ### Needs more work -- Cruise Mach, # of Wheels, Gear Height
 
 
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = []
+    skip_payload = [100,200]
     skip_range   = [1000,2000,3000,4000,5000,7000] # Use this to skip to the one that failed
 
     tech_string = "OR_Wing_Mounted_RR"

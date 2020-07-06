@@ -13,11 +13,11 @@ import random
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = []
+    skip_payload = [50]
     skip_range   = [1000,2000,3000,4000,5000] # Use this to skip to the one that failed
 
     tech_string = "OR_Aft_Mounted_RR"
-    payload_array = [100, 200 ,300, 400]
+    payload_array = [50,150,250,350]
     range_array   = [4000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
 

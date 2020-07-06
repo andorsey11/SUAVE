@@ -4,6 +4,7 @@ from shutil import copyfile
 import subprocess
 # This file creates seed geometry for configurations, sets requirements and creates the variables for the optimizer to run. 
 import time
+import random
 from threading import Timer
 ### Needs more work -- Cruise Mach, # of Wheels, Gear Height
 

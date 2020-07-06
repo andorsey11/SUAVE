@@ -17,7 +17,7 @@ def main():
     skip_range   = [1000,2000,3000,4000,5000] # Use this to skip to the one that failed
 
     tech_string = "OR_Aft_Mounted_RR"
-    payload_array = [100, 200 ,300, 400]
+    payload_array = [50, 150 ,250, 350]
     range_array   = [1000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
 
@@ -216,7 +216,7 @@ def main():
                     p.wait()
                 except Exception as e:
                 	raise e
-                if counter == 6:
+                if counter == 4:
                     converged = True
                   #  import pdb; pdb.set_trace()
                 counter = counter + 1

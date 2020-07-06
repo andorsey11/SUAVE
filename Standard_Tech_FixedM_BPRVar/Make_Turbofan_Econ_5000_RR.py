@@ -12,11 +12,11 @@ import random
 def main():
     # It records all data in a new folder for each combination of payload & range. 
     maxIter = 5
-    skip_payload = [100]
+    skip_payload = []
     skip_range   = [5000] # Use this to skip to the one that failed
 
     tech_string = "Turbofan_Econ_RR"
-    payload_array = [100, 200 ,300, 400]
+    payload_array = [50,150,250,350]
     range_array   = [5000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
     for design_range in range_array:

@@ -16,7 +16,7 @@ def main():
     skip_range   = [2000] # Use this to skip to the one that failed
 
     tech_string = "Turbofan_Econ_RR"
-    payload_array = [100, 200 ,300, 400]
+    payload_array = [50,150,250,350]
     range_array   = [4000]#, 2000, 3000, 4000, 5000, 6000, 7000]
     
     for design_range in range_array:
