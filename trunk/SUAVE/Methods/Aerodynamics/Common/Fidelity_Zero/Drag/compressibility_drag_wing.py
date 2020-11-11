@@ -46,7 +46,6 @@ def compressibility_drag_wing(state,settings,geometry):
     Properties Used:
     N/A
     """ 
-    
     # unpack
     conditions    = state.conditions
     configuration = settings    # unused

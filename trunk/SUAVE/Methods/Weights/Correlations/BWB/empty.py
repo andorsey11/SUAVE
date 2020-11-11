@@ -94,8 +94,7 @@ def empty(vehicle):
     
   
     
-    propulsor_name = list(vehicle.propulsors.keys())[0] #obtain the key f
-    #for the propulsor for assignment purposes
+    propulsor_name = list(vehicle.propulsors.keys())[0] #obtain the key for the propulsor for assignment purposes
     
     propulsors     = vehicle.propulsors[propulsor_name]
     num_eng        = propulsors.number_of_engines
@@ -105,14 +104,30 @@ def empty(vehicle):
         # for now, using thrust_sls = design_thrust / 0.20, just for optimization evaluations
         thrust_sls                       = propulsors.sealevel_static_thrust
         wt_engine_jet                    = Propulsion.engine_jet(thrust_sls)
-        wt_propulsion                    = Propulsion.integrated_propulsion(wt_engine_jet,num_eng)
-        propulsors.mass_properties.mass  = wt_propulsion 
-        
+        wt_propulsion                    = Propulsion.integrated_propulsion(propulsors, 1.6)
+        fuel_weight        = vehicle.wings['main_wing'].fuel_volume * .804 * 1000 / Units.lbs
+        max_mach           = vehicle.cruise_mach*1.1
+        num_eng            = propulsors.thrust.inputs.number_of_engines
+        fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
+       # engine_start_weight = 11 * (num_eng) * (max_mach**.32) * (propulsors.nacelle_diameter / Units.inches**1.6) ## This isn't working
+        propulsors.mass_properties.mass  = wt_propulsion + fuel_system_weight
+    elif propulsor_name == 'openrotor' or propulsor_name == 'openrotoraft':
+        #wt_propulsion      = Propulsion.integrated_propulsion_open_rotor(propulsors,1.6)
+        thrust_sls                       = propulsors.sealevel_static_thrust
+
+        wt_engine_jet                    = Propulsion.engine_jet(thrust_sls)
+        wt_propulsion                    = Propulsion.integrated_propulsion(propulsors, 1.6)
+        fuel_weight        = vehicle.wings['main_wing'].fuel_volume * .804 * 1000 / Units.lbs
+        max_mach           = vehicle.cruise_mach*1.1
+        num_eng            = propulsors.thrust.inputs.number_of_engines
+        fuel_system_weight = 1.07 * (fuel_weight**.58) * (num_eng**.43) * (max_mach**.34) * Units.lb
+        prop_k_factor      = 0.8
+        propulsors.mass_properties.mass  = (wt_propulsion + fuel_system_weight) * prop_k_factor
     else: #propulsor used is not a turbo_fan; assume mass_properties defined outside model
-        wt_propulsion                    = propulsors.mass_properties.mass
+        wt_propulsion                   = propulsors.mass_properties.mass
 
         if wt_propulsion==0:
-            warnings.warn("Propulsion mass= 0; there is no Engine Weight being added to the Configuration", stacklevel=1)    
+            warnings.warn("Propulsion mass= 0 ;e there is no Engine Weight being added to the Configuration", stacklevel=1)      
     
     S_gross_w  = vehicle.reference_area
 

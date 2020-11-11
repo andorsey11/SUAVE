@@ -103,7 +103,8 @@ def compute_component_centers_of_gravity(vehicle, compute_propulsor_origin = Tru
         fuse_key                                                = list(vehicle.fuselages.keys())[0] 
         fuselage                                                = vehicle.fuselages[fuse_key]
         fuselage.mass_properties.center_of_gravity[0]           = .55*fuselage.lengths.total
-        electrical_systems.mass_properties.center_of_gravity[0] = .75*(fuselage.origin[0][0]+  .5*fuselage.lengths.total)+.25*(propulsor.origin[0][0]+propulsor.mass_properties.center_of_gravity[0])      
+        #electrical_systems.mass_properties.center_of_gravity[0] = .75*(fuselage.origin[0][0]+  .5*fuselage.lengths.total)+.25*(propulsor.origin[0][0]+propulsor.mass_properties.center_of_gravity[0])      
+        electrical_systems.mass_properties.center_of_gravity[0] = .25*fuselage.lengths.total    
         avionics.origin                                         = fuselage.origin
         avionics.mass_properties.center_of_gravity[0]           = .4*fuselage.lengths.nose
         

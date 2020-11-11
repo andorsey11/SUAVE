@@ -223,7 +223,7 @@ def empty(vehicle,settings=None):
  
         gear_origin = vehicle.wings['main_wing'].origin[0] + vehicle.wings['main_wing'].aerodynamic_center[0] + 0.4 * vehicle.wings['main_wing'].chords.mean_aerodynamic
         length_to_scrape = (vehicle.fuselages['fuselage'].lengths.cabin*.8 + vehicle.fuselages['fuselage'].lengths.nose) - gear_origin
-        required_fuselage_height_tailscrape = length_to_scrape * numpy.sin(numpy.deg2rad(10))
+        required_fuselage_height_tailscrape = length_to_scrape * numpy.tan(numpy.deg2rad(10))
         required_fuselage_height_rotor = (vehicle.propulsors['openrotor'].fan_diameter / 2) * .9 + 0.5
         if (length_to_scrape > 0): # Check that the wing isn't behind the back end of the fuselage
             gear_penalty_rotor = (required_fuselage_height_rotor / required_fuselage_height_tailscrape ) ** .4

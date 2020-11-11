@@ -1,0 +1,107 @@
+import numpy as np
+import SUAVE
+from SUAVE.Core import Units, Data
+
+import time  # importing library
+import datetime  # importing library
+
+
+def print_sectional_cl(segment,vehicle, filename='print_sectional_cl.txt'):
+    geometry = vehicle.wings['main_wing']
+    conditions = segment.conditions
+    wing = geometry
+    mach           = conditions.freestream.mach_number[0][0]
+        #Iterate over the wing segments and sum it up
+    if wing.tag == 'main_wing':
+        wing_lifts = conditions.aerodynamics.lift_breakdown.compressible_wings[0][0] # currently the total aircraft lift
+    elif wing.vertical:
+        wing_lifts = 0
+    else:
+        wing_lifts = 0.15 * conditions.aerodynamics.lift_breakdown.compressible_wings
+    mach           = conditions.freestream.mach_number[0][0]
+    if wing.tag=='main_wing':
+        cl_w = wing_lifts
+    else:
+        cl_w = 0
+        # start result
+    qdyn = conditions.freestream.density[0][0] * .5 * conditions.freestream.velocity[0][0]**2
+
+    totallift = wing_lifts * qdyn * geometry.areas.reference
+    
+    total_compressibility_drag = 0.0
+    f_write_config = open(filename, "w+")
+    f_write_config.write("Airplane CL        = " + "%.3f" % segment.conditions.aerodynamics.lift_coefficient[0][0] +"\n" )
+    f_write_config.write("Airplane Sref      = " + "%.0f" % (wing.areas.reference * 10.7639) + " sqft   \n")
+    f_write_config.write("Airplane Lift      = " + "%.0f" % (totallift / conditions.freestream.gravity[0][0] * 2.204) + "  lbm  \n")
+    f_write_config.write("Mach               = " + "%.2f" % (mach) + "  nd  \n")
+
+    f_write_config.write("Section      Span Mid Pt     Section Area (sqft)        Section Lift (lbf)      Cl   Cd_c" +"\n")
+    f_write_config.write("------------------------------------------------------------------------------" + "\n")
+
+    lstarsum = 0
+    for x in range(6):  
+        wingseg = geometry.Segments[x]
+        nextseg = geometry.Segments[x+1]
+        midpt = (nextseg.percent_span_location - wingseg.percent_span_location)/2 + wingseg.percent_span_location
+        srefseg = wingseg.areas.reference
+        lstar = (1-(midpt)**2)*(nextseg.percent_span_location - wingseg.percent_span_location) # Assumes elliptical, lift per this length of span
+        lstarsum += lstar # add it up to get factor to get dimensional lift
+   # import pdb; pdb.set_trace()
+    
+    liftk = totallift / lstarsum / conditions.freestream.gravity[0][0]
+    cd_total = 0
+    for y in range(6):
+        wingseg = geometry.Segments[y]
+        nextseg = geometry.Segments[y+1]
+        midpt = (nextseg.percent_span_location - wingseg.percent_span_location)/2 + wingseg.percent_span_location
+        lave = (1-(midpt)**2) * liftk
+        cl_w = (1-(midpt)**2)*liftk/(wingseg.areas.reference *qdyn)
+        t_c_w   = wingseg.thickness_to_chord
+        sweep_w = wingseg.sweeps.quarter_chord
+
+        #Calibrate to fit real data, make t/c hurt more, sweep help less
+        t_c_w = t_c_w * 1.8
+        sweep_w = sweep_w * .7
+        
+        # Currently uses vortex lattice model on all wings  
+        cos_sweep = np.cos(sweep_w)
+
+        # get effective Cl and sweep
+        tc = t_c_w /(cos_sweep)
+        cl = cl_w / (cos_sweep*cos_sweep)
+
+        # compressibility drag based on regressed fits from AA241
+        mcc_cos_ws = 0.922321524499352       \
+                   - 1.153885166170620*tc    \
+                   - 0.304541067183461*cl    \
+                   + 0.332881324404729*tc*tc \
+                   + 0.467317361111105*tc*cl \
+                   + 0.087490431201549*cl*cl
+            
+        # crest-critical mach number, corrected for wing sweep
+        mcc = mcc_cos_ws / cos_sweep
+        
+        # divergence mach number
+        MDiv = mcc * ( 1.02 + 0.08*(1 - cos_sweep) )
+        
+        # divergence ratio
+        mo_mc = mach/mcc
+        
+        # compressibility correlation, Shevell
+        dcdc_cos3g = 0.0019*mo_mc**14.641
+        
+        # compressibility drag
+        cd_c = dcdc_cos3g * cos_sweep*cos_sweep*cos_sweep
+        cd_c = cd_c * .1 *wingseg.areas.reference / wing.areas.reference  # Correction factor to get real world optimizations, and just the cou
+        cd_total +=cd_c
+        # increment
+        f_write_config.write(str(wingseg.tag) + "       " "%.2f" % midpt + "               " + "%.0f"%   (wingseg.areas.reference*10.7639)+ "                       " + "%.0f" % ((1-(midpt)**2)*liftk*.2248) + "            " + "%.2f" % (cl_w) +"     " +   "%.4f" % (cd_c) + "\n")
+    f_write_config.write("Totals    "    + "%.4f" % (cd_total))
+
+
+
+    return
+
+
+if __name__ == '__main__':
+    print(' Error: No test defined ! ')

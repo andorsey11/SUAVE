@@ -1,0 +1,72 @@
+MTOW                                       = 535633  lbm
+MLW                                        = 0  lbm 
+Payload                                    = 89250 lbm 
+OEW                                        = 265032 lbm 
+
+Engine Type                                = turbofan
+Engine Thrust (M0.25)                      = 51437  lbf
+Number of Engines                          = 2.0 
+Engine Bypass Ratio                        = 8.944340653181222
+Nacelle Diameter                           = 119.6 inches
+Fan Diameter                               = 106.8 Inches
+Fan Pressure Ratio                         = 1.5257933385861306
+Thrust to Weight (SLS)                     = 0.269
+
+Wing Area                                  = 4044  sqft
+Wing AR                                    = 10.53
+Wing t/c                                   = 0.084
+Wing Span                                  = 206.3  ft
+Wing Loading                               = 132.5  lbs/sqft
+Wing Origin                                = 102.76  ft
+Fuel Volume                                = 30002  USG
+Wing Sweep                                 = 29.3 deg 
+Horizontail Tail Area / Volume Coefficient = 1071 / 0.700  sqft / nd
+Vertical Tail Area / Volume Coefficient    = 977 / 0.070  sqft / nd
+
+--------------------------DESIGN RANGE-----------------------------------
+Cruise Altitude                            = 32521  ft
+Cruise Mach                                = 0.828
+Initial Cruise Thrust                      = 26898.60 lbf
+Initial Cruise Cl                          = 0.47
+Initial Parasite Cd                        = 0.01353
+Initial Induced Cd                         = 0.00832
+Initial Viscous e                          = 0.81781
+Initial Compressible Cd                    = 0.00188
+Initial Misc Cd                            = 0.00052
+Initial Trim Cd                            = 0.00049
+Initial Total Cd                           = 0.02474
+Initial Cruise L/D                         = 19.2
+Initial Cruise SFC                         = 0.570  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.356 percent  
+Cruise Range Factor                        = 8354.5 
+
+Design Mission Fuel Burn                   = 171815  lbs 
+
+--------------------------ECON RANGE-----------------------------------
+Cruise Altitude - Econ                     = 38658  ft
+Cruise Mach                                = 0.828
+Initial Cruise Thrust                      = 20820.46 lbf
+Initial Cruise Cl                          = 0.48
+Initial Parasite Cd                        = 0.01402
+Initial Induced Cd                         = 0.00865
+Initial Viscous e                          = 0.81376
+Initial Compressible Cd                    = 0.00193
+Initial Misc Cd                            = 0.00052
+Initial Trim Cd                            = 0.00050
+Initial Total Cd                           = 0.02562
+Initial Cruise L/D                         = 18.8
+Initial Cruise SFC                         = 0.573  lbm/lbf-hr
+Initial Cruise Engine Efficiency           = 0.348 percent  
+Cruise Range Factor                        = 8029.8 
+
+Econ Mission Takeoff Weight                = 49867  lbs 
+
+--------------------------REQUIREMENTS-----------------------------------
+Maximum Throttle Setting / Requirement     = 0.95 / 0.95
+Takeoff Field Length / Requirement         = 10792 / 10792  ft/ft
+Approach Speed / Requirement               = 143.6 / 143.6  KCAS / KCAS 
+Fuel Margin   / Requirement                = 0.146 / 0.05
+Second Segment Gradient / Requirement      = 0.024 / 0.024 deg / deg
+Takeoff Convergence                        = 0.0000
+Econ Throttle Max                          = 0.95
+

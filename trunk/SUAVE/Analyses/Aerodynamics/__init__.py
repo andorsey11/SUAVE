@@ -7,6 +7,7 @@ from .Aerodynamics     import Aerodynamics
 from .AVL              import AVL
 from .AVL_Inviscid     import AVL_Inviscid 
 from .Fidelity_Zero    import Fidelity_Zero
+from .Fidelity_Zero_BWB    import Fidelity_Zero_BWB
 from .Markup           import Markup
 from .Process_Geometry import Process_Geometry
 from .Results          import Results

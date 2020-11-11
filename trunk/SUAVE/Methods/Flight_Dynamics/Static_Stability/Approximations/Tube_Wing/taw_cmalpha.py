@@ -106,40 +106,47 @@ def taw_cmalpha(geometry,mach,conditions,configuration):
     #Evaluate the effect of each lifting surface in turn
     CmAlpha_surf = []
     Cm0_surf     = []
-    for surf in geometry.wings:
-        #Unpack inputs
-        s         = surf.areas.reference
-        x_surf    = surf.origin[0]
-        x_ac_surf = surf.aerodynamic_center[0]
-        eta       = surf.dynamic_pressure_ratio
-        downw     = 1 - surf.ep_alpha
-        CL_alpha  = surf.CL_alpha
-        vertical  = surf.vertical
-        twist_r   = surf.twists.root
-        twist_t   = surf.twists.tip     
-        taper     = surf.taper
-        if 'Airfoil' in surf:
-            if 'zero_angle_lift_coefficient' in surf.Airfoil:
-                al0 = surf.Airfoil.zero_angle_lift_coefficient
-            else:
-                al0 = 0.
-            if 'zero_angle_moment_coefficient' in surf.Airfoil:
-                cmac = surf.Airfoil.zero_angle_moment_coefficient
-            else:
-                cmac = 0.
-        else:
-            al0  = 0.
-            cmac = 0.
-        
-        # Average out the incidence angles to ge the zero angle lift
-        CL0_surf   = CL_alpha * ((twist_r+taper*twist_t)/2. -al0)
-        
-        #Calculate Cm_alpha contributions
-        l_surf    = x_surf + x_ac_surf - x_cg
-        Cma       = -l_surf*s/(mac*Sref)*(CL_alpha*eta*downw)*(1. - vertical)
-        cmo       = cmac+ s*eta*CL0_surf*l_surf*downw*(1. - vertical)/(mac*Sref)
+    if 'fuselage_bwb' in geometry.fuselages:
+        #Just put dummy variables
+        Cma       = 0
+        cmo       = 0
         CmAlpha_surf.append(Cma)
         Cm0_surf.append(cmo)
+    else:
+        for surf in geometry.wings:
+        #Unpack inputs
+            s         = surf.areas.reference
+            x_surf    = surf.origin[0]
+            x_ac_surf = surf.aerodynamic_center[0]
+            eta       = surf.dynamic_pressure_ratio
+            downw     = 1 - surf.ep_alpha
+            CL_alpha  = surf.CL_alpha
+            vertical  = surf.vertical
+            twist_r   = surf.twists.root
+            twist_t   = surf.twists.tip     
+            taper     = surf.taper
+            if 'Airfoil' in surf:
+                if 'zero_angle_lift_coefficient' in surf.Airfoil:
+                    al0 = surf.Airfoil.zero_angle_lift_coefficient
+                else:
+                    al0 = 0.
+                if 'zero_angle_moment_coefficient' in surf.Airfoil:
+                    cmac = surf.Airfoil.zero_angle_moment_coefficient
+                else:
+                    cmac = 0.
+            else:
+                al0  = 0.
+                cmac = 0.
+        
+        # Average out the incidence angles to ge the zero angle lift
+            CL0_surf   = CL_alpha * ((twist_r+taper*twist_t)/2. -al0)
+            #import pdb; pdb.set_trace()
+        #Calculate Cm_alpha contributions
+            l_surf    = x_surf + x_ac_surf - x_cg
+            Cma       = -l_surf*s/(mac*Sref)*(CL_alpha*eta*downw)*(1. - vertical)
+            cmo       = cmac+ s*eta*CL0_surf*l_surf*downw*(1. - vertical)/(mac*Sref)
+            CmAlpha_surf.append(Cma)
+            Cm0_surf.append(cmo)
         
     
     cm_alpha = sum(CmAlpha_surf) + CmAlpha_body

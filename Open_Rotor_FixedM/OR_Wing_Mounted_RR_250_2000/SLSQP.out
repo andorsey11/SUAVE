@@ -1,0 +1,55 @@
+
+
+
+
+   ---------------------------------------------------------------------------
+     START OF THE SEQUENTIAL LEAST SQUARES PROGRAMMING ALGORIT  
+   ---------------------------------------------------------------------------
+
+     PARAMETERS:
+        ACC =   0.1000D-01
+        MAXITER =500
+        IPRINT =   1
+IOUT =   6
+
+
+     ITER =    1     OBJ =  0.47063235E+00
+     ITER =    2     OBJ =  0.52519893E+00
+     ITER =    3     OBJ =  0.53399802E+00
+     ITER =    4     OBJ =  0.47927845E+00
+     ITER =    5     OBJ =  0.50346155E+00
+     ITER =    6     OBJ =  0.52326593E+00
+     ITER =    7     OBJ =  0.50730554E+00
+     ITER =    8     OBJ =  0.50789008E+00
+     ITER =    9     OBJ =  0.50266577E+00
+     ITER =   10     OBJ =  0.51788822E+00
+     ITER =   11     OBJ =  0.51780995E+00
+     ITER =   12     OBJ =  0.51695076E+00
+     ITER =   13     OBJ =  0.51694845E+00
+     ITER =   14     OBJ =  0.51752577E+00
+     ITER =   15     OBJ =  0.51759033E+00
+     ITER =   16     OBJ =  0.51759033E+00
+     ITER =   17     OBJ =  0.51838406E+00
+     ITER =   18     OBJ =  0.51845532E+00
+     ITER =   19     OBJ =  0.51845532E+00
+     ITER =   20     OBJ =  0.51889315E+00
+     ITER =   21     OBJ =  0.51887489E+00
+     ITER =   22     OBJ =  0.51887489E+00
+     ITER =   23     OBJ =  0.51887490E+00
+     ITER =   24     OBJ =  0.51887493E+00
+     ITER =   25     OBJ =  0.51887493E+00
+     ITER =   26     OBJ =  0.51887493E+00
+     ITER =   27     OBJ =  0.51887493E+00
+     ITER =   28     OBJ =  0.51887493E+00
+     ITER =   29     OBJ =  0.51887493E+00
+     ITER =   30     OBJ =  0.51887493E+00
+     ITER =   31     OBJ =  0.51887493E+00
+     ITER =   32     OBJ =  0.51887493E+00
+     ITER =   33     OBJ =  0.51887493E+00
+     ITER =   34     OBJ =  0.51887493E+00
+     ITER =   35     OBJ =  0.51887493E+00
+     ITER =   36     OBJ =  0.51887493E+00
+     ITER =   37     OBJ =  0.51926188E+00
+     ITER =   38     OBJ =  0.51933973E+00
+        NUMBER OF FUNC-CALLS:  NFUNC = 286
+        NUMBER OF GRAD-CALLS:  NGRAD =  39

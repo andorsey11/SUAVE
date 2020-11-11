@@ -13,11 +13,29 @@
 IOUT =   6
 
 
-     ITER =    1     OBJ =  0.10246623E+01
-     ITER =    2     OBJ =  0.11623939E+01
-     ITER =    3     OBJ =  0.11927645E+01
-     ITER =    4     OBJ =  0.11802499E+01
-     ITER =    5     OBJ =  0.13457097E+01
-     ITER =    6     OBJ =  0.14543222E+01
-     ITER =    7     OBJ =  0.15084765E+01
-     ITER =    8     OBJ =  0.14646735E+01
+     ITER =    1     OBJ =  0.12915579E+01
+     ITER =    2     OBJ =  0.11799758E+01
+     ITER =    3     OBJ =  0.13083971E+01
+     ITER =    4     OBJ =  0.14302784E+01
+     ITER =    5     OBJ =  0.14131999E+01
+     ITER =    6     OBJ =  0.17412394E+01
+     ITER =    7     OBJ =  0.21413137E+01
+     ITER =    8     OBJ =  0.21102204E+01
+     ITER =    9     OBJ =  0.21256157E+01
+     ITER =   10     OBJ =  0.21436300E+01
+     ITER =   11     OBJ =  0.21548172E+01
+     ITER =   12     OBJ =  0.21672793E+01
+     ITER =   13     OBJ =  0.22136638E+01
+     ITER =   14     OBJ =  0.22188016E+01
+     ITER =   15     OBJ =  0.22272431E+01
+     ITER =   16     OBJ =  0.22395646E+01
+     ITER =   17     OBJ =  0.27127418E+01
+     ITER =   18     OBJ =  0.39301355E+01
+     ITER =   19     OBJ =  0.39367785E+01
+     ITER =   20     OBJ =  0.38375941E+01
+     ITER =   21     OBJ =  0.38452369E+01
+     ITER =   22     OBJ =  0.38328007E+01
+     ITER =   23     OBJ =  0.38188670E+01
+     ITER =   24     OBJ =  0.37950229E+01
+     ITER =   25     OBJ =  0.37868403E+01
+     ITER =   26     OBJ =  0.37818046E+01

@@ -10,6 +10,7 @@ from .parasite_drag_pylon import parasite_drag_pylon
 from .parasite_total import parasite_total
 from .induced_drag_aircraft import induced_drag_aircraft
 from .compressibility_drag_wing import compressibility_drag_wing
+from .compressibility_drag_wing_BWB import compressibility_drag_wing_BWB
 from .compressibility_drag_wing_total import compressibility_drag_wing_total
 from .miscellaneous_drag_aircraft_ESDU import miscellaneous_drag_aircraft_ESDU
 from .trim import trim
