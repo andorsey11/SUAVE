@@ -91,8 +91,8 @@ def base_setup():
     wing.taper                   = 0.025
     wing.span_efficiency         = 1.01
     wing.yehudi_factor           = 1.5               # Factor to capture extra root chord due to yehudi, 1.2 good for low wing, close to 1 for high wing
-    wing.spans.projected         = numpy.sqrt(wing.aspect_ratio * wing.areas.reference)
-    wing.chords.root             = wing.yehudi_factor * 2 * wing.areas.reference / wing.spans.projected / (1+wing.taper)   #A = .5 * [ ct + cr ] * s. This doesn't work for a non-trap wing
+    wing.spans.projected         = 118 / 3.28
+    wing.chords.root             = 20   #A = .5 * [ ct + cr ] * s. This doesn't work for a non-trap wing
     wing.chords.tip              = wing.chords.root * wing.taper
     wing.chords.mean_aerodynamic = wing.chords.root - (2*(wing.chords.root-wing.chords.tip)*(.5*wing.chords.root+wing.chords.tip)/(3*(wing.chords.root+wing.chords.tip)))   #A-(2(A-B)(0.5A+B) / (3(A+B))) http://www.nasascale.org/p2/wp-content/uploads/mac-calculator.htm
     wing.twists.root             = 0 * Units.degrees
@@ -102,15 +102,10 @@ def base_setup():
     wing.symmetric               = True
     wing.high_lift               = True
     wing.dynamic_pressure_ratio  = 1.0
+    wing.aft_centerbody_area     = 0 
+    wing.cabin_area_available    = 0
+    wing.cabin_cutoff            = .35
     wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
-    #wing.origin_factor           = .5
-    # ------------------------------------------------------------------
-    #   Flaps
-    # ------------------------------------------------------------------
-    wing.flaps.chord      =  0.30   # 30% of the chord
-    wing.flaps.span_start =  0.10   # 10% of the span
-    wing.flaps.span_end   =  0.75
-    wing.flaps.type       = 'double_slotted'
 
     segment = SUAVE.Components.Wings.Segment()
 
@@ -176,9 +171,9 @@ def base_setup():
     #This is defined as the extent of the center section, and the span location is a design variable
     segment = SUAVE.Components.Wings.Segment()
     segment.tag                   = 'section_5'
-    segment.percent_span_location = 0.4
+    segment.percent_span_location = wing.cabin_cutoff
     segment.twist                 = 0. * Units.deg
-    segment.root_chord_percent    = 0.313
+    segment.root_chord_percent    = 0.5
     segment.dihedral_outboard     = 1.85  * Units.degrees
     segment.sweeps.quarter_chord  = 35* Units.degrees
     segment.thickness_to_chord    = 0.118
@@ -186,9 +181,9 @@ def base_setup():
     
     segment = SUAVE.Components.Wings.Segment()
     segment.tag                   = 'section_6'
-    segment.percent_span_location = 0.6
+    segment.percent_span_location = 0.5
     segment.twist                 = 0. * Units.deg
-    segment.root_chord_percent    = 0.197
+    segment.root_chord_percent    = 0.4
     segment.dihedral_outboard     = 1.85 * Units.degrees
     segment.sweeps.quarter_chord  = 34.3 * Units.degrees
     segment.thickness_to_chord    = 0.10
@@ -259,7 +254,7 @@ def base_setup():
     wing.chords.root             = 2  * Units.meter
     wing.chords.tip              = 2  * Units.meter
     wing.chords.mean_aerodynamic = 2   * Units.meter
-    wing.areas.reference         = 10 * Units['meters**2']  
+    wing.areas.reference         = 20 * Units['meters**2']  
     wing.twists.root             = 0.0 * Units.degrees
     wing.twists.tip              = 0.0 * Units.degrees  
     wing.origin                  = [28.79,0,1.54] # meters
@@ -284,7 +279,7 @@ def base_setup():
     wing.chords.root             = 2  * Units.meter
     wing.chords.tip              = 2  * Units.meter
     wing.chords.mean_aerodynamic = 2   * Units.meter
-    wing.areas.reference         = 10 * Units['meters**2']  
+    wing.areas.reference         = 20 * Units['meters**2']  
     wing.twists.root             = 0.0 * Units.degrees
     wing.twists.tip              = 0.0 * Units.degrees  
     wing.origin                  = [28.79,0,1.54] # meters
@@ -323,12 +318,12 @@ def base_setup():
     fuselage.areas.front_projected = 12.57    * Units['meters**2'] 
     fuselage.differential_pressure = 5.0e4 * Units.pascal # Maximum differential pressure
     #This is a required floor area, and is a constraint in the optimization
-    fuselage.cabin_area            = ((34 * 18 * 1.2) + (24/6 * 34))/144 * vehicle.passengers * Units['feet**2'] 
+    fuselage.cabin_area_required   = ((34 * 18 * 1.2) + (24/6 * 34))/144 * vehicle.passengers * Units['feet**2'] 
+    fuselage.cabin_area_available  = 0
     fuselage.aft_centerbody_area   += 0.3*((vehicle.wings['main_wing'].Segments[1].percent_span_location - vehicle.wings['main_wing'].Segments[0].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * ((vehicle.wings['main_wing'].Segments[1].root_chord_percent + vehicle.wings['main_wing'].Segments[0].root_chord_percent)/2 *vehicle.wings['main_wing'].chords.root)
     fuselage.aft_centerbody_area   += 0.3*((vehicle.wings['main_wing'].Segments[2].percent_span_location - vehicle.wings['main_wing'].Segments[1].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * ((vehicle.wings['main_wing'].Segments[2].root_chord_percent + vehicle.wings['main_wing'].Segments[1].root_chord_percent)/2 *vehicle.wings['main_wing'].chords.root)
     fuselage.aft_centerbody_area   += 0.3*((vehicle.wings['main_wing'].Segments[3].percent_span_location - vehicle.wings['main_wing'].Segments[2].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * ((vehicle.wings['main_wing'].Segments[3].root_chord_percent + vehicle.wings['main_wing'].Segments[2].root_chord_percent)/2 *vehicle.wings['main_wing'].chords.root)
     fuselage.aft_centerbody_area   += 0.3*((vehicle.wings['main_wing'].Segments[4].percent_span_location - vehicle.wings['main_wing'].Segments[3].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * ((vehicle.wings['main_wing'].Segments[4].root_chord_percent + vehicle.wings['main_wing'].Segments[3].root_chord_percent)/2 *vehicle.wings['main_wing'].chords.root)
-    fuselage.aft_centerbody_area   += 0.3*((vehicle.wings['main_wing'].Segments[5].percent_span_location - vehicle.wings['main_wing'].Segments[4].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * ((vehicle.wings['main_wing'].Segments[5].root_chord_percent + vehicle.wings['main_wing'].Segments[4].root_chord_percent)/2 *vehicle.wings['main_wing'].chords.root)
     #import pdb; pdb.set_trace()
     fuselage.aft_centerbody_taper   = vehicle.wings['main_wing'].Segments[5].root_chord_percent
     fuselage.heights.at_quarter_length          = 3.74 * Units.meter

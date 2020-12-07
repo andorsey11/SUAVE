@@ -72,6 +72,7 @@ def print_parasite_drag(ref_condition,vehicle,analyses,filename = 'parasite_drag
     t_c                     = vehicle.wings['main_wing'].thickness_to_chord
     taper                   = vehicle.wings['main_wing'].taper
     sref                    = vehicle.reference_area
+    span                    = vehicle.wings['main_wing'].spans.projected
     
     settings                = analyses.cruise.aerodynamics.settings
 
@@ -200,13 +201,14 @@ def print_parasite_drag(ref_condition,vehicle,analyses,filename = 'parasite_drag
     cd_increment          =   str('%11.5f'   % settings.drag_coefficient_increment)   + '    |'
     CD_p                 +=  float(cd_increment[0:14])
     fid.write(component + cd_increment + 5*( 8*' '+'-'+6*' '+'|') + '\n')
-    
+    bsw          = span / np.sqrt(swet_tot)
     # Print line with totals
+    span_wet     =  str('%11.2f'   % bsw)                      + '    |'
     swet_tot     =  str('%11.1f'   % swet_tot)                 + '    |'
     CD_p         =  str('%11.5f'   % CD_p    )                 + '    |'
     fid.write(38*' ' + '|'+ 6*( 15*' '+'|') + '\n')
-    fid.write(29*' ' + 'SUM 	  |' + CD_p + swet_tot + 4*( 15*' '+'|') + '\n')
-
+    fid.write(31*' ' + 'SUM 	  |' + CD_p + swet_tot + 4*( 15*' '+'|') + '\n')
+    fid.write('  Span to Sqrt(Swet)'   + span_wet + '\n')
     # Print timestamp
     fid.write(2*'\n'+ 43*'-'+ '\n' + datetime.datetime.now().strftime(" %A, %d. %B %Y %I:%M:%S %p"))
     # done

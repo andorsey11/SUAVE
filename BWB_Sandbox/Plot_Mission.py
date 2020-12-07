@@ -183,7 +183,9 @@ def plot_mission(nexus,line_style='bo-'):
     f_write_config.write("Fuel Margin   / Requirement                = " + "%.3f" % (nexus.summary.fuel_margin[0]) + " / " + str(nexus.optimization_problem.constraints[5][3]) +"\n")
     f_write_config.write("Second Segment Gradient / Requirement      = " + "%.3f" % (nexus.summary.second_seg_grad[0][0]) + " / " + str(nexus.optimization_problem.constraints[4][3]) + " deg / deg\n")
     f_write_config.write("Takeoff Convergence                        = " + "%.4f" % (nexus.summary.takeoff_diff) + "\n")
-    f_write_config.write("Econ Throttle Max                          = " + "%.2f" % (nexus.summary.max_throttle_econ) + "\n\n")
+    f_write_config.write("Econ Throttle Max                          = " + "%.2f" % (nexus.summary.max_throttle_econ) + "\n")
+    f_write_config.write("Cabin Area / Required                      = " + "%.2f" % (nexus.summary.cabin_area_diff) + "\n\n")
+
 
     print_mission_breakdown(results,'mission_output_econ.txt')
 

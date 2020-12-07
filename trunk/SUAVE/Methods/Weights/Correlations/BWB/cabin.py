@@ -42,7 +42,6 @@ def cabin(cabin_area, TOGW):
     W        = TOGW       / Units.pounds
     
     cabin_wt = 5.698865 * 0.316422 * (W ** 0.166552) * S_cab ** 1.061158
-    
     # convert to base units
     cabin_wt = cabin_wt * Units.pounds
     

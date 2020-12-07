@@ -12,6 +12,7 @@ from SUAVE.Core     import Units, Data
 from .cabin          import cabin
 from .aft_centerbody import aft_centerbody
 from .systems        import systems
+from SUAVE.Methods.Weights.Correlations.Tube_Wing   import tail_vertical
 from SUAVE.Methods.Weights.Correlations.Common import wing_main as wing_main
 from SUAVE.Methods.Weights.Correlations.Common import landing_gear as landing_gear
 from SUAVE.Methods.Weights.Correlations.Common import payload as payload
@@ -90,7 +91,7 @@ def empty(vehicle):
     num_seats                = vehicle.passengers
     bwb_aft_centerbody_area  = vehicle.fuselages['fuselage_bwb'].aft_centerbody_area
     bwb_aft_centerbody_taper = vehicle.fuselages['fuselage_bwb'].aft_centerbody_taper
-    bwb_cabin_area           = vehicle.fuselages['fuselage_bwb'].cabin_area
+    bwb_cabin_area           = vehicle.fuselages['fuselage_bwb'].cabin_area_available
     
   
     
@@ -137,16 +138,20 @@ def empty(vehicle):
         warnings.warn("There is no Wing Weight being added to the Configuration", stacklevel=1)
         
     else:
-        b          = vehicle.wings['main_wing'].spans.projected
-        lambda_w   = vehicle.wings['main_wing'].taper
-        t_c_w      = vehicle.wings['main_wing'].thickness_to_chord
-        sweep_w    = vehicle.wings['main_wing'].sweeps.quarter_chord
-        mac_w      = vehicle.wings['main_wing'].chords.mean_aerodynamic
-        wing_c_r   = vehicle.wings['main_wing'].chords.root
+        #BWB Wing here is just the outboard wing, the center section is included in fuselage, so start at section 5
+        b          = (1- vehicle.wings['main_wing'].Segments[4].percent_span_location) * vehicle.wings['main_wing'].spans.projected
+        lambda_w   = vehicle.wings['main_wing'].Segments[6].root_chord_percent / vehicle.wings['main_wing'].Segments[4].root_chord_percent
+        t_c_w      = vehicle.wings['main_wing'].Segments[4].thickness_to_chord
+        sweep_w    = vehicle.wings['main_wing'].Segments[4].sweeps.quarter_chord
+        mac_w      =  (2/3 * vehicle.wings['main_wing'].Segments[4].root_chord_percent *((1+lambda_w +lambda_w **2)/(1+lambda_w )))* vehicle.wings['main_wing'].chords.root
+        wing_c_r   = vehicle.wings['main_wing'].Segments[4].root_chord_percent * vehicle.wings['main_wing'].chords.root
         S_h        = vehicle.wings['main_wing'].areas.reference*0.01 # control surface area on bwb
-        wt_wing    = wing_main.wing_main(S_gross_w,b,lambda_w,t_c_w,sweep_w,Nult,TOW,wt_zf)
+        S_bwb_ref  = 0 
+        S_bwb_ref  +=  ((vehicle.wings['main_wing'].Segments[5].percent_span_location - vehicle.wings['main_wing'].Segments[4].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * (((vehicle.wings['main_wing'].Segments[5].root_chord_percent + vehicle.wings['main_wing'].Segments[4].root_chord_percent)/2) * vehicle.wings['main_wing'].chords.root )
+        S_bwb_ref  +=  ((vehicle.wings['main_wing'].Segments[6].percent_span_location - vehicle.wings['main_wing'].Segments[5].percent_span_location) * vehicle.wings['main_wing'].spans.projected) * (((vehicle.wings['main_wing'].Segments[6].root_chord_percent + vehicle.wings['main_wing'].Segments[5].root_chord_percent)/2) * vehicle.wings['main_wing'].chords.root )
+        # Add sref fracation and TOW fraction
+        wt_wing    = wing_main.wing_main(S_bwb_ref,b,lambda_w,t_c_w,sweep_w,Nult,TOW * S_bwb_ref / vehicle.reference_area,wt_zf)
         vehicle.wings['main_wing'].mass_properties.mass = wt_wing        
-    
 
     # Calculating Empty Weight of Aircraft
     wt_landing_gear    = landing_gear.landing_gear(TOW)
@@ -155,8 +160,20 @@ def empty(vehicle):
     output_2           = systems(num_seats, ctrl_type, S_h , S_gross_w, ac_type)
 
     # Calculate the equipment empty weight of the aircraft
-    wt_empty           = (wt_wing + wt_cabin + wt_aft_centerbody + wt_landing_gear + wt_propulsion + output_2.wt_systems)
     vehicle.fuselages['fuselage_bwb'].mass_properties.mass = wt_cabin 
+    #Do the vertical stabilizers, assume they are the same
+    S_v          = vehicle.wings['vertical_stabilizer_r'].areas.reference
+    b_v          = vehicle.wings['vertical_stabilizer_r'].spans.projected
+    t_c_v        = vehicle.wings['vertical_stabilizer_r'].thickness_to_chord
+    sweep_v      = vehicle.wings['vertical_stabilizer_r'].sweeps.quarter_chord
+    t_tail       = vehicle.wings['vertical_stabilizer_r'].t_tail  
+    output_3     = tail_vertical(S_v,Nult,b_v,TOW,t_c_v,sweep_v,S_gross_w,t_tail)
+    wt_vtail_tot = output_3.wt_tail_vertical + output_3.wt_rudder
+    #wt_vtail_tot = wt_vtail_tot*(1.-wt_factors.empennage)
+    vehicle.wings['vertical_stabilizer_r'].mass_properties.mass = wt_vtail_tot
+    vehicle.wings['vertical_stabilizer_l'].mass_properties.mass = wt_vtail_tot
+    wt_empty           = (wt_wing +wt_vtail_tot*2 + wt_cabin + wt_aft_centerbody + wt_landing_gear + wt_propulsion + output_2.wt_systems)
+
 
     
     # packup outputs
@@ -164,6 +181,7 @@ def empty(vehicle):
     output.wing                                 = wt_wing
     output.fuselage                             = wt_cabin + wt_aft_centerbody
     output.propulsion                           = wt_propulsion
+    output.vertical_tail                        = output_3.wt_tail_vertical * 2
     output.landing_gear                         = wt_landing_gear
     output.systems                              = output_2.wt_systems       
     output.systems_breakdown                    = Data()
@@ -176,7 +194,6 @@ def empty(vehicle):
     output.systems_breakdown.electrical         = output_2.wt_elec        
     output.systems_breakdown.air_conditioner    = output_2.wt_ac          
     output.systems_breakdown.furnish            = output_2.wt_furnish    
-    
     #define weights components
 
     try: 

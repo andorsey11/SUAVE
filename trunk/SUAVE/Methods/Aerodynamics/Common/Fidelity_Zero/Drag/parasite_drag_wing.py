@@ -123,7 +123,6 @@ def parasite_drag_wing(state,settings,geometry):
             total_segment_k_comp_l       += segment_k_comp_l*Sref_seg 
             total_k_reyn_u               += k_reyn_u*Sref_seg                 
             total_k_reyn_l               += k_reyn_l*Sref_seg  
-                
         Swet              = total_wetted_area     
         wing.areas.wetted = total_wetted_area 
         wing_parasite_drag= total_segment_parasite_drag  / Sref
@@ -218,7 +217,6 @@ def compute_parasite_drag(re,mac_w,Mc,Tc,xtu,xtl,sweep_w,t_c_w,Sref,Swet,C):
     Properties Used:
     N/A
     """    
-   
     # reynolds number
     Re_w = re*mac_w  
     

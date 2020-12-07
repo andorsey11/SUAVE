@@ -34,7 +34,7 @@ def main():
     ## Uncomment to view contours of the design space
     #variable_sweep(problem)
     ## Uncomment for the first optimization
-   # output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-2)
+    #output = pyopt_setup.Pyoptsparse_Solve(problem,solver='SLSQP', sense_step=1.0E-2)
     #print(output)        
     #output = scipy_setup.SciPy_Solve(problem, solver='SLSQP')
     # print('fuel burn = ', "%.1f" % (problem.summary.base_mission_fuelburn[0] / Units.lbs))
@@ -84,7 +84,10 @@ def setup():
         [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
        # [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
         [ 'econ_cruise_altitude'         ,   20000/3.28    , (   15000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],
-        [ 'econ_cruise_step'             ,   1 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ]
+        [ 'econ_cruise_step'             ,   1 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
+        [ 'cabin_cutoff'                 ,   0.35     , (0.21, 0.49)       ,     0.35,     Units.less],
+        [ 'root_chord'                   ,   10       , (1, 50)            ,     10,       Units.m],
+        [ 'wing_span'                    ,   118/3.28 , (60/3.28, 250/3.28),     118/3.28, Units.m]
 
     ])
     # -------------------------------------------------------------------
@@ -113,8 +116,9 @@ def setup():
        # [ 'cg_error_neg'   ,  '<',  .01 ,  .01, Units.less],
         [ 'econ_takeoff_diff'   ,  '>', -.01 , .01, Units.less],
         [ 'econ_takeoff_diff_neg'   ,  '<',  .01 ,  .01, Units.less],
-        [ 'max_throttle_econ', '<', .95, .95, Units.less]
+        [ 'max_throttle_econ', '<', .95, .95, Units.less],
         #[ 'wing_span'      , '<',   118/3.28, 118/3.28, Units.m]
+        [ 'cabin_area'       , '>',  0 , 1, Units.less]
     ])
     
     # -------------------------------------------------------------------
@@ -142,7 +146,8 @@ def setup():
         [ 'wing_sweep'                       ,      ['vehicle_configurations.*.wings.main_wing.sweeps.quarter_chord',
                                                     'vehicle_configurations.*.wings.main_wing.sweeps.leading_edge',
                                                     'vehicle_configurations.*.wings.main_wing.sweeps.trailing_edge'      ]],
-        [ 'wing_toverc'                      ,      'vehicle_configurations.*.wings.main_wing.thickness_to_chord'         ], 
+        [ 'wing_toverc'                      ,      'vehicle_configurations.*.wings.main_wing.thickness_to_chord'         ],
+        [ 'cabin_cutoff'                     ,       'vehicle_configurations.*.wings.main_wing.cabin_cutoff'              ],
         [ 'mtowobj'                          ,      'summary.takeoff_weight'                                              ],
         [ 'approach_speed_diff'              ,      'summary.approach_speed_diff'                                         ],
         [ 'max_throttle_diff'                ,      'summary.max_throttle_diff'                                           ],
@@ -152,7 +157,7 @@ def setup():
         [ 'takeoff_diff_lower'               ,      'summary.takeoff_diff_lower'                                          ],
         [ 'fuel_margin_no_reserve'           ,      'summary.takeoff_error'                                               ],
         [ 'wing_aspect_ratio'                ,      'vehicle_configurations.*.wings.main_wing.aspect_ratio'               ],
-        [ 'wing_span'                        ,      'vehicle_configurations.base.wings.main_wing.spans.projected'         ],
+        [ 'wing_span'                        ,      'vehicle_configurations.*.wings.main_wing.spans.projected'            ],
         [ 'landing_diff'                     ,      'summary.landing_diff'                                                ],
         [ 'mzfw_diff'                        ,      'summary.mzfw_diff'                                                   ],
         [ 'fan_pressure_ratio'               ,      'vehicle_configurations.*.propulsors.turbofan.fan.pressure_ratio'     ],
@@ -170,7 +175,8 @@ def setup():
         [ 'econ_takeoff_weight_guess'        ,       'vehicle_configurations.econ.mass_properties.takeoff'                ],   
         [ 'econ_cruise_altitude'             ,       'vehicle_configurations.econ.cruise_altitude'                        ],
         [ 'max_throttle_econ'                ,       'summary.max_throttle_econ'                                          ],
-
+        [ 'cabin_area'                       ,       'summary.cabin_area_diff'                                          ],
+        [ 'root_chord'                       ,       'vehicle_configurations.*.wings.main_wing.chords.root'             ]
         ]      
     
     # -------------------------------------------------------------------

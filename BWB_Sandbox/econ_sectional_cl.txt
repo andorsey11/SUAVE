@@ -1,13 +1,13 @@
-Airplane CL        = 0.252
-Airplane Sref      = 1938 sqft   
-Airplane Lift      = 151542  lbm  
-Mach               = 0.72  nd  
+Airplane CL        = 0.235
+Airplane Sref      = 1723 sqft   
+Airplane Lift      = 151140  lbm  
+Mach               = 0.79  nd  
 Section      Span Mid Pt     Section Area (sqft)        Section Lift (lbf)      Cl   Cd_c
 ------------------------------------------------------------------------------
-section_1       0.03               272                       23006            0.24     0.0001
-section_2       0.10               516                       22790            0.13     0.0002
-section_3       0.17               216                       22315            0.29     0.0002
-section_4       0.30               531                       20949            0.11     0.0006
-section_5       0.50               289                       17265            0.17     0.0000
-section_6       0.78               297                       8835            0.08     0.0000
-Totals    0.0011
+section_1       0.03               186                       22821            0.29     0.0002
+section_2       0.10               353                       22607            0.15     0.0006
+section_3       0.17               148                       22136            0.35     0.0007
+section_4       0.28               326                       21108            0.15     0.0018
+section_5       0.42               261                       18710            0.17     0.0001
+section_6       0.73               442                       10499            0.06     0.0001
+Totals    0.0035
