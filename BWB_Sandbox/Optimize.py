@@ -80,14 +80,26 @@ def setup():
         #[ 'wing_aspect_ratio'            ,   10.4     , ( 6    ,         14)     ,       10.4      , Units.less],
         [ 'cruise_step'                  ,   2000 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'v2_vs'                        ,   1.2        ,  (1.2 ,   1.8)      ,     1.2         , Units.less],
-        [ 'fan_pressure_ratio'           ,   1.7       ,   (1.4, 2.5)        ,     1.2         , Units.less],
+        [ 'fan_pressure_ratio'           ,   1.7       ,   (1.4, 2.5)        ,     1.7         , Units.less],
         [ 'bypass_factor'                ,   .99       ,   (.65, 1)        ,     .99        , Units.less],
        # [ 'wing_origin'                  ,   .4       ,   (.1, .6)        ,    .5        , Units.less],
         [ 'econ_cruise_altitude'         ,   20000/3.28    , (   15000/3.28   ,    47000/3.28   ) ,   35000/3.28  , Units.m],
         [ 'econ_cruise_step'             ,   1 / 3.28, (200  ,     4000)   ,     2000/3.28   , Units.m   ],
         [ 'cabin_cutoff'                 ,   0.35     , (0.21, 0.49)       ,     0.35,     Units.less],
-        [ 'root_chord'                   ,   10       , (1, 50)            ,     10,       Units.m],
-        [ 'wing_span'                    ,   118/3.28 , (60/3.28, 250/3.28),     118/3.28, Units.m]
+        [ 'root_chord'                   ,   15       , (1, 50)            ,     10,       Units.m],
+        [ 'wing_span'                    ,   118/3.28 , (60/3.28, 250/3.28),     118/3.28, Units.m],
+        [ 'root_tc'                      ,    0.16    , (.07    ,   0.20)   ,     0.16,    Units.less],
+        [  'mid_span_tc'                 ,    0.12    , (.05   ,    0.20)   ,    0.12,    Units.less],
+        [  'tip_tc'                      ,    0.08    , (.05    ,    0.15)   ,    0.08,    Units.less],
+        [ 'root_sweep'                      ,    55    , (10    ,   70)   ,     55,    Units.deg],
+        [  'mid_span_sweep'                 ,    30    , (5   ,    45)   ,    30,    Units.deg],
+        [  'tip_sweep'                      ,    20    , (5    ,    45)   ,    20,    Units.deg],
+        [  'wing_segment_two_chord'      ,    0.9     , (0.10   ,    0.99)   ,    0.90,    Units.less],
+        [  'wing_segment_three_chord'      ,    0.7     , (0.10   ,    0.99)   ,    0.70,    Units.less],
+        [  'wing_segment_four_chord'      ,    0.6     , (0.10   ,    0.99)   ,    0.60,    Units.less],
+        [  'wing_segment_five_chord'      ,    0.5     , (0.05   ,    0.99)   ,    0.50,    Units.less],
+        [  'wing_segment_six_chord'      ,    0.3    , (0.03   ,    0.99)   ,    0.30,    Units.less],
+        [  'wing_segment_seven_chord'      ,    0.1     , (0.01   ,    0.99)   ,    0.10,    Units.less],
 
     ])
     # -------------------------------------------------------------------
@@ -176,7 +188,20 @@ def setup():
         [ 'econ_cruise_altitude'             ,       'vehicle_configurations.econ.cruise_altitude'                        ],
         [ 'max_throttle_econ'                ,       'summary.max_throttle_econ'                                          ],
         [ 'cabin_area'                       ,       'summary.cabin_area_diff'                                          ],
-        [ 'root_chord'                       ,       'vehicle_configurations.*.wings.main_wing.chords.root'             ]
+        [ 'root_chord'                       ,       'vehicle_configurations.*.wings.main_wing.chords.root'             ],
+        [ 'wing_segment_two_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_2.percent_root_chord'],
+        [ 'wing_segment_three_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_3.percent_root_chord'],
+        [ 'wing_segment_four_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_4.percent_root_chord'],
+        [ 'wing_segment_five_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_5.percent_root_chord'],
+        [ 'wing_segment_six_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_6.percent_root_chord'],
+        [ 'wing_segment_seven_chord'           ,       'vehicle_configurations.*.wings.main_wing.Segments.section_7.percent_root_chord'],
+        [ 'root_tc'                          ,      'vehicle_configurations.*.wings.main_wing.Segments.section_1.thickness_to_chord'], 
+        [ 'mid_span_tc'                      ,      'vehicle_configurations.*.wings.main_wing.Segments.section_5.thickness_to_chord'], 
+        [ 'tip_tc'                           ,      'vehicle_configurations.*.wings.main_wing.Segments.section_7.thickness_to_chord'], 
+        [ 'root_sweep'                          ,      'vehicle_configurations.*.wings.main_wing.Segments.section_1.sweeps.quarter_chord'], 
+        [ 'mid_span_sweep'                      ,      'vehicle_configurations.*.wings.main_wing.Segments.section_5.sweeps.quarter_chord'], 
+        [ 'tip_sweep'                           ,      'vehicle_configurations.*.wings.main_wing.Segments.section_7.sweeps.quarter_chord'], 
+
         ]      
     
     # -------------------------------------------------------------------

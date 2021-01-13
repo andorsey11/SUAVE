@@ -92,7 +92,7 @@ def base_setup():
     wing.span_efficiency         = 1.01
     wing.yehudi_factor           = 1.5               # Factor to capture extra root chord due to yehudi, 1.2 good for low wing, close to 1 for high wing
     wing.spans.projected         = 118 / 3.28
-    wing.chords.root             = 20   #A = .5 * [ ct + cr ] * s. This doesn't work for a non-trap wing
+    wing.chords.root             = 30   #A = .5 * [ ct + cr ] * s. This doesn't work for a non-trap wing
     wing.chords.tip              = wing.chords.root * wing.taper
     wing.chords.mean_aerodynamic = wing.chords.root - (2*(wing.chords.root-wing.chords.tip)*(.5*wing.chords.root+wing.chords.tip)/(3*(wing.chords.root+wing.chords.tip)))   #A-(2(A-B)(0.5A+B) / (3(A+B))) http://www.nasascale.org/p2/wp-content/uploads/mac-calculator.htm
     wing.twists.root             = 0 * Units.degrees
@@ -246,7 +246,7 @@ def base_setup():
     wing.tag = 'vertical_stabilizer_r'    
 
     wing.aspect_ratio            = 1.91
-    wing.sweeps.quarter_chord    = 25. * Units.deg
+    wing.sweeps.quarter_chord    = 55. * Units.deg
     wing.thickness_to_chord      = 0.08
     wing.taper                   = 0.25
     wing.span_efficiency         = 0.9
@@ -271,7 +271,7 @@ def base_setup():
     wing.tag = 'vertical_stabilizer_l'    
 
     wing.aspect_ratio            = 1.91
-    wing.sweeps.quarter_chord    = 25. * Units.deg
+    wing.sweeps.quarter_chord    = 55. * Units.deg
     wing.thickness_to_chord      = 0.08
     wing.taper                   = 0.25
     wing.span_efficiency         = 0.9
@@ -485,8 +485,9 @@ def base_setup():
     vehicle.apu                = SUAVE.Components.Physical_Component()
     vehicle.hydraulics         = SUAVE.Components.Physical_Component()
     vehicle.optionals          = SUAVE.Components.Physical_Component()
-    #vehicle.wings['vertical_stabilizer'].rudder = SUAVE.Components.Physical_Component()
-    
+    vehicle.wings['vertical_stabilizer_r'].rudder = SUAVE.Components.Physical_Component()
+    vehicle.wings['vertical_stabilizer_l'].rudder = SUAVE.Components.Physical_Component()
+
     # ------------------------------------------------------------------
     #   Vehicle Definition Complete
     # ------------------------------------------------------------------

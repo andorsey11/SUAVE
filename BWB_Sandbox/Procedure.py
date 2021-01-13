@@ -142,18 +142,21 @@ def simple_sizing(nexus):
                 #set the vehicle reference area
             else:
                 #Its just one of the vertical stabilizers, which is a simple trap
+                wing.areas.reference = config.wings['main_wing'].areas.reference * .025
                 wing = SUAVE.Methods.Geometry.Two_Dimensional.Planform.wing_planform(wing)
-                wing.areas.exposed  = 0.8 * wing.areas.wetted
-                wing.areas.affected = 0.6 * wing.areas.reference
+                wing.areas.exposed  = wing.areas.wetted
+                wing.areas.affected = wing.areas.reference
                 # Redo wing geometry based on new area
                 wing.spans.projected         = np.sqrt(wing.aspect_ratio * wing.areas.reference)
                 wing.chords.root             = wing.yehudi_factor * 2 * wing.areas.reference / wing.spans.projected / (1+wing.taper)   #A = .5 * [ ct + cr ] * s 
                 wing.chords.tip              = wing.chords.root * wing.taper
                 wing.chords.mean_aerodynamic = wing.chords.root - (2*(wing.chords.root-wing.chords.tip)*(.5*wing.chords.root+wing.chords.tip)/(3*(wing.chords.root+wing.chords.tip)))   #A-(2(A-B)(0.5A+B) / (3(A+B))) http://www.nasascale.org/p2/wp-content/uploads/mac-calculator.htm
                 wing.fuel_volume             = (wing.thickness_to_chord * wing.chords.root * wing.chords.root*(.4) + wing.thickness_to_chord* wing.chords.tip * wing.chords.tip*.4) / 2 *wing.spans.projected* .9 * .7 # 70% span, 10% stringer and skin knockdown, average x-sec * span
-            
+                config.wings['main_wing'].span_efficiency = 0.95 + (((config.wings['main_wing'].spans.projected + wing.spans.projected) / config.wings['main_wing'].spans.projected )**2 - 1)
+                #import pdb; pdb.set_trace()
+    #Change wing e based on 50% span of the winglets
 
-     # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
     #   Landing Configuration
     # ------------------------------------------------------------------
     landing = nexus.vehicle_configurations.landing

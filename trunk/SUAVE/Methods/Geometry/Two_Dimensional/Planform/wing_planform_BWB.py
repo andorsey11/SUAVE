@@ -68,7 +68,6 @@ def wing_planform_BWB(wing):
     for i_segs in range(num_segments):
         segment = wing.Segments[i_segs]
 
-
         if i_segs == num_segments-1:
             continue 
         nextseg = wing.Segments[i_segs + 1]    
@@ -84,6 +83,17 @@ def wing_planform_BWB(wing):
         mac += macseg * srefseg
         #Aft centerbody is defined as area behind 70% chord for the first 5 segments (index of 4)
         swet += 2 * srefseg *  (1.0 + 0.2*segment.thickness_to_chord)
+        #### Linear t/c and sweep
+        if (i_segs > 0 and i_segs < 4): ## Sections 2,3,4 are linear between 1 and 5 design variables
+            #(Segment 5 - Segment 1) / span * span_delta + previous
+            segment.thickness_to_chord = ((wing.Segments[4].thickness_to_chord - wing.Segments[0].thickness_to_chord) /  (wing.Segments[4].percent_span_location - wing.Segments[0].percent_span_location)) * (segment.percent_span_location - wing.Segments[i_segs-1].percent_span_location) + wing.Segments[i_segs-1].thickness_to_chord        
+            segment.sweeps.quarter_chord = ((wing.Segments[4].sweeps.quarter_chord - wing.Segments[0].sweeps.quarter_chord) /  (wing.Segments[4].sweeps.quarter_chord - wing.Segments[0].sweeps.quarter_chord)) * (segment.sweeps.quarter_chord - wing.Segments[i_segs-1].sweeps.quarter_chord) + wing.Segments[i_segs-1].sweeps.quarter_chord        
+        elif (i_segs == 5): ## Section 6 is linear between 5 and 7. 
+            segment.thickness_to_chord = ((wing.Segments[6].thickness_to_chord - wing.Segments[4].thickness_to_chord) /  (wing.Segments[6].percent_span_location - wing.Segments[4].percent_span_location)) * (segment.percent_span_location - wing.Segments[i_segs-1].percent_span_location) + wing.Segments[i_segs-1].thickness_to_chord                    
+            segment.sweeps.quarter_chord = ((wing.Segments[6].sweeps.quarter_chord - wing.Segments[4].sweeps.quarter_chord) /  (wing.Segments[6].sweeps.quarter_chord - wing.Segments[4].sweeps.quarter_chord)) * (segment.sweeps.quarter_chord - wing.Segments[i_segs-1].sweeps.quarter_chord) + wing.Segments[i_segs-1].sweeps.quarter_chord                    
+        elif (i_segs == 7): ##Tip is just Section 7
+            segment.thickness_to_chord = wing.Segments[6].thickness_to_chord 
+            segment.sweeps.quarter_chord = wing.Segments[6].sweeps.quarter_chord 
         if i_segs <= 3:
             aftcenterbody += srefseg * .3
                     #Next check the available cabin area, defined as thickness above 8.25 ft per Bradley. This is only for sections 1-4

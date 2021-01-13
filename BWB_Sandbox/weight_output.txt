@@ -9,18 +9,18 @@ Output file with weight breakdown
  Flight Controls type ........... : FULLY POWERED
 
  EMPTY WEIGHT BREAKDOWN 
- Wing ........................... :    3179 kg
- Fuselage ....................... :    7434 kg
+ Wing ........................... :    3095 kg
+ Fuselage ....................... :   11400 kg
  Propulsion ..................... :    7793 kg
- Vertical tail .................. :     765 kg
+ Vertical tail .................. :     228 kg
  Landing gear ................... :    3600 kg
- Systems ........................ :   12596 kg
- ........ EMPTY WEIGHT .......... :   35674 kg
+ Systems ........................ :   12864 kg
+ ........ EMPTY WEIGHT .......... :   39071 kg
 
  SYSTEMS WEIGHT BREAKDOWN  
- Control systems ................ :      27 kg
+ Control systems ................ :      41 kg
  Apu ............................ :     540 kg
- Hydraulics ..................... :     508 kg
+ Hydraulics ..................... :     762 kg
  Instruments .................... :     363 kg
  Avionics ....................... :     408 kg
  Optionals ...................... :    2159 kg
@@ -30,4 +30,4 @@ Output file with weight breakdown
 
 
 -------------------------------------------
- Monday, 07. December 2020 02:28:06 PM
+ Tuesday, 12. January 2021 04:16:37 PM
